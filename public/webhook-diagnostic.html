@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Webhook Diagnostic Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #28a745;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        
+        .result.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .result.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .result.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .url-display {
+            background: #2d3748;
+            color: #68d391;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            overflow-x: auto;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status-200 { background: #d4edda; color: #155724; }
+        .status-400 { background: #fff3cd; color: #856404; }
+        .status-429 { background: #f8d7da; color: #721c24; }
+        .status-500 { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 WhatsApp Webhook Diagnostic Tool</h1>
+        <p class="subtitle">Test and diagnose your WhatAPI webhook configuration</p>
+        
+        <div class="section">
+            <h2>📋 Test Configuration</h2>
+            
+            <div class="form-group">
+                <label>Phone Number (with country code)</label>
+                <input type="tel" id="phone" value="919112491779" placeholder="919112491779">
+                <p class="help-text">Format: 91XXXXXXXXXX</p>
+            </div>
+            
+            <div class="form-group">
+                <label>Customer Name</label>
+                <input type="text" id="name" value="Test Customer" placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label>Order ID</label>
+                <input type="text" id="orderId" value="TEST-001" placeholder="SM-ORD-12345">
+            </div>
+            
+            <div class="form-group">
+                <label>Amount (numbers only)</label>
+                <input type="number" id="amount" value="100" placeholder="500">
+            </div>
+            
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="product" value="Test Product" placeholder="Product Name">
+            </div>
+            
+            <div class="form-group">
+                <label>Payment Method</label>
+                <input type="text" id="payment" value="COD" placeholder="Cash on Delivery">
+            </div>
+            
+            <div class="form-group">
+                <label>Address</label>
+                <textarea id="address" rows="2" placeholder="Full address">Test Address</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Media URL (optional)</label>
+                <input type="url" id="mediaUrl" placeholder="https://example.com/image.jpg">
+                <p class="help-text">Leave empty to test without image</p>
+            </div>
+            
+            <button class="btn" onclick="testWebhook()">🚀 Test Webhook</button>
+            <button class="btn btn-secondary" onclick="testWithoutMedia()">📝 Test Without Media</button>
+        </div>
+        
+        <div class="section">
+            <h2>🌐 Generated Webhook URL</h2>
+            <div id="webhookUrl" class="url-display">Click "Test Webhook" to generate URL</div>
+        </div>
+        
+        <div class="section">
+            <h2>📊 Response</h2>
+            <div id="response"></div>
+        </div>
+        
+        <div class="section">
+            <h2>💡 Common Issues & Solutions</h2>
+            <div style="font-size: 14px; line-height: 1.8;">
+                <p><strong>Status 200 but no message:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Template "ordercnfrm" not configured in WhatAPI dashboard</li>
+                    <li>Template not approved by WhatsApp</li>
+                    <li>Template parameter count mismatch (expects 7 params)</li>
+                    <li>Phone number not registered in WhatsApp Business</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Status 400:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Invalid phone number format</li>
+                    <li>Template name incorrect</li>
+                    <li>Message format doesn't match template</li>
+                </ul>
+                
+                <p style="margin-top: 15px;"><strong>Status 429:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Rate limit exceeded</li>
+                    <li>Too many messages sent in short time</li>
+                    <li>Wait 30 minutes before testing again</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function testWebhook() {
+            const phone = document.getElementById('phone').value.replace(/\D/g, '');
+            const name = document.getElementById('name').value.replace(/,/g, ' ').trim();
+            const orderId = document.getElementById('orderId').value.replace(/,/g, ' ').trim();
+            const amount = document.getElementById('amount').value.replace(/[^\d]/g, '');
+            const product = document.getElementById('product').value.replace(/,/g, ' ').trim();
+            const payment = document.getElementById('payment').value.replace(/,/g, ' ').trim();
+            const address = document.getElementById('address').value.replace(/,/g, ' ').replace(/\n/g, ' ').trim();
+            const mediaUrl = document.getElementById('mediaUrl').value.trim();
+            
+            // Build message
+            const message = `ordercnfrm,${name},${orderId},${amount},${product},${payment},${address}`;
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Build webhook URL
+            let webhookUrl = `https://webhook.whatapi.in/webhook/6a1152b26f1a8bf9dd5cf7e1?number=${phone}&message=${encodedMessage}`;
+            
+            if (mediaUrl) {
+                const encodedMedia = encodeURIComponent(mediaUrl);
+                webhookUrl += `&medialink=${encodedMedia}`;
+            }
+            
+            // Display URL
+            document.getElementById('webhookUrl').textContent = webhookUrl;
+            
+            // Show loading
+            document.getElementById('response').innerHTML = '<div class="result info">⏳ Sending request...</div>';
+            
+            try {
+                // Send request
+                const response = await fetch(webhookUrl);
+                const data = await response.text();
+                
+                let resultHtml = `<div class="result ${response.ok ? 'success' : 'error'}">`;
+                resultHtml += `<strong>Status:</strong> ${response.status} <span class="status-badge status-${response.status}">${response.statusText}</span>\n\n`;
+                resultHtml += `<strong>Response:</strong>\n${data}\n\n`;
+                resultHtml += `<strong>Headers:</strong>\n`;
+                response.headers.forEach((value, key) => {
+                    resultHtml += `${key}: ${value}\n`;
+                });
+                resultHtml += `</div>`;
+                
+                // Add interpretation
+                if (response.status === 200) {
+                    resultHtml += '<div class="result info" style="margin-top: 10px;">';
+                    resultHtml += '<strong>✅ Request Successful</strong>\n\n';
+                    resultHtml += 'If message not received:\n';
+                    resultHtml += '1. Check WhatAPI dashboard for template "ordercnfrm"\n';
+                    resultHtml += '2. Verify template is approved\n';
+                    resultHtml += '3. Confirm phone number is registered\n';
+                    resultHtml += '4. Check template has 7 parameters\n';
+                    resultHtml += '</div>';
+                } else if (response.status === 400) {
+                    resultHtml += '<div class="result error" style="margin-top: 10px;">';
+                    resultHtml += '<strong>❌ Bad Request</strong>\n\n';
+                    resultHtml += 'Possible causes:\n';
+                    resultHtml += '1. Template "ordercnfrm" not found\n';
+                    resultHtml += '2. Invalid phone number\n';
+                    resultHtml += '3. Message format doesn\'t match template\n';
+                    resultHtml += '</div>';
+                } else if (response.status === 429) {
+                    resultHtml += '<div class="result error" style="margin-top: 10px;">';
+                    resultHtml += '<strong>⚠️ Rate Limit Exceeded</strong>\n\n';
+                    resultHtml += 'Wait 30 minutes before testing again.\n';
+                    resultHtml += '</div>';
+                }
+                
+                document.getElementById('response').innerHTML = resultHtml;
+                
+            } catch (error) {
+                document.getElementById('response').innerHTML = 
+                    `<div class="result error"><strong>❌ Error:</strong>\n${error.message}</div>`;
+            }
+        }
+        
+        function testWithoutMedia() {
+            document.getElementById('mediaUrl').value = '';
+            testWebhook();
+        }
+    </script>
+</body>
+</html>

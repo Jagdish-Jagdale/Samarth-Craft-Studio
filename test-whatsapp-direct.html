@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp Direct Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; margin: 5px; background: #25D366; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #128C7E; }
+        .result { margin: 10px 0; padding: 10px; background: #f5f5f5; border-radius: 3px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>🚀 WhatsApp Direct Test</h1>
+    <p>This will test your WhatsApp webhook directly without any complications.</p>
+
+    <div class="test-section">
+        <h3>📱 Phone Number</h3>
+        <input type="text" id="phoneNumber" value="9112491779" placeholder="Enter phone number">
+        <p><small>Enter without country code (will auto-add +91)</small></p>
+    </div>
+
+    <div class="test-section">
+        <h3>🎯 Test Methods</h3>
+        
+        <button onclick="testMethod1()">Test Method 1: Template</button>
+        <button onclick="testMethod2()">Test Method 2: Simple Message</button>
+        <button onclick="testMethod3()">Test Method 3: Backup Webhook</button>
+        <button onclick="testAll()">🚀 TEST ALL METHODS</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        function getPhone() {
+            const phone = document.getElementById('phoneNumber').value.replace(/\D/g, '');
+            return phone.length === 10 ? '91' + phone : phone;
+        }
+
+        function addResult(method, success, message, url = '') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `result ${success ? 'success' : 'error'}`;
+            div.innerHTML = `
+                <strong>${method}:</strong> ${success ? '✅' : '❌'} ${message}<br>
+                ${url ? `<small>URL: ${url.substring(0, 100)}...</small>` : ''}
+            `;
+            results.appendChild(div);
+        }
+
+        async function testMethod1() {
+            const phone = getPhone();
+            const webhookId = '6a16bca56f1a8bf9dd614ae3';
+            const message = 'ordcnfrm,Test User,TEST-001,999,Test Product,Test Payment,Test Address';
+            
+            const url = `https://webhook.whatapi.in/webhook/${webhookId}?number=${phone}&message=${encodeURIComponent(message)}`;
+            
+            try {
+                console.log('Testing Method 1:', url);
+                const response = await fetch(url, { mode: 'no-cors' });
+                addResult('Method 1 (Template)', true, 'Request sent successfully', url);
+                
+                // Also try with image
+                const img = new Image();
+                img.src = url;
+                
+            } catch (error) {
+                addResult('Method 1 (Template)', false, error.message, url);
+            }
+        }
+
+        async function testMethod2() {
+            const phone = getPhone();
+            const webhookId = '6a16bca56f1a8bf9dd614ae3';
+            const message = '🛍️ TEST ORDER\n\n📦 Order: TEST-002\n💰 Amount: INR 999\n🛒 Product: Test Product\n\n✅ This is a test message!';
+            
+            const url = `https://webhook.whatapi.in/webhook/${webhookId}?number=${phone}&message=${encodeURIComponent(message)}`;
+            
+            try {
+                console.log('Testing Method 2:', url);
+                const response = await fetch(url, { mode: 'no-cors' });
+                addResult('Method 2 (Simple)', true, 'Request sent successfully', url);
+                
+                // Also try with image
+                const img = new Image();
+                img.src = url;
+                
+            } catch (error) {
+                addResult('Method 2 (Simple)', false, error.message, url);
+            }
+        }
+
+        async function testMethod3() {
+            const phone = getPhone();
+            const webhookId = '6a0ed0836f1a8bf9dd5ad2e3'; // Backup webhook from your screenshot
+            const message = 'TEST ORDER: TEST-003 - Amount: INR 999 - Product: Test Product - This is a backup webhook test!';
+            
+            const url = `https://webhook.whatapi.in/webhook/${webhookId}?number=${phone}&message=${encodeURIComponent(message)}`;
+            
+            try {
+                console.log('Testing Method 3:', url);
+                const response = await fetch(url, { mode: 'no-cors' });
+                addResult('Method 3 (Backup)', true, 'Request sent successfully', url);
+                
+                // Also try with image
+                const img = new Image();
+                img.src = url;
+                
+            } catch (error) {
+                addResult('Method 3 (Backup)', false, error.message, url);
+            }
+        }
+
+        async function testAll() {
+            document.getElementById('results').innerHTML = '<h4>🚀 Testing all methods...</h4>';
+            
+            await testMethod1();
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            await testMethod2();
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            await testMethod3();
+            
+            addResult('All Tests', true, 'All methods tested! Check your WhatsApp now!');
+        }
+
+        // Auto-test on page load
+        window.onload = function() {
+            console.log('WhatsApp Direct Test Page Loaded');
+            addResult('Page Load', true, 'Ready to test WhatsApp webhooks');
+        };
+    </script>
+</body>
+</html>

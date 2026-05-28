@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webhook Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 3px; white-space: pre-wrap; }
+        .error { background: #f8d7da; color: #721c24; }
+        .success { background: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Webhook Debug Test</h1>
+        
+        <div class="test-section">
+            <h3>1. Test Incoming Webhook (Simulate "Yes" Response)</h3>
+            <p>This simulates what happens when a user clicks "Yes" on WhatsApp</p>
+            <button onclick="testIncomingWebhook('yes')">Test "Yes" Response</button>
+            <button onclick="testIncomingWebhook('no')">Test "No" Response</button>
+            <div id="incoming-result" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>2. Test Direct Webhook Call</h3>
+            <p>Test the exact webhook URL from your question</p>
+            <button onclick="testDirectWebhook()">Test Direct Webhook</button>
+            <div id="direct-result" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>3. Create Test Cancellation Request</h3>
+            <p>Create a pending cancellation to test with</p>
+            <input type="text" id="test-phone" placeholder="Phone (e.g., 918058516003)" value="918058516003">
+            <input type="text" id="test-order" placeholder="Order ID (e.g., SM-ORD-48790)" value="SM-ORD-48790">
+            <input type="text" id="test-name" placeholder="Customer Name" value="Palash Borgave">
+            <button onclick="createTestCancellation()">Create Test Cancellation</button>
+            <div id="create-result" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>4. Test Cancellation Success Message</h3>
+            <p>Test the exact webhook that should send the success message</p>
+            <button onclick="testCancellationSuccess()">Test Success Message</button>
+            <div id="success-result" class="result"></div>
+        </div>
+
+        <div class="test-section">
+            <h3>5. Check Webhook Response</h3>
+            <p>Test the exact webhook format from your URL</p>
+            <button onclick="testWebhookFormat()">Test Webhook Format</button>
+            <div id="format-result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        async function testIncomingWebhook(response) {
+            const resultDiv = document.getElementById('incoming-result');
+            resultDiv.textContent = 'Testing...';
+            
+            try {
+                const webhookUrl = 'https://whatsappincomingwebhook-gc53j5bqka-uc.a.run.app';
+                
+                const testData = {
+                    waNumber: '918058516003',
+                    reply: response,
+                    message: response,
+                    buttonText: response
+                };
+                
+                const response_obj = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const result = await response_obj.json();
+                resultDiv.textContent = `Status: ${response_obj.status}\nResponse: ${JSON.stringify(result, null, 2)}`;
+                resultDiv.className = 'result ' + (response_obj.ok ? 'success' : 'error');
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function testDirectWebhook() {
+            const resultDiv = document.getElementById('direct-result');
+            resultDiv.textContent = 'Testing direct webhook...';
+            
+            try {
+                // Test the exact webhook from your question
+                const webhookUrl = 'https://webhook.whatapi.in/webhook/6a0ed0836f1a8bf9dd5ad2e3?number=918058516003&message=ordercancel,Palash%20Borgave,SM-ORD-48790';
+                
+                const response = await fetch(webhookUrl, {
+                    method: 'GET',
+                    mode: 'no-cors' // This might be needed for external webhook
+                });
+                
+                resultDiv.textContent = `Webhook called successfully!\nURL: ${webhookUrl}`;
+                resultDiv.className = 'result success';
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}\nNote: This might be expected due to CORS, but the webhook should still work.`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function createTestCancellation() {
+            const resultDiv = document.getElementById('create-result');
+            const phone = document.getElementById('test-phone').value;
+            const orderId = document.getElementById('test-order').value;
+            const customerName = document.getElementById('test-name').value;
+            
+            resultDiv.textContent = 'Creating test cancellation...';
+            
+            try {
+                const functionUrl = 'https://requestwhatsappordercancellation-gc53j5bqka-uc.a.run.app';
+                
+                const response = await fetch(functionUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            phone: phone,
+                            orderId: orderId,
+                            customerName: customerName
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                resultDiv.textContent = `Status: ${response.status}\nResponse: ${JSON.stringify(result, null, 2)}`;
+                resultDiv.className = 'result ' + (response.ok ? 'success' : 'error');
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function testCancellationSuccess() {
+            const resultDiv = document.getElementById('success-result');
+            resultDiv.textContent = 'Testing cancellation success message...';
+            
+            try {
+                const testUrl = 'https://us-central1-kolhapuri-chappals-56bdc.cloudfunctions.net/testOrderCancellationSuccess';
+                
+                const response = await fetch(testUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        data: {
+                            phone: '918058516003',
+                            orderId: 'SM-ORD-48790',
+                            customerName: 'Palash Borgave'
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                resultDiv.textContent = `Status: ${response.status}\nResponse: ${JSON.stringify(result, null, 2)}`;
+                resultDiv.className = 'result ' + (response.ok ? 'success' : 'error');
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        async function testWebhookFormat() {
+            const resultDiv = document.getElementById('format-result');
+            resultDiv.textContent = 'Testing webhook format...';
+            
+            try {
+                // Test different message formats
+                const formats = [
+                    'ordercancel,Palash Borgave,SM-ORD-48790',
+                    'ordercancel,name,orderno',
+                    'Order SM-ORD-48790 has been cancelled successfully. Thank you!'
+                ];
+                
+                let results = '';
+                
+                for (let i = 0; i < formats.length; i++) {
+                    const message = formats[i];
+                    const webhookUrl = `https://webhook.whatapi.in/webhook/6a0ed0836f1a8bf9dd5ad2e3?number=918058516003&message=${encodeURIComponent(message)}`;
+                    
+                    try {
+                        const response = await fetch(webhookUrl, {
+                            method: 'GET',
+                            mode: 'no-cors'
+                        });
+                        results += `Format ${i + 1}: SUCCESS\nMessage: ${message}\n\n`;
+                    } catch (error) {
+                        results += `Format ${i + 1}: ${error.message}\nMessage: ${message}\n\n`;
+                    }
+                }
+                
+                resultDiv.textContent = results;
+                resultDiv.className = 'result success';
+                
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.className = 'result error';
+            }
+        }
+    </script>
+</body>
+</html>

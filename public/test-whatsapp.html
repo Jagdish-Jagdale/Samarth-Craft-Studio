@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Webhook Tester - Samartha Craft Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .log-container {
+            margin-top: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .log-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .clear-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .log-entry {
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+        
+        .log-success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+        
+        .log-error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        .log-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+        }
+        
+        .log-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .url-display {
+            background: #e9ecef;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            color: #495057;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        .example-btn {
+            background: #28a745;
+            margin-top: 5px;
+        }
+        
+        .example-btn:hover {
+            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 WhatsApp Webhook Tester</h1>
+        <p class="subtitle">Test your WhatsApp order confirmation messages</p>
+        
+        <form id="testForm">
+            <div class="form-group">
+                <label for="phone">📱 Phone Number (with country code)</label>
+                <input type="tel" id="phone" placeholder="919284775331" required>
+                <p class="help-text">Format: 91XXXXXXXXXX (no spaces or special characters)</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="customerName">👤 Customer Name</label>
+                <input type="text" id="customerName" placeholder="Asmita Yadav" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="orderId">🔖 Order ID</label>
+                <input type="text" id="orderId" placeholder="SM-ORD-19315" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">💰 Amount (numbers only)</label>
+                <input type="number" id="amount" placeholder="640" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="productName">🛍️ Product Name</label>
+                <input type="text" id="productName" placeholder="Necklace" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="paymentMethod">💳 Payment Method</label>
+                <input type="text" id="paymentMethod" placeholder="Cash on Delivery (COD)" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">📍 Address</label>
+                <textarea id="address" placeholder="Chitle Dailry Road Near Hanuman Mandir Bhilawadi Station Taluka: Palus Dist: Sangli Maharashtra - 416303" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="mediaUrl">🖼️ Product Image URL (optional)</label>
+                <input type="url" id="mediaUrl" placeholder="https://example.com/product-image.jpg">
+                <p class="help-text">Leave empty to test without image</p>
+            </div>
+            
+            <button type="submit" class="btn" id="sendBtn">
+                🚀 Send Test Message
+            </button>
+            
+            <button type="button" class="btn example-btn" id="fillExampleBtn">
+                📝 Fill Example Data
+            </button>
+        </form>
+        
+        <div class="log-container">
+            <div class="log-title">
+                <span>📋 Console Logs</span>
+                <button class="clear-btn" id="clearBtn">Clear</button>
+            </div>
+            <div id="logs"></div>
+        </div>
+    </div>
+
+    <script>
+        const logsContainer = document.getElementById('logs');
+        
+        function addLog(message, type = 'info') {
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+        }
+        
+        function clearLogs() {
+            logsContainer.innerHTML = '';
+        }
+        
+        document.getElementById('clearBtn').addEventListener('click', clearLogs);
+        
+        document.getElementById('fillExampleBtn').addEventListener('click', () => {
+            document.getElementById('phone').value = '919284775331';
+            document.getElementById('customerName').value = 'Asmita Yadav';
+            document.getElementById('orderId').value = 'SM-ORD-' + Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('amount').value = '640';
+            document.getElementById('productName').value = 'Necklace';
+            document.getElementById('paymentMethod').value = 'Cash on Delivery (COD)';
+            document.getElementById('address').value = 'Chitle Dailry Road Near Hanuman Mandir Bhilawadi Station Taluka: Palus Dist: Sangli Maharashtra - 416303';
+            document.getElementById('mediaUrl').value = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80';
+            addLog('Example data filled successfully', 'success');
+        });
+        
+        document.getElementById('testForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            sendBtn.textContent = '⏳ Sending...';
+            
+            clearLogs();
+            
+            // Get form values
+            const phone = document.getElementById('phone').value.replace(/\D/g, '');
+            const customerName = document.getElementById('customerName').value.replace(/,/g, ' ').trim();
+            const orderId = document.getElementById('orderId').value.replace(/,/g, ' ').trim();
+            const amount = document.getElementById('amount').value.replace(/[^\d]/g, '');
+            const productName = document.getElementById('productName').value.replace(/,/g, ' ').trim();
+            const paymentMethod = document.getElementById('paymentMethod').value.replace(/,/g, ' ').trim();
+            const address = document.getElementById('address').value.replace(/,/g, ' ').replace(/\n/g, ' ').trim();
+            const mediaUrl = document.getElementById('mediaUrl').value.trim();
+            
+            addLog('📝 Building webhook request...', 'info');
+            addLog(`Phone: ${phone}`, 'info');
+            
+            // Build message in exact format
+            const messageText = `ordercnfrm,${customerName},${orderId},${amount},${productName},${paymentMethod},${address}`;
+            addLog(`Message: ${messageText}`, 'info');
+            
+            // Encode message
+            const encodedMessage = encodeURIComponent(messageText);
+            
+            // Build webhook URL
+            let webhookUrl = `https://webhook.whatapi.in/webhook/6a1152b26f1a8bf9dd5cf7e1?number=${phone}&message=${encodedMessage}`;
+            
+            if (mediaUrl) {
+                webhookUrl += `&medialink=${encodeURIComponent(mediaUrl)}`;
+                addLog(`Media URL: ${mediaUrl}`, 'info');
+            }
+            
+            addLog('🌐 Complete Webhook URL:', 'info');
+            const urlDisplay = document.createElement('div');
+            urlDisplay.className = 'url-display';
+            urlDisplay.textContent = webhookUrl;
+            logsContainer.appendChild(urlDisplay);
+            
+            addLog('📤 Sending via Method 1: Fetch (no-cors)...', 'info');
+            
+            // Method 1: Fetch with no-cors
+            try {
+                await fetch(webhookUrl, { 
+                    method: 'GET',
+                    mode: 'no-cors'
+                });
+                addLog('✅ Method 1 completed (no-cors mode - cannot read response)', 'success');
+            } catch (err) {
+                addLog(`❌ Method 1 error: ${err.message}`, 'error');
+            }
+            
+            // Method 2: Image fallback
+            addLog('📤 Sending via Method 2: Image fallback...', 'info');
+            try {
+                const img = new Image();
+                img.src = webhookUrl;
+                addLog('✅ Method 2 initiated (Image element)', 'success');
+            } catch (err) {
+                addLog(`❌ Method 2 error: ${err.message}`, 'error');
+            }
+            
+            // Method 3: iframe
+            addLog('📤 Sending via Method 3: iframe...', 'info');
+            try {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = webhookUrl;
+                document.body.appendChild(iframe);
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    addLog('✅ Method 3 completed (iframe removed)', 'success');
+                }, 3000);
+                addLog('✅ Method 3 initiated (iframe)', 'success');
+            } catch (err) {
+                addLog(`❌ Method 3 error: ${err.message}`, 'error');
+            }
+            
+            addLog('', 'info');
+            addLog('🎉 All webhook requests sent!', 'success');
+            addLog('⏰ Check your WhatsApp in 5-10 seconds...', 'warning');
+            addLog('', 'info');
+            addLog('💡 If message not received:', 'warning');
+            addLog('1. Verify template "ordercnfrm" is configured in WhatsApp Business API', 'warning');
+            addLog('2. Check phone number is registered: ' + phone, 'warning');
+            addLog('3. Verify webhook ID is correct: 6a1152b26f1a8bf9dd5cf7e1', 'warning');
+            addLog('4. Check webhook.whatapi.in dashboard for logs', 'warning');
+            
+            sendBtn.disabled = false;
+            sendBtn.textContent = '🚀 Send Test Message';
+        });
+        
+        // Initial log
+        addLog('🎯 WhatsApp Webhook Tester Ready', 'success');
+        addLog('Fill in the form and click "Send Test Message" to test your webhook', 'info');
+    </script>
+</body>
+</html>

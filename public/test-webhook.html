@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Webhook Tester</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #c9982a;
+            padding-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background: #c9982a;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #b8872a;
+        }
+        .output {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid #c9982a;
+        }
+        .output h3 {
+            margin-top: 0;
+            color: #c9982a;
+        }
+        .url-display {
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .success {
+            color: #10b981;
+            font-weight: bold;
+        }
+        .error {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        .info {
+            background: #e0f2fe;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0284c7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 WhatsApp Webhook Tester</h1>
+        
+        <div class="info">
+            <strong>📱 Test your WhatsApp webhook integration</strong><br>
+            Fill in the form below and click "Send Test Message" to test your webhook.
+        </div>
+
+        <div class="form-group">
+            <label>Webhook ID:</label>
+            <input type="text" id="webhookId" value="6a1152b26f1a8bf9dd5cf7e1" placeholder="Enter webhook ID">
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number (10 digits):</label>
+            <input type="text" id="phone" value="8058516003" placeholder="e.g., 8058516003">
+        </div>
+
+        <div class="form-group">
+            <label>Customer Name:</label>
+            <input type="text" id="customerName" value="Palash Borgave" placeholder="Enter customer name">
+        </div>
+
+        <div class="form-group">
+            <label>Order ID:</label>
+            <input type="text" id="orderId" value="SM-ORD-12345" placeholder="e.g., SM-ORD-12345">
+        </div>
+
+        <div class="form-group">
+            <label>Amount (numbers only):</label>
+            <input type="text" id="amount" value="2500" placeholder="e.g., 2500">
+        </div>
+
+        <div class="form-group">
+            <label>Product Name:</label>
+            <input type="text" id="productName" value="Kolhapuri Chappal" placeholder="Enter product name">
+        </div>
+
+        <div class="form-group">
+            <label>Payment Method:</label>
+            <input type="text" id="paymentMethod" value="Cash on Delivery" placeholder="e.g., Cash on Delivery">
+        </div>
+
+        <div class="form-group">
+            <label>Address:</label>
+            <textarea id="address" rows="2" placeholder="Enter delivery address">Kolhapur Maharashtra</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Image URL (optional):</label>
+            <input type="text" id="imageUrl" value="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" placeholder="Enter image URL">
+        </div>
+
+        <button onclick="sendTestMessage()">📤 Send Test Message</button>
+        <button onclick="copyUrl()" style="background: #6366f1;">📋 Copy URL</button>
+        <button onclick="openInBrowser()" style="background: #10b981;">🌐 Open in Browser</button>
+
+        <div class="output" id="output" style="display: none;">
+            <h3>📊 Test Results</h3>
+            <div id="results"></div>
+        </div>
+    </div>
+
+    <script>
+        let generatedUrl = '';
+
+        function sendTestMessage() {
+            const webhookId = document.getElementById('webhookId').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const customerName = document.getElementById('customerName').value.trim();
+            const orderId = document.getElementById('orderId').value.trim();
+            const amount = document.getElementById('amount').value.trim();
+            const productName = document.getElementById('productName').value.trim();
+            const paymentMethod = document.getElementById('paymentMethod').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const imageUrl = document.getElementById('imageUrl').value.trim();
+
+            // Validate inputs
+            if (!webhookId || !phone || !customerName || !orderId) {
+                alert('Please fill in all required fields!');
+                return;
+            }
+
+            // Format phone number
+            let formattedPhone = phone.replace(/\D/g, '');
+            if (formattedPhone.length === 10) {
+                formattedPhone = '91' + formattedPhone;
+            }
+
+            // Build message in comma-separated format
+            const message = `ordercnfrm,${customerName},${orderId},${amount},${productName},${paymentMethod},${address}`;
+
+            // Build webhook URL
+            const baseUrl = `https://webhook.whatapi.in/webhook/${webhookId}`;
+            const url = new URL(baseUrl);
+            url.searchParams.set('number', formattedPhone);
+            url.searchParams.set('message', message);
+            
+            if (imageUrl) {
+                url.searchParams.set('medialink', encodeURIComponent(imageUrl));
+            }
+
+            generatedUrl = url.toString();
+
+            // Display results
+            const output = document.getElementById('output');
+            const results = document.getElementById('results');
+            output.style.display = 'block';
+
+            results.innerHTML = `
+                <p><strong>📱 Phone:</strong> ${formattedPhone}</p>
+                <p><strong>💬 Message:</strong> ${message}</p>
+                <p><strong>🖼️ Image:</strong> ${imageUrl || 'None'}</p>
+                <hr>
+                <p><strong>🔗 Generated URL:</strong></p>
+                <div class="url-display">${generatedUrl}</div>
+                <hr>
+                <p class="success">✅ Sending webhook request...</p>
+            `;
+
+            // Send via fetch (no-cors)
+            fetch(generatedUrl, { mode: 'no-cors' })
+                .then(() => {
+                    results.innerHTML += '<p class="success">✅ Method 1: Fetch request sent successfully!</p>';
+                })
+                .catch(err => {
+                    results.innerHTML += `<p class="error">❌ Method 1 failed: ${err.message}</p>`;
+                });
+
+            // Send via Image fallback
+            try {
+                const img = new Image();
+                img.onload = () => {
+                    results.innerHTML += '<p class="success">✅ Method 2: Image loaded (webhook triggered)</p>';
+                };
+                img.onerror = () => {
+                    results.innerHTML += '<p class="success">⚠️ Method 2: Image error (but webhook may have triggered)</p>';
+                };
+                img.src = generatedUrl;
+                results.innerHTML += '<p class="success">✅ Method 2: Image request initiated</p>';
+            } catch (err) {
+                results.innerHTML += `<p class="error">❌ Method 2 failed: ${err.message}</p>`;
+            }
+
+            results.innerHTML += `
+                <hr>
+                <p><strong>📱 Check your WhatsApp now!</strong></p>
+                <p>Phone: +${formattedPhone}</p>
+            `;
+        }
+
+        function copyUrl() {
+            if (!generatedUrl) {
+                alert('Please send a test message first!');
+                return;
+            }
+            navigator.clipboard.writeText(generatedUrl).then(() => {
+                alert('✅ URL copied to clipboard!');
+            });
+        }
+
+        function openInBrowser() {
+            if (!generatedUrl) {
+                alert('Please send a test message first!');
+                return;
+            }
+            window.open(generatedUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /products/{allPaths=**} {
+      // Allow anyone to read/download product images
+      allow read: if true;
+      // Allow uploads from admin panel (no Firebase Auth used in admin)
+      allow write: if true;
+    }
+  }
+}

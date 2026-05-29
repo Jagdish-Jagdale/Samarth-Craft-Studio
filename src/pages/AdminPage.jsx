@@ -9,7 +9,7 @@ const initialProducts = [
     id: 1,
     name: 'The Royal Gold Kolhapuri',
     sku: 'SM-KOL-001',
-    category: 'Kolhapuri Chappaloo',
+    category: 'Kolhapuri Chappal',
     collection: 'Royal Atelier',
     subCategory: 'Royal Atelier',
     price: 18500,
@@ -1964,8 +1964,8 @@ ${payout.orders.slice(-5).map(order =>
               key={sub}
               onClick={() => setActiveSubCategory(sub)}
               className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${activeSubCategory === sub
-                  ? 'bg-gold-500 text-dark border-gold-500 shadow-sm'
-                  : 'bg-white text-dark/60 border-dark/10 hover:border-dark/20 hover:text-dark'
+                ? 'bg-gold-500 text-dark border-gold-500 shadow-sm'
+                : 'bg-white text-dark/60 border-dark/10 hover:border-dark/20 hover:text-dark'
                 }`}
             >
               {sub}
@@ -2284,8 +2284,8 @@ ${payout.orders.slice(-5).map(order =>
               key={sub}
               onClick={() => setActiveSubCategory(sub)}
               className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${activeSubCategory === sub
-                  ? 'bg-gold-500 text-dark border-gold-500 shadow-sm'
-                  : 'bg-white text-dark/60 border-dark/10 hover:border-dark/20 hover:text-dark'
+                ? 'bg-gold-500 text-dark border-gold-500 shadow-sm'
+                : 'bg-white text-dark/60 border-dark/10 hover:border-dark/20 hover:text-dark'
                 }`}
             >
               {sub}
@@ -3175,7 +3175,7 @@ ${payout.orders.slice(-5).map(order =>
                       <div>
                         <p className="text-sm font-bold text-dark">{r.name}</p>
                         <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${r.status === 'Active' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' :
-                            r.status === 'Onboarding' ? 'bg-amber-50 border-amber-100 text-amber-700' : 'bg-red-50 border-red-100 text-red-700'
+                          r.status === 'Onboarding' ? 'bg-amber-50 border-amber-100 text-amber-700' : 'bg-red-50 border-red-100 text-red-700'
                           }`}>
                           {r.status}
                         </span>
@@ -3417,7 +3417,7 @@ ${payout.orders.slice(-5).map(order =>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${inq.status === 'Unread' ? 'bg-amber-50 text-amber-700 border border-amber-100' :
-                      inq.status === 'Replied' ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-emerald-50 text-emerald-700 border border-emerald-100'
+                    inq.status === 'Replied' ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-emerald-50 text-emerald-700 border border-emerald-100'
                     }`}>
                     {inq.status}
                   </span>
@@ -4238,8 +4238,8 @@ ${payout.orders.slice(-5).map(order =>
                 setIsMobileMenuOpen(false) // Close mobile menu on selection
               }}
               className={`w-full flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeNav === item.label
-                  ? 'bg-gold-500/10 text-gold-600 border border-gold-500/20'
-                  : 'text-dark/60 hover:text-dark hover:bg-cream/40 border border-transparent'
+                ? 'bg-gold-500/10 text-gold-600 border border-gold-500/20'
+                : 'text-dark/60 hover:text-dark hover:bg-cream/40 border border-transparent'
                 }`}
             >
               <span className="opacity-80">{item.icon}</span>
@@ -4683,8 +4683,8 @@ ${payout.orders.slice(-5).map(order =>
                   </p>
                   <div className="flex items-center justify-center w-full">
                     <label className={`flex flex-col items-center justify-center w-full h-28 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isUploadingImages
-                        ? 'border-gold-400 bg-gold-50 cursor-wait'
-                        : 'border-dark/10 bg-[#faf8f5] hover:bg-cream/20 hover:border-gold-500'
+                      ? 'border-gold-400 bg-gold-50 cursor-wait'
+                      : 'border-dark/10 bg-[#faf8f5] hover:bg-cream/20 hover:border-gold-500'
                       }`}>
                       <div className="flex flex-col items-center justify-center pt-4 pb-4">
                         {isUploadingImages ? (

@@ -5,17 +5,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // Initial Datasets for full statefulness
 const initialProducts = [
-  { 
-    id: 1, 
-    name: 'The Royal Gold Kolhapuri', 
-    sku: 'SM-KOL-001', 
-    category: 'Kolhapuri Chappal', 
-    collection: 'Royal Atelier', 
+  {
+    id: 1,
+    name: 'The Royal Gold Kolhapuri',
+    sku: 'SM-KOL-001',
+    category: 'Kolhapuri Chappaloo',
+    collection: 'Royal Atelier',
     subCategory: 'Royal Atelier',
-    price: 18500, 
+    price: 18500,
     discount: 10,
-    statusColor: 'green', 
-    sizes: { 6: 5, 7: 8, 8: 3, 9: 12, 10: 6, 11: 4, 12: 2 }, 
+    statusColor: 'green',
+    sizes: { 6: 5, 7: 8, 8: 3, 9: 12, 10: 6, 11: 4, 12: 2 },
     stock: 40,
     badge: 'LIMITED EDITION',
     description: 'Imperial hand-braided tan sandals with royal gold-thread embroidery and natural vegetable-tanned buffalo leather cushioning.',
@@ -23,17 +23,17 @@ const initialProducts = [
     img: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&q=80',
     images: ['https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=500&q=80', 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&q=80']
   },
-  { 
-    id: 2, 
-    name: 'Midnight Zardosi Silk Jutti', 
-    sku: 'SM-JUT-082', 
-    category: 'Kolhapuri Chappal', 
-    collection: 'Heritage Earth', 
+  {
+    id: 2,
+    name: 'Midnight Zardosi Silk Jutti',
+    sku: 'SM-JUT-082',
+    category: 'Kolhapuri Chappal',
+    collection: 'Heritage Earth',
     subCategory: 'Heritage Earth',
-    price: 12400, 
+    price: 12400,
     discount: 0,
-    statusColor: 'yellow', 
-    sizes: { 6: 2, 7: 0, 8: 4, 9: 1, 10: 0, 11: 3, 12: 1 }, 
+    statusColor: 'yellow',
+    sizes: { 6: 2, 7: 0, 8: 4, 9: 1, 10: 0, 11: 3, 12: 1 },
     stock: 11,
     badge: 'NEW ARRIVAL',
     description: 'Generational midnight black silk footwear with hand-dyed dark outlines and premium comfort-cushioned soles.',
@@ -41,17 +41,17 @@ const initialProducts = [
     img: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&q=80',
     images: ['https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=500&q=80']
   },
-  { 
-    id: 3, 
-    name: 'Ancient Indigo Terracotta Sandal', 
-    sku: 'SM-TER-042', 
-    category: 'Kolhapuri Chappal', 
-    collection: 'Heritage Earth', 
+  {
+    id: 3,
+    name: 'Ancient Indigo Terracotta Sandal',
+    sku: 'SM-TER-042',
+    category: 'Kolhapuri Chappal',
+    collection: 'Heritage Earth',
     subCategory: 'Heritage Earth',
-    price: 8500, 
+    price: 8500,
     discount: 15,
-    statusColor: 'red', 
-    sizes: { 6: 1, 7: 2, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0 }, 
+    statusColor: 'red',
+    sizes: { 6: 1, 7: 2, 8: 0, 9: 0, 10: 1, 11: 0, 12: 0 },
     stock: 4,
     badge: 'CLEARANCE SALE',
     description: 'Hand-tooled organic indigo vegetable leather sandal with anti-slip crepe outsole and fine border-stitch finish.',
@@ -59,60 +59,60 @@ const initialProducts = [
     img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
     images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80']
   },
-  { 
-    id: 4, 
-    name: '24K Polki Kundan Necklace', 
-    sku: 'SM-JWL-991', 
-    category: 'Jewellery', 
-    collection: 'Imperial Gems', 
+  {
+    id: 4,
+    name: '24K Polki Kundan Necklace',
+    sku: 'SM-JWL-991',
+    category: 'Jewellery',
+    collection: 'Imperial Gems',
     subCategory: 'Imperial Gems',
-    price: 145000, 
+    price: 145000,
     discount: 5,
-    statusColor: 'green', 
-    weight: '45g', 
-    gemstone: 'Polki Diamond, Ruby', 
-    metal: '24K Gold', 
-    stock: 3, 
+    statusColor: 'green',
+    weight: '45g',
+    gemstone: 'Polki Diamond, Ruby',
+    metal: '24K Gold',
+    stock: 3,
     badge: 'LIMITED EDITION',
     description: 'Exquisite 24K gold temple necklace with hand-laid Polki raw diamonds, Burmese rubies, and premium green spinels.',
     image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80',
     img: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80',
     images: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&q=80', 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&q=80']
   },
-  { 
-    id: 5, 
-    name: 'Temple Craft Ruby Bangles', 
-    sku: 'SM-JWL-882', 
-    category: 'Jewellery', 
-    collection: 'Royal Atelier', 
+  {
+    id: 5,
+    name: 'Temple Craft Ruby Bangles',
+    sku: 'SM-JWL-882',
+    category: 'Jewellery',
+    collection: 'Royal Atelier',
     subCategory: 'Royal Atelier',
-    price: 78000, 
+    price: 78000,
     discount: 0,
-    statusColor: 'yellow', 
-    weight: '28g', 
-    gemstone: 'Natural Ruby, Emerald', 
-    metal: '22K Gold', 
-    stock: 1, 
+    statusColor: 'yellow',
+    weight: '28g',
+    gemstone: 'Natural Ruby, Emerald',
+    metal: '22K Gold',
+    stock: 1,
     badge: 'BEST SELLER',
     description: 'Set of two detailed gold bangles depicting historic carvings from western ghat shrines, clad with deep natural rubies.',
     image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80',
     img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80',
     images: ['https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80']
   },
-  { 
-    id: 6, 
-    name: 'Heritage Filigree Ring', 
-    sku: 'SM-JWL-103', 
-    category: 'Jewellery', 
-    collection: 'Imperial Gems', 
+  {
+    id: 6,
+    name: 'Heritage Filigree Ring',
+    sku: 'SM-JWL-103',
+    category: 'Jewellery',
+    collection: 'Imperial Gems',
     subCategory: 'Imperial Gems',
-    price: 32000, 
+    price: 32000,
     discount: 0,
-    statusColor: 'green', 
-    weight: '12g', 
-    gemstone: 'Basra Pearl', 
-    metal: '18K Gold', 
-    stock: 8, 
+    statusColor: 'green',
+    weight: '12g',
+    gemstone: 'Basra Pearl',
+    metal: '18K Gold',
+    stock: 8,
     badge: 'TOP SELLING',
     description: 'Fine filigree ring in 18K yellow gold, featuring an authentic central Basra saltwater pearl.',
     image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80',
@@ -224,14 +224,14 @@ export default function AdminPage() {
 
   // State Management for Interactive Components
   // State Management for Interactive Components (Fully Bound to Firestore)
-  const { 
-    products, 
-    orders, 
-    resellers, 
-    inquiries, 
-    addProduct, 
-    deleteProduct, 
-    updateOrderStatus, 
+  const {
+    products,
+    orders,
+    resellers,
+    inquiries,
+    addProduct,
+    deleteProduct,
+    updateOrderStatus,
     updatePaymentStatus,
     deleteOrder,
     addReseller,
@@ -374,16 +374,16 @@ export default function AdminPage() {
   })
 
   const handleCreateResellerAccount = async () => {
-    if(!newReseller.name || !newReseller.email || !newReseller.password) {
+    if (!newReseller.name || !newReseller.email || !newReseller.password) {
       alert("Please fill required fields (Name, Email, Password)");
       return;
     }
-    
+
     // Construct DB payload
     const newPartnerData = {
       id: Date.now(), // Add unique ID
       name: newReseller.name,
-      business: `${newReseller.name} Enterprise`, 
+      business: `${newReseller.name} Enterprise`,
       representative: newReseller.name, // Add representative field
       location: 'Online',
       status: 'Active',
@@ -396,11 +396,11 @@ export default function AdminPage() {
       commissionModel: newReseller.commissionModel,
       commissionValue: newReseller.commissionValue
     }
-    
+
     // Save to Firestore Context
     console.log('Creating reseller with data:', newPartnerData)
     const success = await addReseller(newPartnerData)
-    
+
     if (success) {
       console.log('Reseller created successfully')
       alert(`Reseller partner account securely created for ${newReseller.name}! Credentials established.`);
@@ -449,7 +449,7 @@ export default function AdminPage() {
     }
 
     const success = await updateReseller(editingReseller.id, updatedData)
-    
+
     if (success) {
       alert(`Reseller details updated successfully for ${editResellerData.name}!`);
       setShowEditResellerModal(false);
@@ -478,7 +478,7 @@ export default function AdminPage() {
   const [isUploadingImages, setIsUploadingImages] = useState(false)
   const [customSubCategory, setCustomSubCategory] = useState('')
   const [isCustomSubCategoryActive, setIsCustomSubCategoryActive] = useState(false)
-  
+
   const [newProduct, setNewProduct] = useState({
     name: '',
     category: 'Kolhapuri Chappal',
@@ -517,7 +517,7 @@ export default function AdminPage() {
 
     const cat = p.category || 'Kolhapuri Chappal'
     const sub = p.subCategory || p.collection || ''
-    
+
     let dropdownVal = sub
     let isCustom = false
     let customVal = ''
@@ -543,13 +543,13 @@ export default function AdminPage() {
     }
 
     // Get existing Firebase Storage URLs (filter out any Base64 that may exist from old saves)
-    const existingFirebaseUrls = (p.images || []).filter(url => 
+    const existingFirebaseUrls = (p.images || []).filter(url =>
       url && typeof url === 'string' && url.startsWith('https://')
     )
     const singleUrl = (p.image || p.img || '')
     const fallbackUrl = singleUrl.startsWith('https://') ? singleUrl : ''
-    const existingUrls = existingFirebaseUrls.length > 0 
-      ? existingFirebaseUrls 
+    const existingUrls = existingFirebaseUrls.length > 0
+      ? existingFirebaseUrls
       : (fallbackUrl ? [fallbackUrl] : [])
 
     setNewProduct({
@@ -568,20 +568,20 @@ export default function AdminPage() {
       metal: p.metal || '',
       gemstone: p.gemstone || '',
       // Store existing URLs in colorVariants for display only
-      colorVariants: p.colorVariants 
+      colorVariants: p.colorVariants
         ? p.colorVariants.map(v => ({
-            ...v,
-            // Filter out Base64 from existing variant images
-            images: (v.images || []).filter(url => url && url.startsWith('https://'))
-          }))
+          ...v,
+          // Filter out Base64 from existing variant images
+          images: (v.images || []).filter(url => url && url.startsWith('https://'))
+        }))
         : [
-            {
-              id: 1,
-              colorName: 'Default',
-              colorCode: '#8B4513',
-              images: existingUrls
-            }
-          ]
+          {
+            id: 1,
+            colorName: 'Default',
+            colorCode: '#8B4513',
+            images: existingUrls
+          }
+        ]
     })
 
     setIsCustomSubCategoryActive(isCustom)
@@ -818,7 +818,7 @@ export default function AdminPage() {
   const updateColorVariant = (variantId, field, value) => {
     setNewProduct(prev => ({
       ...prev,
-      colorVariants: (prev.colorVariants || []).map(v => 
+      colorVariants: (prev.colorVariants || []).map(v =>
         v.id === variantId ? { ...v, [field]: value } : v
       )
     }))
@@ -1078,8 +1078,8 @@ export default function AdminPage() {
       return
     }
 
-    const orderItems = Array.isArray(order.items) 
-      ? order.items 
+    const orderItems = Array.isArray(order.items)
+      ? order.items
       : [{ name: order.items || 'Handcrafted Curation Selection', category: 'Handcrafted Heritage', price: order.total, quantity: 1 }]
 
     const itemsRows = orderItems.map(item => {
@@ -1299,9 +1299,9 @@ Total Pending: ₹${payout.totalPending.toLocaleString()}
 Orders: ${payout.orders.length}
 
 Recent Orders:
-${payout.orders.slice(-5).map(order => 
-  `• ${order.orderId} - ${order.date} - ₹${order.amount} (${order.productName})`
-).join('\n')}
+${payout.orders.slice(-5).map(order =>
+      `• ${order.orderId} - ${order.date} - ₹${order.amount} (${order.productName})`
+    ).join('\n')}
     `
     alert(details)
   }
@@ -1328,12 +1328,12 @@ ${payout.orders.slice(-5).map(order =>
       // Update orders in context (this would normally update Firestore)
       // For now, we'll just show success message
       alert(`Payment of ₹${payout.totalPending.toLocaleString()} processed successfully for ${payout.resellerName}!`)
-      
+
       // In a real implementation, you would:
       // 1. Update all related orders in Firestore
       // 2. Create a payout record
       // 3. Send notification to reseller
-      
+
     } catch (error) {
       console.error('Error processing payment:', error)
       alert('Failed to process payment. Please try again.')
@@ -1345,7 +1345,7 @@ ${payout.orders.slice(-5).map(order =>
     const currentDate = new Date()
     const currentMonth = currentDate.getMonth()
     const currentYear = currentDate.getFullYear()
-    
+
     const monthlyOrders = orders.filter(order => {
       const orderDate = new Date(order.date)
       return orderDate.getMonth() === currentMonth && orderDate.getFullYear() === currentYear
@@ -1383,7 +1383,7 @@ ${payout.orders.slice(-5).map(order =>
   const generatePayoutPDF = (resellerData, month, year) => {
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December']
-    
+
     const reportWindow = window.open('', '_blank')
     if (!reportWindow) {
       alert('Pop-up blocked! Please allow popups to generate the report.')
@@ -1489,7 +1489,7 @@ ${payout.orders.slice(-5).map(order =>
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-xs text-dark/60 font-semibold tracking-wider mb-2 uppercase">Email</label>
-              <input 
+              <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -1499,7 +1499,7 @@ ${payout.orders.slice(-5).map(order =>
             </div>
             <div>
               <label className="block text-xs text-dark/60 font-semibold tracking-wider mb-2 uppercase">Password</label>
-              <input 
+              <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -1507,7 +1507,7 @@ ${payout.orders.slice(-5).map(order =>
                 required
               />
             </div>
-            <button 
+            <button
               type="submit"
               className="w-full bg-dark text-white font-bold py-3 text-sm hover:bg-gold-600 transition-colors mt-4 rounded-lg shadow-md hover:shadow-lg"
             >
@@ -1618,7 +1618,7 @@ ${payout.orders.slice(-5).map(order =>
     // 1. Dynamic Total Revenue based on orders
     const completedOrders = orders.filter(o => o.paymentStatus === 'Paid' || o.paymentMethod === 'Pay Online' || o.orderStatus === 'Delivered' || o.paymentMethod?.includes('Online'));
     const totalRevenue = completedOrders.reduce((acc, curr) => acc + (Number(curr.total) || 0), 0);
-    
+
     // 2. Active Orders
     const activeOrdersCount = orders.filter(o => o.orderStatus === 'Processing' || o.orderStatus === 'In Transit').length;
 
@@ -1642,9 +1642,9 @@ ${payout.orders.slice(-5).map(order =>
         sub: `${stats.count} Products`,
         value: `₹${stats.value.toLocaleString()}`
       }))
-      .sort((a, b) => Number(b.value.replace(/[^0-9.-]+/g,"")) - Number(a.value.replace(/[^0-9.-]+/g,"")))
+      .sort((a, b) => Number(b.value.replace(/[^0-9.-]+/g, "")) - Number(a.value.replace(/[^0-9.-]+/g, "")))
       .slice(0, 3);
-    
+
     return (
       <div className="space-y-6 lg:space-y-8">
         {/* Stats Row */}
@@ -1771,7 +1771,7 @@ ${payout.orders.slice(-5).map(order =>
       <div className="space-y-4 lg:space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
-            <button 
+            <button
               onClick={() => setShowAddProductModal(true)}
               className="bg-gold-500 text-dark text-sm font-bold px-4 lg:px-5 py-2.5 rounded-lg flex items-center gap-2 hover:bg-gold-400 transition-colors shadow-sm w-full sm:w-auto justify-center sm:justify-start"
             >
@@ -1779,7 +1779,7 @@ ${payout.orders.slice(-5).map(order =>
             </button>
             <div className="flex border border-dark/10 rounded-lg overflow-hidden bg-white w-full sm:w-auto">
               {['All', 'Kolhapuri Chappal', 'Jewellery'].map((cat) => (
-                <button 
+                <button
                   key={cat}
                   onClick={() => setInvCategoryFilter(cat)}
                   className={`px-3 lg:px-4 py-2 text-xs font-semibold flex-1 sm:flex-none ${invCategoryFilter === cat ? 'bg-gold-500 text-dark' : 'text-dark/50 hover:text-dark hover:bg-cream/20'}`}
@@ -1792,10 +1792,10 @@ ${payout.orders.slice(-5).map(order =>
 
           <div className="flex items-center gap-2 bg-white border border-dark/10 rounded-lg px-3 py-2 text-sm w-full sm:w-auto">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-dark/40"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input 
+            <input
               value={invSearch}
-              onChange={(e) => setInvSearch(e.target.value)} 
-              className="bg-transparent outline-none w-full sm:w-48 text-dark placeholder-stone-400" 
+              onChange={(e) => setInvSearch(e.target.value)}
+              className="bg-transparent outline-none w-full sm:w-48 text-dark placeholder-stone-400"
             />
           </div>
         </div>
@@ -1817,13 +1817,13 @@ ${payout.orders.slice(-5).map(order =>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-dark/50">Stock: <span className="font-semibold text-dark">{p.stock}</span></span>
                     <div className="flex gap-2">
-                      <button 
+                      <button
                         onClick={() => startEditProduct(p)}
                         className="px-3 py-1.5 text-xs font-semibold text-gold-700 bg-gold-50 border border-gold-200 rounded hover:bg-gold-100 transition-colors"
                       >
                         Edit
                       </button>
-                      <button 
+                      <button
                         onClick={() => deleteProduct(p.id)}
                         className="px-3 py-1.5 text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded hover:bg-red-100 transition-colors"
                       >
@@ -1851,7 +1851,7 @@ ${payout.orders.slice(-5).map(order =>
               </thead>
               <tbody>
                 {filteredProducts.map((p) => {
-                  const stockSum = p.category === 'Kolhapuri Chappal' 
+                  const stockSum = p.category === 'Kolhapuri Chappal'
                     ? Object.values(p.sizes || {}).reduce((a, b) => a + b, 0)
                     : (p.stock || 0)
 
@@ -1872,19 +1872,19 @@ ${payout.orders.slice(-5).map(order =>
                         <div className="flex items-center gap-2">
                           <span className={`w-2 h-2 rounded-full ${stockSum === 0 ? 'bg-red-500' : stockSum < 5 ? 'bg-amber-500' : 'bg-emerald-500'}`} />
                           <span className="text-xs font-semibold text-dark/70">
-                            {stockSum} units 
+                            {stockSum} units
                             {p.category === 'Kolhapuri Chappal' && ' (Size-wise)'}
                           </span>
                         </div>
                       </td>
                       <td className="px-6 py-4 text-right space-x-2">
-                        <button 
+                        <button
                           onClick={() => startEditProduct(p)}
                           className="px-3 py-1.5 text-[10px] font-bold text-gold-700 border border-gold-200 rounded bg-gold-50 hover:bg-gold-100 transition-colors"
                         >
                           Edit
                         </button>
-                        <button 
+                        <button
                           onClick={() => deleteProduct(p.id)}
                           className="px-3 py-1.5 text-[10px] font-bold text-red-600 border border-red-200 rounded bg-red-50 hover:bg-red-100 transition-colors"
                         >
@@ -1931,7 +1931,7 @@ ${payout.orders.slice(-5).map(order =>
             <h3 className="font-serif text-xl text-dark font-bold">Kolhapuri Chappals Curation</h3>
             <p className="text-xs text-dark/50 mt-1">Manage and publish custom handcrafted premium leather footwear.</p>
           </div>
-          <button 
+          <button
             onClick={() => {
               setNewProduct({
                 name: '',
@@ -1963,11 +1963,10 @@ ${payout.orders.slice(-5).map(order =>
             <button
               key={sub}
               onClick={() => setActiveSubCategory(sub)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${
-                activeSubCategory === sub
+              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${activeSubCategory === sub
                   ? 'bg-gold-500 text-dark border-gold-500 shadow-sm'
                   : 'bg-white text-dark/60 border-dark/10 hover:border-dark/20 hover:text-dark'
-              }`}
+                }`}
             >
               {sub}
             </button>
@@ -1998,7 +1997,7 @@ ${payout.orders.slice(-5).map(order =>
                   {Object.keys(p.sizes || {}).map((size) => (
                     <div key={size} className="flex flex-col items-center bg-white border border-dark/5 rounded-lg p-2 w-14 text-center">
                       <span className="text-[9px] text-dark/45 font-bold uppercase tracking-wider mb-1">IND {size}</span>
-                      <input 
+                      <input
                         type="number"
                         min="0"
                         value={p.sizes[size]}
@@ -2031,7 +2030,7 @@ ${payout.orders.slice(-5).map(order =>
 
         {/* Kolhapuri Chappal Size Chart Section */}
         <div className="bg-white border border-dark/5 rounded-xl shadow-sm overflow-hidden">
-          <div 
+          <div
             className="p-4 lg:p-6 cursor-pointer hover:bg-cream/20 transition-colors"
             onClick={() => setShowChappalSizeChart(!showChappalSizeChart)}
           >
@@ -2051,11 +2050,11 @@ ${payout.orders.slice(-5).map(order =>
                 <span className="text-xs text-dark/40 font-medium hidden sm:inline">
                   {showChappalSizeChart ? 'Hide Chart' : 'View Chart'}
                 </span>
-                <svg 
-                  className={`w-4 h-4 lg:w-5 lg:h-5 text-dark/40 transition-transform ${showChappalSizeChart ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
+                <svg
+                  className={`w-4 h-4 lg:w-5 lg:h-5 text-dark/40 transition-transform ${showChappalSizeChart ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"></path>
@@ -2149,7 +2148,7 @@ ${payout.orders.slice(-5).map(order =>
       <div className="space-y-6">
         {/* Ring Size Chart Section */}
         <div className="bg-white border border-dark/5 rounded-xl shadow-sm overflow-hidden">
-          <div 
+          <div
             className="p-4 lg:p-6 cursor-pointer hover:bg-cream/20 transition-colors"
             onClick={() => setShowRingSizeChart(!showRingSizeChart)}
           >
@@ -2170,11 +2169,11 @@ ${payout.orders.slice(-5).map(order =>
                 <span className="text-xs text-dark/40 font-medium hidden sm:inline">
                   {showRingSizeChart ? 'Hide Chart' : 'View Chart'}
                 </span>
-                <svg 
-                  className={`w-4 h-4 lg:w-5 lg:h-5 text-dark/40 transition-transform ${showRingSizeChart ? 'rotate-180' : ''}`} 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
+                <svg
+                  className={`w-4 h-4 lg:w-5 lg:h-5 text-dark/40 transition-transform ${showRingSizeChart ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"></path>
@@ -2252,7 +2251,7 @@ ${payout.orders.slice(-5).map(order =>
             <h3 className="font-serif text-xl text-dark font-bold">Temple Jewellery Curation</h3>
             <p className="text-xs text-dark/50 mt-1">Manage and publish custom handcrafted premium temple jewelry.</p>
           </div>
-          <button 
+          <button
             onClick={() => {
               setNewProduct({
                 name: '',
@@ -2284,11 +2283,10 @@ ${payout.orders.slice(-5).map(order =>
             <button
               key={sub}
               onClick={() => setActiveSubCategory(sub)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${
-                activeSubCategory === sub
+              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all border ${activeSubCategory === sub
                   ? 'bg-gold-500 text-dark border-gold-500 shadow-sm'
                   : 'bg-white text-dark/60 border-dark/10 hover:border-dark/20 hover:text-dark'
-              }`}
+                }`}
             >
               {sub}
             </button>
@@ -2323,7 +2321,7 @@ ${payout.orders.slice(-5).map(order =>
                     </div>
                     <h4 className="font-serif text-base font-bold text-dark mt-1">{p.name}</h4>
                   </div>
-                  
+
                   <p className="text-xs text-dark/50 line-clamp-3 leading-relaxed">{p.description}</p>
                 </div>
               </div>
@@ -2342,14 +2340,14 @@ ${payout.orders.slice(-5).map(order =>
                 <div className="flex items-center justify-between py-3 border-t border-dark/5">
                   <span className="text-[10px] text-dark/45 font-bold uppercase">Update Stock</span>
                   <div className="flex items-center bg-[#faf8f5] rounded-lg border border-dark/10 overflow-hidden">
-                    <button 
+                    <button
                       onClick={() => handleJewelleryStockChange(p.id, -1)}
                       className="px-2.5 py-1 text-xs text-dark/50 hover:bg-cream/45 hover:text-dark font-bold"
                     >
                       -
                     </button>
                     <span className="px-3 text-xs font-bold text-dark">{p.stock}</span>
-                    <button 
+                    <button
                       onClick={() => handleJewelleryStockChange(p.id, 1)}
                       className="px-2.5 py-1 text-xs text-dark/50 hover:bg-cream/45 hover:text-dark font-bold"
                     >
@@ -2359,13 +2357,13 @@ ${payout.orders.slice(-5).map(order =>
                 </div>
 
                 <div className="flex items-center justify-between pt-3 border-t border-dark/5 gap-2">
-                  <button 
+                  <button
                     onClick={() => startEditProduct(p)}
                     className="flex-1 px-3 py-2 text-xs font-bold text-gold-700 border border-gold-200 rounded-lg bg-gold-50 hover:bg-gold-100 transition-colors text-center"
                   >
                     Edit Details
                   </button>
-                  <button 
+                  <button
                     onClick={() => deleteProduct(p.id)}
                     className="flex-1 px-3 py-2 text-xs font-bold text-red-600 border border-red-200 rounded-lg bg-red-50 hover:bg-red-100 transition-colors text-center"
                   >
@@ -2385,13 +2383,13 @@ ${payout.orders.slice(-5).map(order =>
     const generateMonthlyPDFReport = () => {
       const currentMonth = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
       const currentDate = new Date().toLocaleDateString();
-      
+
       // Filter orders for current month
       const currentMonthOrders = orders.filter(order => {
         const orderDate = new Date(order.date);
         const currentDate = new Date();
-        return orderDate.getMonth() === currentDate.getMonth() && 
-               orderDate.getFullYear() === currentDate.getFullYear();
+        return orderDate.getMonth() === currentDate.getMonth() &&
+          orderDate.getFullYear() === currentDate.getFullYear();
       });
 
       // Calculate totals
@@ -2411,7 +2409,7 @@ ${payout.orders.slice(-5).map(order =>
         const displayItems = Array.isArray(order.items)
           ? order.items.map(item => `${item.name} (Qty: ${item.quantity})`).join(', ')
           : order.items;
-        
+
         return `
           <tr>
             <td style="padding: 8px; border-bottom: 1px solid #e5e5e5; font-size: 11px;">${order.id}</td>
@@ -2420,11 +2418,10 @@ ${payout.orders.slice(-5).map(order =>
             <td style="padding: 8px; border-bottom: 1px solid #e5e5e5; font-size: 11px; max-width: 200px; word-wrap: break-word;">${displayItems}</td>
             <td style="padding: 8px; border-bottom: 1px solid #e5e5e5; font-size: 11px; text-align: right; font-weight: 600;">₹${order.total.toLocaleString()}</td>
             <td style="padding: 8px; border-bottom: 1px solid #e5e5e5; font-size: 11px; text-align: center;">
-              <span style="padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; ${
-                (order.paymentStatus === 'Paid' || order.paymentMethod === 'Pay Online') 
-                  ? 'background: #dcfce7; color: #166534;' 
-                  : 'background: #fef3c7; color: #92400e;'
-              }">${order.paymentStatus || (order.paymentMethod === 'Pay Online' ? 'Paid' : 'Pending')}</span>
+              <span style="padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; ${(order.paymentStatus === 'Paid' || order.paymentMethod === 'Pay Online')
+            ? 'background: #dcfce7; color: #166534;'
+            : 'background: #fef3c7; color: #92400e;'
+          }">${order.paymentStatus || (order.paymentMethod === 'Pay Online' ? 'Paid' : 'Pending')}</span>
             </td>
             <td style="padding: 8px; border-bottom: 1px solid #e5e5e5; font-size: 11px; text-align: center;">${order.orderStatus || order.status}</td>
           </tr>
@@ -2584,23 +2581,23 @@ ${payout.orders.slice(-5).map(order =>
 
     const generateMonthlyExcelReport = () => {
       const currentMonth = new Date().toLocaleString('default', { month: 'long', year: 'numeric' });
-      
+
       // Filter orders for current month
       const currentMonthOrders = orders.filter(order => {
         const orderDate = new Date(order.date);
         const currentDate = new Date();
-        return orderDate.getMonth() === currentDate.getMonth() && 
-               orderDate.getFullYear() === currentDate.getFullYear();
+        return orderDate.getMonth() === currentDate.getMonth() &&
+          orderDate.getFullYear() === currentDate.getFullYear();
       });
 
       // Prepare CSV data
       const csvHeaders = ['Order ID', 'Customer', 'Date', 'Items', 'Subtotal', 'Shipping', 'COD Charge', 'Total', 'Payment Status', 'Payment Method', 'Order Status'];
-      
+
       const csvRows = currentMonthOrders.map(order => {
         const displayItems = Array.isArray(order.items)
           ? order.items.map(item => `${item.name} (Qty: ${item.quantity})`).join('; ')
           : order.items;
-        
+
         return [
           order.id,
           order.customer || order.customerName,
@@ -2618,7 +2615,7 @@ ${payout.orders.slice(-5).map(order =>
 
       // Create CSV content
       const csvContent = [csvHeaders.join(','), ...csvRows].join('\n');
-      
+
       // Create and download file
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
@@ -2641,7 +2638,7 @@ ${payout.orders.slice(-5).map(order =>
               <p className="text-xs text-dark/50 mt-1">Track and manage customer orders with monthly reporting.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2 lg:gap-3 w-full sm:w-auto">
-              <button 
+              <button
                 onClick={generateMonthlyPDFReport}
                 className="bg-red-600 hover:bg-red-700 text-white text-[10px] lg:text-[11px] font-bold px-3 lg:px-4 py-2.5 rounded flex items-center justify-center gap-2 transition-colors uppercase tracking-widest shadow-sm"
               >
@@ -2650,7 +2647,7 @@ ${payout.orders.slice(-5).map(order =>
                 </svg>
                 PDF Report
               </button>
-              <button 
+              <button
                 onClick={generateMonthlyExcelReport}
                 className="bg-green-600 hover:bg-green-700 text-white text-[10px] lg:text-[11px] font-bold px-3 lg:px-4 py-2.5 rounded flex items-center justify-center gap-2 transition-colors uppercase tracking-widest shadow-sm"
               >
@@ -2674,8 +2671,8 @@ ${payout.orders.slice(-5).map(order =>
                 const paymentVal = o.paymentStatus || (o.paymentMethod === 'Pay Online' ? 'Paid' : 'Pending');
 
                 return (
-                  <div 
-                    key={o.id} 
+                  <div
+                    key={o.id}
                     onClick={() => setSelectedOrderDetails(o)}
                     className="border border-dark/10 rounded-lg p-4 space-y-3 hover:border-gold-500/50 hover:bg-cream/5 cursor-pointer transition-all duration-200"
                   >
@@ -2696,12 +2693,12 @@ ${payout.orders.slice(-5).map(order =>
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="text-xs text-dark/45 font-medium line-clamp-2">{displayItems}</div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <select 
+                        <select
                           value={paymentVal}
                           onChange={(e) => handlePaymentStatusChange(o.id, e.target.value)}
                           onClick={(e) => e.stopPropagation()}
@@ -2722,8 +2719,8 @@ ${payout.orders.slice(-5).map(order =>
                           </span>
                         )}
                       </div>
-                      
-                      <select 
+
+                      <select
                         value={o.orderStatus || o.status}
                         onChange={(e) => handleOrderStatusChange(o.id, e.target.value)}
                         onClick={(e) => e.stopPropagation()}
@@ -2735,15 +2732,15 @@ ${payout.orders.slice(-5).map(order =>
                         <option value="Canceled">Canceled</option>
                       </select>
                     </div>
-                    
+
                     <div className="flex gap-2 pt-2 border-t border-dark/10">
-                      <button 
+                      <button
                         onClick={(e) => { e.stopPropagation(); downloadInvoice(o); }}
                         className="flex-1 px-3 py-2 text-xs font-bold text-gold-700 bg-gold-50 border border-gold-200 rounded hover:bg-gold-100 transition-colors text-center"
                       >
                         Invoice
                       </button>
-                      <button 
+                      <button
                         onClick={(e) => { e.stopPropagation(); deleteOrder(o.id); }}
                         className="flex-1 px-3 py-2 text-xs font-bold text-red-600 bg-red-50 border border-red-200 rounded hover:bg-red-100 transition-colors text-center"
                       >
@@ -2780,8 +2777,8 @@ ${payout.orders.slice(-5).map(order =>
                   const paymentVal = o.paymentStatus || (o.paymentMethod === 'Pay Online' ? 'Paid' : 'Pending');
 
                   return (
-                    <tr 
-                      key={o.id} 
+                    <tr
+                      key={o.id}
                       onClick={() => setSelectedOrderDetails(o)}
                       className="border-b border-dark/5 hover:bg-cream/20 hover:shadow-sm cursor-pointer transition-all duration-200"
                     >
@@ -2801,7 +2798,7 @@ ${payout.orders.slice(-5).map(order =>
                       </td>
                       <td className="px-6 py-4">
                         <div className="space-y-1">
-                          <select 
+                          <select
                             value={paymentVal}
                             onChange={(e) => handlePaymentStatusChange(o.id, e.target.value)}
                             onClick={(e) => e.stopPropagation()}
@@ -2824,7 +2821,7 @@ ${payout.orders.slice(-5).map(order =>
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <select 
+                        <select
                           value={o.orderStatus || o.status}
                           onChange={(e) => handleOrderStatusChange(o.id, e.target.value)}
                           onClick={(e) => e.stopPropagation()}
@@ -2838,13 +2835,13 @@ ${payout.orders.slice(-5).map(order =>
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex gap-2 justify-end">
-                          <button 
+                          <button
                             onClick={(e) => { e.stopPropagation(); downloadInvoice(o); }}
                             className="px-2.5 py-1 text-[10px] font-bold text-gold-700 bg-gold-50 border border-gold-200 rounded hover:bg-gold-100 transition-colors"
                           >
                             Invoice
                           </button>
-                          <button 
+                          <button
                             onClick={(e) => { e.stopPropagation(); deleteOrder(o.id); }}
                             className="px-2.5 py-1 text-[10px] font-bold text-red-600 bg-red-50 border border-red-200 rounded hover:bg-red-100 transition-colors"
                           >
@@ -2907,7 +2904,7 @@ ${payout.orders.slice(-5).map(order =>
                     </div>
                     <div>
                       <p className="text-[10px] text-dark/45 font-bold uppercase tracking-wide">Delivery Status</p>
-                      <select 
+                      <select
                         value={selectedOrderDetails.orderStatus || selectedOrderDetails.status || 'Processing'}
                         onChange={(e) => handleOrderStatusChange(selectedOrderDetails.id, e.target.value)}
                         className="bg-[#faf8f5] border border-dark/10 text-[10px] rounded px-2 py-1 text-dark outline-none font-bold mt-0.5"
@@ -2921,7 +2918,7 @@ ${payout.orders.slice(-5).map(order =>
                     <div>
                       <p className="text-[10px] text-dark/45 font-bold uppercase tracking-wide">Payment Status</p>
                       <div className="flex items-center gap-2 mt-0.5">
-                        <select 
+                        <select
                           value={selectedOrderDetails.paymentStatus || (selectedOrderDetails.paymentMethod === 'Pay Online' ? 'Paid' : 'Pending')}
                           onChange={(e) => handlePaymentStatusChange(selectedOrderDetails.id, e.target.value)}
                           className="bg-[#faf8f5] border border-dark/10 text-[10px] rounded px-2 py-1 text-dark outline-none font-bold"
@@ -3065,7 +3062,7 @@ ${payout.orders.slice(-5).map(order =>
             <h3 className="font-serif text-xl text-dark font-bold">Resellers Network</h3>
             <p className="text-xs text-dark/50 mt-1">Manage partner accounts and sales operations.</p>
           </div>
-          <button 
+          <button
             onClick={() => setShowResellerForm(true)}
             className="bg-dark hover:bg-gold-600 text-white hover:text-dark text-[11px] font-bold px-5 py-2.5 rounded flex items-center gap-2 transition-colors uppercase tracking-widest shadow-sm"
           >
@@ -3079,56 +3076,56 @@ ${payout.orders.slice(-5).map(order =>
               <h3 className="font-serif text-lg font-bold text-dark flex items-center gap-2">
                 <span className="text-xl">👥</span> Reseller Onboarding
               </h3>
-              <button 
+              <button
                 onClick={() => setShowResellerForm(false)}
                 className="text-[10px] font-bold uppercase tracking-widest px-4 py-2 border border-dark/20 text-dark rounded hover:bg-[#faf8f5] transition-colors"
               >
                 Cancel
               </button>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-start">
               <div>
                 <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Full Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={newReseller.name}
-                  onChange={(e) => setNewReseller({...newReseller, name: e.target.value})}
+                  onChange={(e) => setNewReseller({ ...newReseller, name: e.target.value })}
                   className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                 />
               </div>
               <div>
                 <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Email Address (For Login)</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   value={newReseller.email}
-                  onChange={(e) => setNewReseller({...newReseller, email: e.target.value})}
+                  onChange={(e) => setNewReseller({ ...newReseller, email: e.target.value })}
                   className="w-full text-xs font-medium border border-[#b8daff] bg-[#eef6ff] rounded-lg px-3 py-2 outline-none focus:border-blue-400"
                 />
               </div>
               <div>
                 <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Mobile Number</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={newReseller.phone}
-                  onChange={(e) => setNewReseller({...newReseller, phone: e.target.value})}
+                  onChange={(e) => setNewReseller({ ...newReseller, phone: e.target.value })}
                   className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                 />
               </div>
               <div>
                 <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Set Password (min 6 chars)</label>
-                <input 
-                  type="password" 
+                <input
+                  type="password"
                   value={newReseller.password}
-                  onChange={(e) => setNewReseller({...newReseller, password: e.target.value})}
+                  onChange={(e) => setNewReseller({ ...newReseller, password: e.target.value })}
                   className="w-full text-xs font-medium border border-[#b8daff] bg-[#eef6ff] rounded-lg px-3 py-2 outline-none focus:border-blue-400 tracking-widest"
                 />
               </div>
               <div>
                 <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Commission Model</label>
-                <select 
+                <select
                   value={newReseller.commissionModel}
-                  onChange={(e) => setNewReseller({...newReseller, commissionModel: e.target.value})}
+                  onChange={(e) => setNewReseller({ ...newReseller, commissionModel: e.target.value })}
                   className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500 bg-white"
                 >
                   <option value="Percentage (%)">Percentage (%)</option>
@@ -3137,17 +3134,17 @@ ${payout.orders.slice(-5).map(order =>
               </div>
               <div>
                 <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Commission Value</label>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   value={newReseller.commissionValue}
-                  onChange={(e) => setNewReseller({...newReseller, commissionValue: e.target.value})}
+                  onChange={(e) => setNewReseller({ ...newReseller, commissionValue: e.target.value })}
                   className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                 />
               </div>
             </div>
 
             <div className="mt-8">
-              <button 
+              <button
                 onClick={handleCreateResellerAccount}
                 className="bg-[#386c55] hover:bg-[#254738] text-white text-[11px] font-bold tracking-widest px-6 py-3 rounded-lg flex items-center gap-2 transition-colors shadow-sm"
               >
@@ -3177,10 +3174,9 @@ ${payout.orders.slice(-5).map(order =>
                     <td className="px-6 py-4">
                       <div>
                         <p className="text-sm font-bold text-dark">{r.name}</p>
-                        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${
-                          r.status === 'Active' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' :
-                          r.status === 'Onboarding' ? 'bg-amber-50 border-amber-100 text-amber-700' : 'bg-red-50 border-red-100 text-red-700'
-                        }`}>
+                        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border ${r.status === 'Active' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' :
+                            r.status === 'Onboarding' ? 'bg-amber-50 border-amber-100 text-amber-700' : 'bg-red-50 border-red-100 text-red-700'
+                          }`}>
                           {r.status}
                         </span>
                       </div>
@@ -3192,14 +3188,14 @@ ${payout.orders.slice(-5).map(order =>
                     <td className="px-6 py-4 text-xs font-bold text-gold-600">₹{r.margin.toLocaleString()}</td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex gap-2 justify-end">
-                        <button 
+                        <button
                           onClick={() => startEditReseller(r)}
                           className="px-3 py-1.5 text-[10px] font-bold text-dark bg-gray-100 border border-gray-200 rounded hover:bg-gray-200 transition-colors shadow-sm"
                         >
                           Edit Details
                         </button>
                         {r.status === 'Onboarding' && (
-                          <button 
+                          <button
                             onClick={() => approveReseller(r.id)}
                             className="px-3 py-1.5 text-[10px] font-bold text-white bg-dark rounded hover:bg-gold-600 transition-colors shadow-sm"
                           >
@@ -3221,7 +3217,7 @@ ${payout.orders.slice(-5).map(order =>
   const renderPayoutRequestsView = () => {
     // Calculate pending commissions for each reseller
     const resellerCommissions = {}
-    
+
     orders.forEach(order => {
       if (order.commissions && Array.isArray(order.commissions)) {
         order.commissions.forEach(commission => {
@@ -3282,8 +3278,8 @@ ${payout.orders.slice(-5).map(order =>
               ₹{orders.filter(o => {
                 const orderDate = new Date(o.date)
                 const currentDate = new Date()
-                return orderDate.getMonth() === currentDate.getMonth() && 
-                       orderDate.getFullYear() === currentDate.getFullYear()
+                return orderDate.getMonth() === currentDate.getMonth() &&
+                  orderDate.getFullYear() === currentDate.getFullYear()
               }).reduce((sum, o) => sum + (o.totalCommissions || 0), 0).toLocaleString()}
             </p>
           </div>
@@ -3318,13 +3314,13 @@ ${payout.orders.slice(-5).map(order =>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <div className="flex gap-2 justify-end">
-                        <button 
+                        <button
                           onClick={() => viewResellerDetails(payout)}
                           className="px-3 py-1.5 text-[10px] font-bold text-dark bg-gray-100 border border-gray-200 rounded hover:bg-gray-200 transition-colors shadow-sm"
                         >
                           View Details
                         </button>
-                        <button 
+                        <button
                           onClick={() => processPayment(payout)}
                           className="px-3 py-1.5 text-[10px] font-bold text-white bg-green-600 rounded hover:bg-green-500 transition-colors shadow-sm"
                         >
@@ -3377,13 +3373,13 @@ ${payout.orders.slice(-5).map(order =>
                       <td className="px-6 py-4 text-right">
                         {p.status === 'Pending' ? (
                           <div className="flex gap-2 justify-end">
-                            <button 
+                            <button
                               onClick={() => handlePayoutStatus(p.id, 'Paid')}
                               className="px-2.5 py-1 text-[9px] font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded transition-colors"
                             >
                               Approve
                             </button>
-                            <button 
+                            <button
                               onClick={() => handlePayoutStatus(p.id, 'Rejected')}
                               className="px-2.5 py-1 text-[9px] font-bold text-white bg-red-600 hover:bg-red-500 rounded transition-colors"
                             >
@@ -3391,9 +3387,8 @@ ${payout.orders.slice(-5).map(order =>
                             </button>
                           </div>
                         ) : (
-                          <span className={`text-[9px] font-bold px-2 py-1 rounded ${
-                            p.status === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'
-                          }`}>
+                          <span className={`text-[9px] font-bold px-2 py-1 rounded ${p.status === 'Paid' ? 'bg-emerald-50 text-emerald-700' : 'bg-red-50 text-red-700'
+                            }`}>
                             {p.status}
                           </span>
                         )}
@@ -3421,14 +3416,13 @@ ${payout.orders.slice(-5).map(order =>
                   <p className="text-xs text-dark/45 font-medium">{inq.email} · {inq.date}</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
-                    inq.status === 'Unread' ? 'bg-amber-50 text-amber-700 border border-amber-100' :
-                    inq.status === 'Replied' ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-emerald-50 text-emerald-700 border border-emerald-100'
-                  }`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${inq.status === 'Unread' ? 'bg-amber-50 text-amber-700 border border-amber-100' :
+                      inq.status === 'Replied' ? 'bg-blue-50 text-blue-700 border border-blue-100' : 'bg-emerald-50 text-emerald-700 border border-emerald-100'
+                    }`}>
                     {inq.status}
                   </span>
                   {inq.status !== 'Resolved' && (
-                    <button 
+                    <button
                       onClick={() => resolveInquiry(inq.id)}
                       className="px-2.5 py-1 text-[10px] font-bold text-white bg-dark rounded hover:bg-gold-600 transition-colors"
                     >
@@ -3473,9 +3467,8 @@ ${payout.orders.slice(-5).map(order =>
                     <td className="px-6 py-4 text-xs text-dark/45">{p.date}</td>
                     <td className="px-6 py-4 text-xs font-bold text-gold-600 font-sans">₹{p.amount.toLocaleString()}</td>
                     <td className="px-6 py-4 text-right">
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${
-                        p.status === 'Successful' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-amber-50 border-amber-100 text-amber-700'
-                      }`}>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${p.status === 'Successful' ? 'bg-emerald-50 border-emerald-100 text-emerald-700' : 'bg-amber-50 border-amber-100 text-amber-700'
+                        }`}>
                         {p.status}
                       </span>
                     </td>
@@ -3513,7 +3506,7 @@ ${payout.orders.slice(-5).map(order =>
               </div>
               <h3 className="text-lg font-semibold text-gray-800">Cash on Delivery</h3>
             </div>
-            
+
             <p className="text-sm text-gray-600 mb-6">
               Configure extra charges for Cash on Delivery orders. This amount will be added to the total during checkout.
             </p>
@@ -3571,7 +3564,7 @@ ${payout.orders.slice(-5).map(order =>
               </div>
               <h3 className="text-lg font-semibold text-gray-800">Shipping Logistics</h3>
             </div>
-            
+
             <p className="text-sm text-gray-600 mb-6">
               Define distance-wise shipping rates based on the customer's delivery location.
             </p>
@@ -3724,7 +3717,7 @@ ${payout.orders.slice(-5).map(order =>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Background Image</label>
-              
+
               {/* Image Upload Button */}
               <div className="space-y-3">
                 <div className="flex gap-3">
@@ -3756,7 +3749,7 @@ ${payout.orders.slice(-5).map(order =>
                       }}
                     />
                   </label>
-                  
+
                   {homepageSettings.hero.backgroundImage && (
                     <button
                       onClick={() => setHomepageSettings({
@@ -3769,7 +3762,7 @@ ${payout.orders.slice(-5).map(order =>
                     </button>
                   )}
                 </div>
-                
+
                 {/* URL Input Option */}
                 <div className="relative">
                   <input
@@ -3783,14 +3776,14 @@ ${payout.orders.slice(-5).map(order =>
                   />
                 </div>
               </div>
-              
+
               {/* Image Preview */}
               {homepageSettings.hero.backgroundImage && (
                 <div className="mt-3">
                   <p className="text-xs text-gray-500 mb-2">Preview:</p>
-                  <img 
-                    src={homepageSettings.hero.backgroundImage} 
-                    alt="Hero Background Preview" 
+                  <img
+                    src={homepageSettings.hero.backgroundImage}
+                    alt="Hero Background Preview"
                     className="w-full h-40 object-cover rounded-lg border border-gray-200"
                   />
                 </div>
@@ -3850,7 +3843,7 @@ ${payout.orders.slice(-5).map(order =>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">About Image</label>
-              
+
               {/* Image Upload Button */}
               <div className="space-y-3">
                 <div className="flex gap-3">
@@ -3882,7 +3875,7 @@ ${payout.orders.slice(-5).map(order =>
                       }}
                     />
                   </label>
-                  
+
                   {homepageSettings.about.image && (
                     <button
                       onClick={() => setHomepageSettings({
@@ -3895,7 +3888,7 @@ ${payout.orders.slice(-5).map(order =>
                     </button>
                   )}
                 </div>
-                
+
                 {/* URL Input Option */}
                 <div className="relative">
                   <input
@@ -3909,14 +3902,14 @@ ${payout.orders.slice(-5).map(order =>
                   />
                 </div>
               </div>
-              
+
               {/* Image Preview */}
               {homepageSettings.about.image && (
                 <div className="mt-3">
                   <p className="text-xs text-gray-500 mb-2">Preview:</p>
-                  <img 
-                    src={homepageSettings.about.image} 
-                    alt="About Image Preview" 
+                  <img
+                    src={homepageSettings.about.image}
+                    alt="About Image Preview"
                     className="w-full h-40 object-cover rounded-lg border border-gray-200"
                   />
                 </div>
@@ -4205,16 +4198,15 @@ ${payout.orders.slice(-5).map(order =>
     <div className="flex min-h-screen bg-[#f5f0e8] text-dark font-sans selection:bg-gold-500/30 relative">
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
       {/* ─── Sidebar ─── */}
-      <aside className={`w-64 bg-white border-r border-dark/5 flex flex-col fixed lg:relative h-full z-50 shadow-sm transition-transform duration-300 ${
-        isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-      }`}>
+      <aside className={`w-64 bg-white border-r border-dark/5 flex flex-col fixed lg:relative h-full z-50 shadow-sm transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}>
         {/* Logo */}
         <div className="p-6 border-b border-dark/5 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -4225,7 +4217,7 @@ ${payout.orders.slice(-5).map(order =>
             </div>
           </div>
           {/* Mobile Close Button */}
-          <button 
+          <button
             onClick={() => setIsMobileMenuOpen(false)}
             className="lg:hidden p-1 rounded text-dark/40 hover:text-dark"
           >
@@ -4245,11 +4237,10 @@ ${payout.orders.slice(-5).map(order =>
                 setActiveSubCategory('All')
                 setIsMobileMenuOpen(false) // Close mobile menu on selection
               }}
-              className={`w-full flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                activeNav === item.label
+              className={`w-full flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeNav === item.label
                   ? 'bg-gold-500/10 text-gold-600 border border-gold-500/20'
                   : 'text-dark/60 hover:text-dark hover:bg-cream/40 border border-transparent'
-              }`}
+                }`}
             >
               <span className="opacity-80">{item.icon}</span>
               {item.label}
@@ -4264,7 +4255,7 @@ ${payout.orders.slice(-5).map(order =>
         <header className="h-16 lg:h-20 border-b border-dark/5 bg-white/95 backdrop-blur-md px-4 lg:px-8 flex items-center justify-between sticky top-0 z-40">
           <div className="flex items-center gap-3">
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="lg:hidden p-2 rounded-lg text-dark/40 hover:text-dark hover:bg-cream/40 transition-colors"
             >
@@ -4272,21 +4263,21 @@ ${payout.orders.slice(-5).map(order =>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
             </button>
-            
+
             <div>
               <h1 className="font-serif text-lg lg:text-2xl font-bold text-dark">{activeNav}</h1>
               <p className="text-xs text-dark/50 mt-0.5 hidden sm:block">Welcome back, here's what's happening today.</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-2 lg:gap-6">
             <div className="hidden sm:flex items-center gap-2 bg-[#faf8f5] border border-dark/5 rounded-lg px-3 lg:px-4 py-2 text-xs lg:text-sm text-dark/70">
               <span className="opacity-50">📅</span>
               <span className="font-semibold tracking-wide">MAY 2026</span>
             </div>
-            
+
             <div className="hidden sm:block h-8 w-px bg-dark/10"></div>
-            
+
             <div className="flex items-center gap-2 lg:gap-3">
               <div className="hidden sm:flex items-center gap-2">
                 <div className="w-6 h-6 lg:w-8 lg:h-8 bg-gold-100 rounded-lg flex items-center justify-center">
@@ -4323,7 +4314,7 @@ ${payout.orders.slice(-5).map(order =>
             <form onSubmit={handleAddProduct} className="space-y-4">
               <div>
                 <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Product Name</label>
-                <input 
+                <input
                   required
                   value={newProduct.name}
                   onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
@@ -4334,7 +4325,7 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Category</label>
-                  <select 
+                  <select
                     value={newProduct.category}
                     onChange={(e) => {
                       const cat = e.target.value
@@ -4352,7 +4343,7 @@ ${payout.orders.slice(-5).map(order =>
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Sub-Category (Collection)</label>
                   {newProduct.category === 'Kolhapuri Chappal' ? (
-                    <select 
+                    <select
                       value={newProduct.subCategory}
                       onChange={(e) => {
                         const val = e.target.value
@@ -4371,7 +4362,7 @@ ${payout.orders.slice(-5).map(order =>
                       <option value="custom">+ List New Subcategory...</option>
                     </select>
                   ) : (
-                    <select 
+                    <select
                       value={newProduct.subCategory}
                       onChange={(e) => {
                         const val = e.target.value
@@ -4397,7 +4388,7 @@ ${payout.orders.slice(-5).map(order =>
               {isCustomSubCategoryActive && (
                 <div className="bg-gold-500/5 p-3 rounded-lg border border-gold-500/10 space-y-1">
                   <label className="block text-[9px] text-gold-600 font-bold uppercase tracking-wider">New Custom Sub-Category Name</label>
-                  <input 
+                  <input
                     required
                     value={customSubCategory}
                     onChange={(e) => setCustomSubCategory(e.target.value)}
@@ -4409,7 +4400,7 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Price (₹)</label>
-                  <input 
+                  <input
                     required
                     type="number"
                     value={newProduct.price}
@@ -4419,7 +4410,7 @@ ${payout.orders.slice(-5).map(order =>
                 </div>
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Discount (%)</label>
-                  <input 
+                  <input
                     type="number"
                     min="0"
                     max="100"
@@ -4430,7 +4421,7 @@ ${payout.orders.slice(-5).map(order =>
                 </div>
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Product Badge</label>
-                  <select 
+                  <select
                     value={newProduct.badge || 'None'}
                     onChange={(e) => setNewProduct({ ...newProduct, badge: e.target.value })}
                     className="w-full bg-[#faf8f5] border border-dark/10 px-3 py-2 text-xs rounded outline-none focus:border-gold-600 text-dark font-semibold cursor-pointer"
@@ -4453,7 +4444,7 @@ ${payout.orders.slice(-5).map(order =>
                     {[6, 7, 8, 9, 10, 11, 12].map(size => (
                       <div key={size} className="flex-1 text-center bg-white p-2 border border-dark/5 rounded shadow-xs">
                         <span className="text-[9px] text-dark/45 font-bold block mb-1">IND {size}</span>
-                        <input 
+                        <input
                           type="number"
                           min="0"
                           value={newProduct.sizes[size] || 0}
@@ -4487,7 +4478,7 @@ ${payout.orders.slice(-5).map(order =>
                       {[8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26].map(size => (
                         <div key={size} className="text-center bg-white p-2 border border-dark/5 rounded shadow-xs">
                           <span className="text-[9px] text-dark/45 font-bold block mb-1">IND {size}</span>
-                          <input 
+                          <input
                             type="number"
                             min="0"
                             value={newProduct.sizes?.[size] || 0}
@@ -4509,7 +4500,7 @@ ${payout.orders.slice(-5).map(order =>
               ) : (
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Stock Quantity</label>
-                  <input 
+                  <input
                     required
                     type="number"
                     min="0"
@@ -4527,7 +4518,7 @@ ${payout.orders.slice(-5).map(order =>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Weight (e.g. 45g)</label>
-                      <input 
+                      <input
                         value={newProduct.weight || ''}
                         onChange={(e) => setNewProduct({ ...newProduct, weight: e.target.value })}
                         className="w-full bg-white border border-dark/10 px-3 py-2 text-xs rounded outline-none focus:border-gold-600 text-dark font-medium placeholder-stone-400"
@@ -4535,7 +4526,7 @@ ${payout.orders.slice(-5).map(order =>
                     </div>
                     <div>
                       <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Metal Type</label>
-                      <input 
+                      <input
                         value={newProduct.metal || ''}
                         onChange={(e) => setNewProduct({ ...newProduct, metal: e.target.value })}
                         className="w-full bg-white border border-dark/10 px-3 py-2 text-xs rounded outline-none focus:border-gold-600 text-dark font-medium placeholder-stone-400"
@@ -4543,7 +4534,7 @@ ${payout.orders.slice(-5).map(order =>
                     </div>
                     <div>
                       <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Gemstones</label>
-                      <input 
+                      <input
                         value={newProduct.gemstone || ''}
                         onChange={(e) => setNewProduct({ ...newProduct, gemstone: e.target.value })}
                         className="w-full bg-white border border-dark/10 px-3 py-2 text-xs rounded outline-none focus:border-gold-600 text-dark font-medium placeholder-stone-400"
@@ -4555,7 +4546,7 @@ ${payout.orders.slice(-5).map(order =>
 
               <div>
                 <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Product Description</label>
-                <textarea 
+                <textarea
                   required
                   rows={2}
                   value={newProduct.description}
@@ -4633,12 +4624,12 @@ ${payout.orders.slice(-5).map(order =>
                               <span className="text-sm mb-1">📸</span>
                               <p className="text-xs text-dark font-medium">Upload images for this color</p>
                             </div>
-                            <input 
-                              type="file" 
-                              multiple 
+                            <input
+                              type="file"
+                              multiple
                               accept="image/*"
                               onChange={(e) => handleColorVariantImageUpload(variant.id, e.target.files)}
-                              className="hidden" 
+                              className="hidden"
                             />
                           </label>
                         </div>
@@ -4686,22 +4677,21 @@ ${payout.orders.slice(-5).map(order =>
                 <div>
                   <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-1">Upload Product Image</label>
                   <p className="text-xs text-dark/40 mb-2">
-                    {isEditing 
-                      ? 'Upload a new image to replace the current one. Leave empty to keep existing image.' 
+                    {isEditing
+                      ? 'Upload a new image to replace the current one. Leave empty to keep existing image.'
                       : 'Upload product image. It will be stored in Firebase Storage.'}
                   </p>
                   <div className="flex items-center justify-center w-full">
-                    <label className={`flex flex-col items-center justify-center w-full h-28 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
-                      isUploadingImages
+                    <label className={`flex flex-col items-center justify-center w-full h-28 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${isUploadingImages
                         ? 'border-gold-400 bg-gold-50 cursor-wait'
                         : 'border-dark/10 bg-[#faf8f5] hover:bg-cream/20 hover:border-gold-500'
-                    }`}>
+                      }`}>
                       <div className="flex flex-col items-center justify-center pt-4 pb-4">
                         {isUploadingImages ? (
                           <>
                             <svg className="animate-spin w-6 h-6 text-gold-500 mb-2" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                             </svg>
                             <p className="text-xs text-gold-600 font-bold">Converting image…</p>
                             <p className="text-[9px] text-dark/40 mt-0.5">HEIC files may take a few seconds</p>
@@ -4714,13 +4704,13 @@ ${payout.orders.slice(-5).map(order =>
                           </>
                         )}
                       </div>
-                      <input 
-                        type="file" 
-                        multiple 
+                      <input
+                        type="file"
+                        multiple
                         disabled={isUploadingImages}
                         accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif"
                         onChange={handleLocalImageUpload}
-                        className="hidden" 
+                        className="hidden"
                       />
                     </label>
                   </div>
@@ -4773,7 +4763,7 @@ ${payout.orders.slice(-5).map(order =>
                     <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase">Or Online Image URLs (One URL per line)</label>
                     <span className="text-[8px] text-gold-600 font-bold">Fallback option</span>
                   </div>
-                  <textarea 
+                  <textarea
                     rows={2}
                     value={newProduct.imageInput}
                     onChange={(e) => setNewProduct({ ...newProduct, imageInput: e.target.value })}
@@ -4783,14 +4773,14 @@ ${payout.orders.slice(-5).map(order =>
               </div>
 
               <div className="flex justify-end gap-3 border-t border-dark/5 pt-4">
-                <button 
+                <button
                   type="button"
                   onClick={resetProductForm}
                   className="px-4 py-2 text-xs font-semibold text-dark/50 hover:text-dark transition-colors"
                 >
                   Cancel
                 </button>
-                <button 
+                <button
                   type="submit"
                   className="bg-gold-500 text-dark text-xs font-bold px-5 py-2.5 rounded-lg hover:bg-gold-400 transition-colors shadow-sm"
                 >
@@ -4808,7 +4798,7 @@ ${payout.orders.slice(-5).map(order =>
           <div className="w-full max-w-lg bg-white border border-dark/5 rounded-xl p-8 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between">
               <h3 className="font-serif text-xl font-bold text-dark">Edit Reseller Details</h3>
-              <button 
+              <button
                 onClick={() => setShowEditResellerModal(false)}
                 className="w-8 h-8 rounded-full bg-dark/5 flex items-center justify-center text-dark/40 hover:text-dark hover:bg-dark/10 transition-colors"
               >
@@ -4820,21 +4810,21 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Reseller Name</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     value={editResellerData.name}
-                    onChange={(e) => setEditResellerData({...editResellerData, name: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, name: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                   />
                 </div>
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Business Name</label>
-                  <input 
-                    type="text" 
-                    required 
+                  <input
+                    type="text"
+                    required
                     value={editResellerData.business}
-                    onChange={(e) => setEditResellerData({...editResellerData, business: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, business: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                   />
                 </div>
@@ -4843,18 +4833,18 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Location</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={editResellerData.location}
-                    onChange={(e) => setEditResellerData({...editResellerData, location: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, location: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                   />
                 </div>
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Status</label>
-                  <select 
+                  <select
                     value={editResellerData.status}
-                    onChange={(e) => setEditResellerData({...editResellerData, status: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, status: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500 bg-white"
                   >
                     <option value="Active">Active</option>
@@ -4867,19 +4857,19 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Email Address</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     value={editResellerData.email}
-                    onChange={(e) => setEditResellerData({...editResellerData, email: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, email: e.target.value })}
                     className="w-full text-xs font-medium border border-[#b8daff] bg-[#eef6ff] rounded-lg px-3 py-2 outline-none focus:border-blue-400"
                   />
                 </div>
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Mobile Number</label>
-                  <input 
-                    type="text" 
+                  <input
+                    type="text"
                     value={editResellerData.phone}
-                    onChange={(e) => setEditResellerData({...editResellerData, phone: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, phone: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                   />
                 </div>
@@ -4888,18 +4878,18 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Login Password</label>
-                  <input 
-                    type="password" 
+                  <input
+                    type="password"
                     value={editResellerData.password}
-                    onChange={(e) => setEditResellerData({...editResellerData, password: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, password: e.target.value })}
                     className="w-full text-xs font-medium border border-[#b8daff] bg-[#eef6ff] rounded-lg px-3 py-2 outline-none focus:border-blue-400"
                   />
                 </div>
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Commission Model</label>
-                  <select 
+                  <select
                     value={editResellerData.commissionModel}
-                    onChange={(e) => setEditResellerData({...editResellerData, commissionModel: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, commissionModel: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500 bg-white"
                   >
                     <option value="Percentage (%)">Percentage (%)</option>
@@ -4911,10 +4901,10 @@ ${payout.orders.slice(-5).map(order =>
               <div className="grid grid-cols-1 gap-4">
                 <div>
                   <label className="block text-[9px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Commission Value</label>
-                  <input 
-                    type="number" 
+                  <input
+                    type="number"
                     value={editResellerData.commissionValue}
-                    onChange={(e) => setEditResellerData({...editResellerData, commissionValue: e.target.value})}
+                    onChange={(e) => setEditResellerData({ ...editResellerData, commissionValue: e.target.value })}
                     className="w-full text-xs font-medium border border-dark/10 rounded-lg px-3 py-2 outline-none focus:border-gold-500"
                   />
                 </div>

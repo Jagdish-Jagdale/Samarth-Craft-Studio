@@ -13,7 +13,7 @@ export default function ContactPage() {
     name: '',
     email: '',
     phone: '',
-    interest: 'Bespoke Ordertt',
+    interest: 'Bespoke Order',
     message: ''
   })
 

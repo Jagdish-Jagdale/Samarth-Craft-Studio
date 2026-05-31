@@ -13,7 +13,7 @@ export default function ContactPage() {
     name: '',
     email: '',
     phone: '',
-    interest: 'Bespoke Order',
+    interest: 'Bespoke Ordertt',
     message: ''
   })
 
@@ -25,7 +25,7 @@ export default function ContactPage() {
       date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
     }
     await addInquiry(newInquiry)
-    
+
     setSubmitted(true)
     setTimeout(() => {
       setSubmitted(false)
@@ -39,7 +39,7 @@ export default function ContactPage() {
 
       <div className="pt-32 pb-24 px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-16">
-          
+
           {/* ─── LEFT COLUMN: DETAILS ─── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

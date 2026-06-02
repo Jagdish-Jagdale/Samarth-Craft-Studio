@@ -15,7 +15,7 @@ export default function TermsPage() {
         >
           <div className="border-b border-dark/5 pb-5">
             <span className="text-[10px] font-bold tracking-[0.4em] text-gold-600 uppercase mb-2 block">
-              LEGAL REGISTRY
+              LEGAL REGISTRYkk
             </span>
             <h1 className="font-serif text-3xl md:text-4xl font-bold">Terms and Conditions</h1>
             <p className="text-xs text-dark/45 mt-2">Last Updated: May 17, 2026</p>

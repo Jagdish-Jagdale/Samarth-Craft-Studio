@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { motion, AnimatePresence } from 'framer-motion'
 
-// Initial Datasets for full statefulnessjj
+// Initial Datasets for full statefulness
 const initialProducts = [
   {
     id: 1,

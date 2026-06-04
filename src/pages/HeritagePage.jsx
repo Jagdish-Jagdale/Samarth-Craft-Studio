@@ -18,7 +18,7 @@ export default function HeritagePage() {
   const [headerRef, headerInView] = useInView()
   const { addToCart, wishlist, addToWishlist, removeFromWishlist, products: productsList } = useApp()
 
-  // Generate dynamic categories from actual products
+  // Generate dynamic categories from actual productscc
   const categories = useMemo(() => {
     const categoryMap = {}
     productsList.forEach(p => {
@@ -32,7 +32,7 @@ export default function HeritagePage() {
   // Generate dynamic subcategories based on selected category
   const subCategories = useMemo(() => {
     if (!activeCategory) return []
-    
+
     const subCategoryMap = {}
     productsList
       .filter(p => {
@@ -50,20 +50,20 @@ export default function HeritagePage() {
           subCategoryMap[subCat] = (subCategoryMap[subCat] || 0) + 1
         }
       })
-    
+
     return Object.entries(subCategoryMap).map(([label, count]) => ({ label, count }))
   }, [productsList, activeCategory])
 
   useEffect(() => {
     const categoryParam = searchParams.get('category')
     const subCategoryParam = searchParams.get('subcategory')
-    
+
     if (categoryParam) {
       setActiveCategory(categoryParam)
     } else {
       setActiveCategory(null)
     }
-    
+
     if (subCategoryParam) {
       setActiveSubCategory(subCategoryParam)
     } else {
@@ -74,14 +74,14 @@ export default function HeritagePage() {
   const sortedAndFilteredProducts = useMemo(() => {
     let items = activeCategory
       ? productsList.filter(p => {
-          if (activeCategory === 'Kolhapuri Footwear') {
-            return p.category === 'Kolhapuri Footwear' || p.category === 'Kolhapuri Chappal'
-          }
-          if (activeCategory === 'Temple Jewellery') {
-            return p.category === 'Temple Jewellery' || p.category === 'Jewellery'
-          }
-          return p.category === activeCategory
-        })
+        if (activeCategory === 'Kolhapuri Footwear') {
+          return p.category === 'Kolhapuri Footwear' || p.category === 'Kolhapuri Chappal'
+        }
+        if (activeCategory === 'Temple Jewellery') {
+          return p.category === 'Temple Jewellery' || p.category === 'Jewellery'
+        }
+        return p.category === activeCategory
+      })
       : productsList
 
     // Subcategory Filter
@@ -137,7 +137,7 @@ export default function HeritagePage() {
     const params = new URLSearchParams()
     if (category) params.set('category', category)
     if (subCategory) params.set('subcategory', subCategory)
-    
+
     const newUrl = params.toString() ? `?${params.toString()}` : '/heritage'
     window.history.pushState({}, '', newUrl)
   }
@@ -172,11 +172,10 @@ export default function HeritagePage() {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleCategoryChange(null)}
-                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
-                    !activeCategory 
-                      ? 'bg-gold-500 text-white' 
+                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${!activeCategory
+                      ? 'bg-gold-500 text-white'
                       : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                  }`}
+                    }`}
                 >
                   All Categories
                 </button>
@@ -184,11 +183,10 @@ export default function HeritagePage() {
                   <button
                     key={cat.label}
                     onClick={() => handleCategoryChange(cat.label)}
-                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
-                      activeCategory === cat.label 
-                        ? 'bg-gold-500 text-white' 
+                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${activeCategory === cat.label
+                        ? 'bg-gold-500 text-white'
                         : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                    }`}
+                      }`}
                   >
                     {cat.label} ({cat.count})
                   </button>
@@ -203,11 +201,10 @@ export default function HeritagePage() {
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleSubCategoryChange(null)}
-                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
-                      !activeSubCategory 
-                        ? 'bg-gold-500 text-white' 
+                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${!activeSubCategory
+                        ? 'bg-gold-500 text-white'
                         : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                    }`}
+                      }`}
                   >
                     All {activeCategory}
                   </button>
@@ -215,11 +212,10 @@ export default function HeritagePage() {
                     <button
                       key={subCat.label}
                       onClick={() => handleSubCategoryChange(subCat.label)}
-                      className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
-                        activeSubCategory === subCat.label 
-                          ? 'bg-gold-500 text-white' 
+                      className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${activeSubCategory === subCat.label
+                          ? 'bg-gold-500 text-white'
                           : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                      }`}
+                        }`}
                     >
                       {subCat.label} ({subCat.count})
                     </button>
@@ -266,9 +262,8 @@ export default function HeritagePage() {
                     key={cat.label}
                     whileHover={{ x: 4 }}
                     onClick={() => handleCategoryChange(cat.label)}
-                    className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${
-                      activeCategory === cat.label ? 'text-gold-600 font-medium' : 'text-dark/70 hover:text-dark'
-                    }`}
+                    className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${activeCategory === cat.label ? 'text-gold-600 font-medium' : 'text-dark/70 hover:text-dark'
+                      }`}
                   >
                     <span>{cat.label}</span>
                     <span className="text-xs text-dark/30">{cat.count}</span>
@@ -297,9 +292,8 @@ export default function HeritagePage() {
                       key={subCat.label}
                       whileHover={{ x: 4 }}
                       onClick={() => handleSubCategoryChange(subCat.label)}
-                      className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${
-                        activeSubCategory === subCat.label ? 'text-gold-600 font-medium' : 'text-dark/70 hover:text-dark'
-                      }`}
+                      className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${activeSubCategory === subCat.label ? 'text-gold-600 font-medium' : 'text-dark/70 hover:text-dark'
+                        }`}
                     >
                       <span>{subCat.label}</span>
                       <span className="text-xs text-dark/30">{subCat.count}</span>
@@ -408,9 +402,9 @@ export default function HeritagePage() {
               </motion.p>
               <div className="flex items-center gap-2 text-sm text-dark/50">
                 <span>SORT BY:</span>
-                <select 
-                  value={sortBy} 
-                  onChange={(e) => setSortBy(e.target.value)} 
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
                   className="bg-transparent border-b border-dark/20 outline-none text-dark py-1 cursor-pointer"
                 >
                   <option value="FEATURED">FEATURED</option>
@@ -429,7 +423,7 @@ export default function HeritagePage() {
               <AnimatePresence mode="popLayout">
                 {sortedAndFilteredProducts.map((p, i) => {
                   const isWishlisted = wishlist.some(item => item.id === p.id)
-                  
+
                   return (
                     <motion.div
                       key={p.id}
@@ -444,8 +438,8 @@ export default function HeritagePage() {
                     >
                       <Link to={`/product?id=${p.id}`}>
                         <div className="relative overflow-hidden mb-3 bg-transparent flex items-center justify-center aspect-square w-full">
-                           {/* Wishlist Heart Button */}
-                           <button
+                          {/* Wishlist Heart Button */}
+                          <button
                             onClick={(e) => {
                               e.preventDefault()
                               e.stopPropagation()
@@ -511,11 +505,10 @@ export default function HeritagePage() {
                                   animate={{ y: 0, opacity: 1 }}
                                   exit={{ y: 20, opacity: 0 }}
                                   transition={{ duration: 0.25 }}
-                                  className={`text-xs tracking-widest px-6 py-2.5 transition-colors shadow-sm font-bold ${
-                                    Number(p.stock || 0) > 0 
+                                  className={`text-xs tracking-widest px-6 py-2.5 transition-colors shadow-sm font-bold ${Number(p.stock || 0) > 0
                                       ? 'bg-dark text-white hover:bg-gold-600'
                                       : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
-                                  }`}
+                                    }`}
                                 >
                                   {Number(p.stock || 0) > 0 ? 'ADD TO CART' : 'SOLD OUT'}
                                 </motion.button>
@@ -560,11 +553,10 @@ export default function HeritagePage() {
                   key={i}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-9 h-9 text-xs flex items-center justify-center border transition-all ${
-                    item === '01'
+                  className={`w-9 h-9 text-xs flex items-center justify-center border transition-all ${item === '01'
                       ? 'bg-dark text-white border-dark'
                       : 'border-dark/15 text-dark/60 hover:border-dark hover:text-dark'
-                  }`}
+                    }`}
                 >
                   {item}
                 </motion.button>

@@ -18,7 +18,7 @@ export default function HeritagePage() {
   const [headerRef, headerInView] = useInView()
   const { addToCart, wishlist, addToWishlist, removeFromWishlist, products: productsList } = useApp()
 
-  // Generate dynamic categories from actual productscc
+  // Generate dynamic categories from actual products
   const categories = useMemo(() => {
     const categoryMap = {}
     productsList.forEach(p => {
@@ -173,8 +173,8 @@ export default function HeritagePage() {
                 <button
                   onClick={() => handleCategoryChange(null)}
                   className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${!activeCategory
-                      ? 'bg-gold-500 text-white'
-                      : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
+                    ? 'bg-gold-500 text-white'
+                    : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
                     }`}
                 >
                   All Categories
@@ -184,8 +184,8 @@ export default function HeritagePage() {
                     key={cat.label}
                     onClick={() => handleCategoryChange(cat.label)}
                     className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${activeCategory === cat.label
-                        ? 'bg-gold-500 text-white'
-                        : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
+                      ? 'bg-gold-500 text-white'
+                      : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
                       }`}
                   >
                     {cat.label} ({cat.count})
@@ -202,8 +202,8 @@ export default function HeritagePage() {
                   <button
                     onClick={() => handleSubCategoryChange(null)}
                     className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${!activeSubCategory
-                        ? 'bg-gold-500 text-white'
-                        : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
+                      ? 'bg-gold-500 text-white'
+                      : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
                       }`}
                   >
                     All {activeCategory}
@@ -213,8 +213,8 @@ export default function HeritagePage() {
                       key={subCat.label}
                       onClick={() => handleSubCategoryChange(subCat.label)}
                       className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${activeSubCategory === subCat.label
-                          ? 'bg-gold-500 text-white'
-                          : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
+                        ? 'bg-gold-500 text-white'
+                        : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
                         }`}
                     >
                       {subCat.label} ({subCat.count})
@@ -506,8 +506,8 @@ export default function HeritagePage() {
                                   exit={{ y: 20, opacity: 0 }}
                                   transition={{ duration: 0.25 }}
                                   className={`text-xs tracking-widest px-6 py-2.5 transition-colors shadow-sm font-bold ${Number(p.stock || 0) > 0
-                                      ? 'bg-dark text-white hover:bg-gold-600'
-                                      : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
+                                    ? 'bg-dark text-white hover:bg-gold-600'
+                                    : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
                                     }`}
                                 >
                                   {Number(p.stock || 0) > 0 ? 'ADD TO CART' : 'SOLD OUT'}
@@ -554,8 +554,8 @@ export default function HeritagePage() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className={`w-9 h-9 text-xs flex items-center justify-center border transition-all ${item === '01'
-                      ? 'bg-dark text-white border-dark'
-                      : 'border-dark/15 text-dark/60 hover:border-dark hover:text-dark'
+                    ? 'bg-dark text-white border-dark'
+                    : 'border-dark/15 text-dark/60 hover:border-dark hover:text-dark'
                     }`}
                 >
                   {item}

@@ -18,7 +18,7 @@ export default function CopyrightPolicyPage() {
               LEGAL REGISTRY
             </span>
             <h1 className="font-serif text-3xl md:text-4xl font-bold text-dark">
-              Product Image Copyright Policy
+              Product Image Copyright Policyuu
             </h1>
             <p className="text-xs text-dark/45 mt-2 font-sans">Last Updated: May 23, 2026</p>
           </div>
@@ -47,7 +47,7 @@ export default function CopyrightPolicyPage() {
 
             <h3 className="font-serif text-lg font-bold text-dark pt-4">3. Authorized Partner Exceptions</h3>
             <p>
-              Registered partners of the <strong>Samartha Reseller Network</strong> who have active, verified affiliate accounts and are in good standing are granted a limited, revocable, non-exclusive license to share product links and associated product images solely to generate referral sales. 
+              Registered partners of the <strong>Samartha Reseller Network</strong> who have active, verified affiliate accounts and are in good standing are granted a limited, revocable, non-exclusive license to share product links and associated product images solely to generate referral sales.
             </p>
             <p>
               This license is strictly governed by the Reseller Agreement and will immediately terminate upon suspension or closure of the partner account.

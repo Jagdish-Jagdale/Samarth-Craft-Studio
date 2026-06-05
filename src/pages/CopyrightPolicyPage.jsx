@@ -18,7 +18,7 @@ export default function CopyrightPolicyPage() {
               LEGAL REGISTRY
             </span>
             <h1 className="font-serif text-3xl md:text-4xl font-bold text-dark">
-              Product Image Copyright Policyuu
+              Product Image Copyright Policy
             </h1>
             <p className="text-xs text-dark/45 mt-2 font-sans">Last Updated: May 23, 2026</p>
           </div>

@@ -16,7 +16,7 @@ const thumbs = [
 
 const reviews = [
   {
-    name: 'Aditi R.',
+    name: 'Aditi Rrr.',
     tag: 'VERIFIED COLLECTOR',
     date: 'Sept 2023',
     quote: '"A masterpiece for the feet."',
@@ -43,21 +43,21 @@ export default function ProductPage() {
   const [addedToCart, setAddedToCart] = useState(false)
   const [reviewsRef, reviewsInView] = useInView()
   const [heroRef, heroInView] = useInView()
-  
+
   // Image zoom state
   const [isZooming, setIsZooming] = useState(false)
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 })
   const [showFullscreenZoom, setShowFullscreenZoom] = useState(false)
-  
+
   // Color variants state
   const [selectedColorVariant, setSelectedColorVariant] = useState(0)
   const [fullscreenZoomLevel, setFullscreenZoomLevel] = useState(1)
   const imageRef = useRef(null)
-  
+
   // Touch/Swipe/Scroll refs for mobile
   const mobileScrollRef = useRef(null)
   const isProgrammaticScroll = useRef(false)
-  
+
   const { addToCart, wishlist, addToWishlist, removeFromWishlist, resellers, products, addReview } = useApp()
 
   // Review modal states
@@ -155,10 +155,10 @@ export default function ProductPage() {
     productIdType: typeof productId,
     productsLength: productsList.length,
     availableProductIds: productsList.map(p => ({ id: p.id, idType: typeof p.id, name: p.name })),
-    products: productsList.map(p => ({ 
-      id: p.id, 
-      name: p.name, 
-      hasImages: !!p.images, 
+    products: productsList.map(p => ({
+      id: p.id,
+      name: p.name,
+      hasImages: !!p.images,
       imageCount: p.images?.length || 0,
       hasColorVariants: !!p.colorVariants,
       colorVariantCount: p.colorVariants?.length || 0
@@ -194,13 +194,13 @@ export default function ProductPage() {
   // Color variant images take over only when a specific variant is selected
   const productImages = matchedProduct.colorVariants && matchedProduct.colorVariants.length > 0
     ? (matchedProduct.colorVariants[selectedColorVariant]?.images?.length > 0
-        ? matchedProduct.colorVariants[selectedColorVariant].images
-        : matchedProduct.images?.length > 0
-          ? matchedProduct.images
-          : [matchedProduct.image || matchedProduct.img || 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80'])
+      ? matchedProduct.colorVariants[selectedColorVariant].images
+      : matchedProduct.images?.length > 0
+        ? matchedProduct.images
+        : [matchedProduct.image || matchedProduct.img || 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80'])
     : matchedProduct.images && matchedProduct.images.length > 0
-    ? matchedProduct.images
-    : [matchedProduct.image || matchedProduct.img || 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80']
+      ? matchedProduct.images
+      : [matchedProduct.image || matchedProduct.img || 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80']
 
   // Debug product images
   console.log('Product Images Debug:', {
@@ -237,25 +237,25 @@ export default function ProductPage() {
   }
 
   // Find reseller if referral code exists
-  const referringReseller = referralCode 
+  const referringReseller = referralCode
     ? resellers.find(r => {
-        const cleanRef = referralCode.trim()
-        return (r.id && r.id.toString().trim() === cleanRef) ||
-               (r.docId && r.docId.toString().trim() === cleanRef)
-      }) 
+      const cleanRef = referralCode.trim()
+      return (r.id && r.id.toString().trim() === cleanRef) ||
+        (r.docId && r.docId.toString().trim() === cleanRef)
+    })
     : null
 
   // Calculate commission-added price if referred by reseller
-  const basePrice = typeof matchedProduct.price === 'number' 
-    ? matchedProduct.price 
+  const basePrice = typeof matchedProduct.price === 'number'
+    ? matchedProduct.price
     : parseFloat(String(matchedProduct.price || '0').replace(/[^\d.]/g, '')) || 0
   const commissionRate = referringReseller ? parseFloat(referringReseller.commissionValue || 10) : 0
   const commissionAmount = Math.round((basePrice * commissionRate) / 100)
   // Calculate discounted price
-  const discountedPrice = Number(matchedProduct.discount) > 0 
+  const discountedPrice = Number(matchedProduct.discount) > 0
     ? Math.round(basePrice * (1 - Number(matchedProduct.discount) / 100))
     : basePrice
-  
+
   const finalPrice = referringReseller ? discountedPrice + commissionAmount : discountedPrice
 
   const isSelectedSizeInStock = (() => {
@@ -287,28 +287,28 @@ export default function ProductPage() {
 
   const handleAddToCart = () => {
     // Add reseller info to cart item if referred
-    const cartItem = referringReseller 
-      ? { 
-          ...currentProduct, 
-          referralCode, 
-          resellerId: referringReseller.id, 
-          resellerName: referringReseller.name,
-          commissionRate: commissionRate
-        }
+    const cartItem = referringReseller
+      ? {
+        ...currentProduct,
+        referralCode,
+        resellerId: referringReseller.id,
+        resellerName: referringReseller.name,
+        commissionRate: commissionRate
+      }
       : currentProduct
-    
+
     // Add size information based on product category
-    const sizeInfo = matchedProduct.category === 'Kolhapuri Chappal' 
-      ? selectedSize 
+    const sizeInfo = matchedProduct.category === 'Kolhapuri Chappal'
+      ? selectedSize
       : (matchedProduct.category === 'Jewellery' && matchedProduct.name.toLowerCase().includes('ring'))
         ? selectedRingSize
         : null
-    
+
     // Add color variant information
     const selectedColor = matchedProduct.colorVariants && matchedProduct.colorVariants.length > 0
       ? matchedProduct.colorVariants[selectedColorVariant]
       : null
-    
+
     const cartItemWithDetails = {
       ...cartItem,
       selectedColor: selectedColor ? {
@@ -316,7 +316,7 @@ export default function ProductPage() {
         colorCode: selectedColor.colorCode
       } : null
     }
-    
+
     addToCart(cartItemWithDetails, sizeInfo)
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 2000)
@@ -325,11 +325,11 @@ export default function ProductPage() {
   // Image zoom handlers
   const handleMouseMove = (e) => {
     if (!imageRef.current) return
-    
+
     const rect = imageRef.current.getBoundingClientRect()
     const x = ((e.clientX - rect.left) / rect.width) * 100
     const y = ((e.clientY - rect.top) / rect.height) * 100
-    
+
     setZoomPosition({ x, y })
   }
 
@@ -479,11 +479,10 @@ export default function ProductPage() {
                   <button
                     key={i}
                     onClick={() => handleActiveImageChange(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      activeThumb === i 
-                        ? 'w-6 bg-gold-600' 
+                    className={`h-1.5 rounded-full transition-all duration-300 ${activeThumb === i
+                        ? 'w-6 bg-gold-600'
                         : 'w-1.5 bg-dark/20 hover:bg-dark/40'
-                    }`}
+                      }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
@@ -606,7 +605,7 @@ export default function ProductPage() {
                           transition: isZooming ? 'none' : 'transform 0.3s ease-out'
                         }}
                       />
-                      
+
                       {/* Zoom Indicator */}
                       {!isZooming && (
                         <div className="absolute bottom-4 right-4 bg-black/70 text-white px-3 py-1.5 text-xs font-medium rounded-full backdrop-blur-sm flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -642,9 +641,8 @@ export default function ProductPage() {
                     onClick={() => handleActiveImageChange(i)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`relative overflow-hidden border-2 transition-all duration-300 aspect-square flex-shrink-0 w-full ${
-                      activeThumb === i ? 'border-gold-500 shadow-md' : 'border-dark/10 hover:border-dark/30'
-                    }`}
+                    className={`relative overflow-hidden border-2 transition-all duration-300 aspect-square flex-shrink-0 w-full ${activeThumb === i ? 'border-gold-500 shadow-md' : 'border-dark/10 hover:border-dark/30'
+                      }`}
                   >
                     <img src={t} alt={`View ${i + 1}`} className="w-full h-full object-cover" />
                     {activeThumb === i && (
@@ -713,8 +711,8 @@ export default function ProductPage() {
             >
               <span className="text-gold-600 text-sm">⚡</span>
               <span className="text-sm text-dark/70 font-medium italic">
-                {matchedProduct.category === 'Kolhapuri Chappal' 
-                  ? 'Genuine Leather Ledger: Crafted by master artisans in Pattan Kadoli.' 
+                {matchedProduct.category === 'Kolhapuri Chappal'
+                  ? 'Genuine Leather Ledger: Crafted by master artisans in Pattan Kadoli.'
                   : `Exclusive release: Only a few pieces remaining in stock.`}
               </span>
             </motion.div>
@@ -735,19 +733,17 @@ export default function ProductPage() {
                         setSelectedColorVariant(index)
                         setActiveThumb(0) // Reset to first image of selected color
                       }}
-                      className={`flex flex-col items-center gap-2 p-3 border-2 rounded-lg transition-all duration-200 ${
-                        selectedColorVariant === index
+                      className={`flex flex-col items-center gap-2 p-3 border-2 rounded-lg transition-all duration-200 ${selectedColorVariant === index
                           ? 'border-dark bg-dark/5'
                           : 'border-dark/20 hover:border-dark/40'
-                      }`}
+                        }`}
                     >
-                      <div 
+                      <div
                         className="w-8 h-8 rounded-full border-2 border-white shadow-md"
                         style={{ backgroundColor: variant.colorCode }}
                       />
-                      <span className={`text-xs font-medium ${
-                        selectedColorVariant === index ? 'text-dark' : 'text-dark/60'
-                      }`}>
+                      <span className={`text-xs font-medium ${selectedColorVariant === index ? 'text-dark' : 'text-dark/60'
+                        }`}>
                         {variant.colorName}
                       </span>
                     </motion.button>
@@ -767,7 +763,7 @@ export default function ProductPage() {
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-xs font-medium tracking-widest text-dark/60">SELECT SIZE (IND)</p>
-                  <button 
+                  <button
                     onClick={() => setShowChappalSizeChart(true)}
                     className="text-xs text-gold-600 underline hover:text-gold-700 transition-colors"
                   >
@@ -775,8 +771,8 @@ export default function ProductPage() {
                   </button>
                 </div>
                 <div className="flex gap-2 flex-wrap">
-                  {(matchedProduct.sizes && Object.keys(matchedProduct.sizes).length > 0 
-                    ? Object.keys(matchedProduct.sizes).map(Number) 
+                  {(matchedProduct.sizes && Object.keys(matchedProduct.sizes).length > 0
+                    ? Object.keys(matchedProduct.sizes).map(Number)
                     : defaultSizes
                   ).map((s) => {
                     const isSizeInStock = matchedProduct.sizes ? Number(matchedProduct.sizes[s] || 0) > 0 : true
@@ -786,13 +782,12 @@ export default function ProductPage() {
                         whileHover={isSizeInStock ? { scale: 1.05 } : {}}
                         whileTap={isSizeInStock ? { scale: 0.95 } : {}}
                         onClick={() => setSelectedSize(s)}
-                        className={`w-12 h-12 text-sm border transition-all duration-200 relative ${
-                          selectedSize === s
+                        className={`w-12 h-12 text-sm border transition-all duration-200 relative ${selectedSize === s
                             ? 'bg-dark text-white border-dark'
                             : isSizeInStock
                               ? 'border-dark/20 hover:border-dark text-dark'
                               : 'border-dark/10 text-dark/30 bg-stone-100/50'
-                        }`}
+                          }`}
                       >
                         {s}
                         {!isSizeInStock && (
@@ -812,7 +807,7 @@ export default function ProductPage() {
               <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-xs font-medium tracking-widest text-dark/60">SELECT RING SIZE (IND)</p>
-                  <button 
+                  <button
                     onClick={() => setShowRingSizeChart(true)}
                     className="text-xs text-gold-600 underline hover:text-gold-700 transition-colors"
                   >
@@ -826,11 +821,10 @@ export default function ProductPage() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedRingSize(size.indian)}
-                      className={`w-12 h-12 text-sm border transition-all duration-200 ${
-                        selectedRingSize === size.indian
+                      className={`w-12 h-12 text-sm border transition-all duration-200 ${selectedRingSize === size.indian
                           ? 'bg-dark text-white border-dark'
                           : 'border-dark/20 hover:border-dark text-dark'
-                      }`}
+                        }`}
                     >
                       {size.indian}
                     </motion.button>
@@ -943,11 +937,10 @@ export default function ProductPage() {
                 disabled={!isSelectedSizeInStock}
                 whileHover={isSelectedSizeInStock ? { scale: 1.02 } : {}}
                 whileTap={isSelectedSizeInStock ? { scale: 0.98 } : {}}
-                className={`flex-1 text-white text-sm font-medium tracking-widest py-4 relative overflow-hidden transition-all duration-300 ${
-                  isSelectedSizeInStock 
-                    ? 'bg-dark hover:bg-gold-600 hover:text-dark' 
+                className={`flex-1 text-white text-sm font-medium tracking-widest py-4 relative overflow-hidden transition-all duration-300 ${isSelectedSizeInStock
+                    ? 'bg-dark hover:bg-gold-600 hover:text-dark'
                     : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
-                }`}
+                  }`}
               >
                 <AnimatePresence mode="wait">
                   {!isSelectedSizeInStock ? (
@@ -1174,7 +1167,7 @@ export default function ProductPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                 </svg>
               </motion.button>
-              
+
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -1210,7 +1203,7 @@ export default function ProductPage() {
             <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm z-10">
               {Math.round(fullscreenZoomLevel * 100)}%
             </div>
-            
+
             {/* Zoomable Image */}
             <motion.img
               initial={{ scale: 0.9 }}
@@ -1225,7 +1218,7 @@ export default function ProductPage() {
               }}
               onClick={(e) => e.stopPropagation()}
             />
-            
+
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
               Use controls to zoom • Drag to pan
             </div>
@@ -1419,11 +1412,10 @@ export default function ProductPage() {
                     </thead>
                     <tbody>
                       {ringSizeChart.map((size, index) => (
-                        <tr 
-                          key={size.indian} 
-                          className={`border-b border-gray-100 hover:bg-gold-25 transition-colors cursor-pointer ${
-                            selectedRingSize === size.indian ? 'bg-gold-100' : index % 2 === 0 ? 'bg-gray-25' : 'bg-white'
-                          }`}
+                        <tr
+                          key={size.indian}
+                          className={`border-b border-gray-100 hover:bg-gold-25 transition-colors cursor-pointer ${selectedRingSize === size.indian ? 'bg-gold-100' : index % 2 === 0 ? 'bg-gray-25' : 'bg-white'
+                            }`}
                           onClick={() => {
                             setSelectedRingSize(size.indian)
                             setShowRingSizeChart(false)
@@ -1541,11 +1533,10 @@ export default function ProductPage() {
                     </thead>
                     <tbody>
                       {chappalSizeChart.map((size, index) => (
-                        <tr 
-                          key={size.our} 
-                          className={`border-b border-gray-100 hover:bg-gold-25 transition-colors cursor-pointer ${
-                            selectedSize === size.indiaUk ? 'bg-gold-100 font-bold' : index % 2 === 0 ? 'bg-gray-25' : 'bg-white'
-                          }`}
+                        <tr
+                          key={size.our}
+                          className={`border-b border-gray-100 hover:bg-gold-25 transition-colors cursor-pointer ${selectedSize === size.indiaUk ? 'bg-gold-100 font-bold' : index % 2 === 0 ? 'bg-gray-25' : 'bg-white'
+                            }`}
                           onClick={() => {
                             setSelectedSize(size.indiaUk)
                             setShowChappalSizeChart(false)

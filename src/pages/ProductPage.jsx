@@ -16,7 +16,7 @@ const thumbs = [
 
 const reviews = [
   {
-    name: 'Aditi Rrr.',
+    name: 'Aditi R.',
     tag: 'VERIFIED COLLECTOR',
     date: 'Sept 2023',
     quote: '"A masterpiece for the feet."',
@@ -480,8 +480,8 @@ export default function ProductPage() {
                     key={i}
                     onClick={() => handleActiveImageChange(i)}
                     className={`h-1.5 rounded-full transition-all duration-300 ${activeThumb === i
-                        ? 'w-6 bg-gold-600'
-                        : 'w-1.5 bg-dark/20 hover:bg-dark/40'
+                      ? 'w-6 bg-gold-600'
+                      : 'w-1.5 bg-dark/20 hover:bg-dark/40'
                       }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />
@@ -734,8 +734,8 @@ export default function ProductPage() {
                         setActiveThumb(0) // Reset to first image of selected color
                       }}
                       className={`flex flex-col items-center gap-2 p-3 border-2 rounded-lg transition-all duration-200 ${selectedColorVariant === index
-                          ? 'border-dark bg-dark/5'
-                          : 'border-dark/20 hover:border-dark/40'
+                        ? 'border-dark bg-dark/5'
+                        : 'border-dark/20 hover:border-dark/40'
                         }`}
                     >
                       <div
@@ -783,10 +783,10 @@ export default function ProductPage() {
                         whileTap={isSizeInStock ? { scale: 0.95 } : {}}
                         onClick={() => setSelectedSize(s)}
                         className={`w-12 h-12 text-sm border transition-all duration-200 relative ${selectedSize === s
-                            ? 'bg-dark text-white border-dark'
-                            : isSizeInStock
-                              ? 'border-dark/20 hover:border-dark text-dark'
-                              : 'border-dark/10 text-dark/30 bg-stone-100/50'
+                          ? 'bg-dark text-white border-dark'
+                          : isSizeInStock
+                            ? 'border-dark/20 hover:border-dark text-dark'
+                            : 'border-dark/10 text-dark/30 bg-stone-100/50'
                           }`}
                       >
                         {s}
@@ -822,8 +822,8 @@ export default function ProductPage() {
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedRingSize(size.indian)}
                       className={`w-12 h-12 text-sm border transition-all duration-200 ${selectedRingSize === size.indian
-                          ? 'bg-dark text-white border-dark'
-                          : 'border-dark/20 hover:border-dark text-dark'
+                        ? 'bg-dark text-white border-dark'
+                        : 'border-dark/20 hover:border-dark text-dark'
                         }`}
                     >
                       {size.indian}
@@ -938,8 +938,8 @@ export default function ProductPage() {
                 whileHover={isSelectedSizeInStock ? { scale: 1.02 } : {}}
                 whileTap={isSelectedSizeInStock ? { scale: 0.98 } : {}}
                 className={`flex-1 text-white text-sm font-medium tracking-widest py-4 relative overflow-hidden transition-all duration-300 ${isSelectedSizeInStock
-                    ? 'bg-dark hover:bg-gold-600 hover:text-dark'
-                    : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
+                  ? 'bg-dark hover:bg-gold-600 hover:text-dark'
+                  : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
                   }`}
               >
                 <AnimatePresence mode="wait">

@@ -11,7 +11,7 @@ export default function CheckoutPage() {
   const { cart, clearCart, addOrder, addReview, firebaseUser, userProfile, saveUserAddress, resellers } = useApp()
   const navigate = useNavigate()
 
-  // Form inputs statell
+  // Form inputs state
   const [customerName, setCustomerName] = useState(() => {
     if (userProfile?.name) return userProfile.name
     const saved = localStorage.getItem('samartha_user')
@@ -690,8 +690,8 @@ export default function CheckoutPage() {
                             key={addr.id}
                             onClick={() => setSelectedAddressId(addr.id)}
                             className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col justify-between bg-[#faf8f5] text-left relative ${selectedAddressId === addr.id
-                                ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
-                                : 'border-dark/10 hover:border-dark/25'
+                              ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
+                              : 'border-dark/10 hover:border-dark/25'
                               }`}
                           >
                             <div className="text-[11px] space-y-1">
@@ -710,8 +710,8 @@ export default function CheckoutPage() {
                         <div
                           onClick={() => setSelectedAddressId('new')}
                           className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex items-center justify-center bg-[#faf8f5] border-dashed ${selectedAddressId === 'new'
-                              ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
-                              : 'border-dark/10 hover:border-dark/25'
+                            ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
+                            : 'border-dark/10 hover:border-dark/25'
                             }`}
                         >
                           <div className="text-center space-y-1">
@@ -750,7 +750,7 @@ export default function CheckoutPage() {
                           </div>
                           {pincodeLookupMessage && (
                             <p className={`text-[9px] font-bold mt-1.5 ${pincodeLookupMessage.startsWith('✓') ? 'text-emerald-700' :
-                                pincodeLookupMessage.startsWith('⚡') ? 'text-gold-600 animate-pulse' : 'text-stone-500'
+                              pincodeLookupMessage.startsWith('⚡') ? 'text-gold-600 animate-pulse' : 'text-stone-500'
                               }`}>
                               {pincodeLookupMessage}
                             </p>
@@ -862,8 +862,8 @@ export default function CheckoutPage() {
                           key={pay.label}
                           onClick={() => setPaymentMethod(pay.label)}
                           className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col items-center text-center space-y-1 bg-[#faf8f5] ${paymentMethod === pay.label
-                              ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
-                              : 'border-dark/10 hover:border-dark/25'
+                            ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
+                            : 'border-dark/10 hover:border-dark/25'
                             }`}
                         >
                           <span className="text-xl">{pay.icon}</span>

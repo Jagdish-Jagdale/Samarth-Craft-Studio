@@ -11,7 +11,7 @@ export default function CheckoutPage() {
   const { cart, clearCart, addOrder, addReview, firebaseUser, userProfile, saveUserAddress, resellers } = useApp()
   const navigate = useNavigate()
 
-  // Form inputs state
+  // Form inputs statell
   const [customerName, setCustomerName] = useState(() => {
     if (userProfile?.name) return userProfile.name
     const saved = localStorage.getItem('samartha_user')
@@ -85,7 +85,7 @@ export default function CheckoutPage() {
       const currentState = stateField.toLowerCase()
       const currentDistrict = district.toLowerCase()
       const currentCity = city.toLowerCase()
-      
+
       // Local delivery (Kolhapur)
       if (currentCity.includes('kolhapur') || currentDistrict.includes('kolhapur')) {
         return paymentConfig.shippingRates.local
@@ -105,7 +105,7 @@ export default function CheckoutPage() {
         const addressState = selectedAddress.state?.toLowerCase() || ''
         const addressDistrict = selectedAddress.district?.toLowerCase() || ''
         const addressCity = selectedAddress.city?.toLowerCase() || ''
-        
+
         if (addressCity.includes('kolhapur') || addressDistrict.includes('kolhapur')) {
           return paymentConfig.shippingRates.local
         }
@@ -194,7 +194,7 @@ export default function CheckoutPage() {
       // 1. Generate Order ID from Firebase Functions Backend
       const { functions } = await import('../firebase');
       const { httpsCallable } = await import('firebase/functions');
-      
+
       const createOrder = httpsCallable(functions, 'createRazorpayOrder');
       const result = await createOrder({ amount: finalTotal * 100, currency: 'INR' });
       const orderData = result.data;
@@ -270,7 +270,7 @@ export default function CheckoutPage() {
 
   const finalizeOrder = async (razorpayPaymentId = null) => {
     setIsSubmitting(true)
-    
+
     let finalAddress = ''
     let newAddressObj = null
     if (selectedAddressId !== 'new' && userProfile?.addresses && Array.isArray(userProfile.addresses)) {
@@ -291,24 +291,24 @@ export default function CheckoutPage() {
     }
 
     const orderId = 'SM-ORD-' + Math.floor(10000 + Math.random() * 90000)
-    
+
     // Calculate reseller commissions
     const commissionData = []
     let totalCommissions = 0
-    
+
     cart.forEach(item => {
       if (item.resellerId) {
         // Use base price if available (for commission-added items), otherwise use regular price
         const itemPrice = item.basePrice || parseFloat(String(item.price).replace(/[^\d]/g, '')) || 0
         const itemTotal = itemPrice * item.quantity
-        
+
         // Get reseller commission rate from item or reseller profile
-        const commissionRate = item.commissionRate || (resellers?.find(r => 
-          (r.id && r.id.toString() === item.resellerId.toString()) || 
+        const commissionRate = item.commissionRate || (resellers?.find(r =>
+          (r.id && r.id.toString() === item.resellerId.toString()) ||
           (r.docId && r.docId.toString() === item.resellerId.toString())
         )?.commissionValue) || 10
         const commissionAmount = Math.round((itemTotal * parseFloat(commissionRate)) / 100)
-        
+
         commissionData.push({
           resellerId: item.resellerId,
           resellerName: item.resellerName,
@@ -319,11 +319,11 @@ export default function CheckoutPage() {
           commissionAmount,
           status: 'Pending' // Will be paid out later by admin
         })
-        
+
         totalCommissions += commissionAmount
       }
     })
-    
+
     const newOrder = {
       id: orderId,
       date: new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
@@ -362,7 +362,7 @@ export default function CheckoutPage() {
 
     // 2. Send WhatsApp Order Confirmation via Backend
     console.log('📤 Sending WhatsApp Order Confirmation')
-    
+
     sendOrderConfirmation({
       order: newOrder,
       customerPhone: phone
@@ -380,7 +380,7 @@ export default function CheckoutPage() {
     // 3. Persist in local user profile cache for immediate navigation reactivity
     const savedUser = localStorage.getItem('samartha_user')
     let baseProfile = savedUser ? JSON.parse(savedUser) : { name: customerName, phone: phone }
-    
+
     // Auto-save address if authenticated and a new one was used
     if (firebaseUser?.uid && newAddressObj) {
       try {
@@ -689,11 +689,10 @@ export default function CheckoutPage() {
                           <div
                             key={addr.id}
                             onClick={() => setSelectedAddressId(addr.id)}
-                            className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col justify-between bg-[#faf8f5] text-left relative ${
-                              selectedAddressId === addr.id
+                            className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col justify-between bg-[#faf8f5] text-left relative ${selectedAddressId === addr.id
                                 ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
                                 : 'border-dark/10 hover:border-dark/25'
-                            }`}
+                              }`}
                           >
                             <div className="text-[11px] space-y-1">
                               <p className="font-bold text-dark">{addr.area}</p>
@@ -707,14 +706,13 @@ export default function CheckoutPage() {
                             )}
                           </div>
                         ))}
-                        
+
                         <div
                           onClick={() => setSelectedAddressId('new')}
-                          className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex items-center justify-center bg-[#faf8f5] border-dashed ${
-                            selectedAddressId === 'new'
+                          className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex items-center justify-center bg-[#faf8f5] border-dashed ${selectedAddressId === 'new'
                               ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
                               : 'border-dark/10 hover:border-dark/25'
-                          }`}
+                            }`}
                         >
                           <div className="text-center space-y-1">
                             <span className="text-lg">➕</span>
@@ -731,7 +729,7 @@ export default function CheckoutPage() {
                       <div className="border-b border-dark/5 pb-2 mb-2">
                         <p className="text-xs font-bold text-dark uppercase tracking-wide">Enter New Shipping Address Details</p>
                       </div>
-                      
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-[10px] text-dark/65 font-bold tracking-wider uppercase mb-2">PIN Code</label>
@@ -751,10 +749,9 @@ export default function CheckoutPage() {
                             )}
                           </div>
                           {pincodeLookupMessage && (
-                            <p className={`text-[9px] font-bold mt-1.5 ${
-                              pincodeLookupMessage.startsWith('✓') ? 'text-emerald-700' :
-                              pincodeLookupMessage.startsWith('⚡') ? 'text-gold-600 animate-pulse' : 'text-stone-500'
-                            }`}>
+                            <p className={`text-[9px] font-bold mt-1.5 ${pincodeLookupMessage.startsWith('✓') ? 'text-emerald-700' :
+                                pincodeLookupMessage.startsWith('⚡') ? 'text-gold-600 animate-pulse' : 'text-stone-500'
+                              }`}>
                               {pincodeLookupMessage}
                             </p>
                           )}
@@ -832,13 +829,13 @@ export default function CheckoutPage() {
                       <p>
                         <strong>Shipping Zone:</strong> {
                           (() => {
-                            const currentState = selectedAddressId === 'new' ? stateField.toLowerCase() : 
+                            const currentState = selectedAddressId === 'new' ? stateField.toLowerCase() :
                               (userProfile?.addresses?.find(a => a.id === selectedAddressId)?.state?.toLowerCase() || '')
-                            const currentDistrict = selectedAddressId === 'new' ? district.toLowerCase() : 
+                            const currentDistrict = selectedAddressId === 'new' ? district.toLowerCase() :
                               (userProfile?.addresses?.find(a => a.id === selectedAddressId)?.district?.toLowerCase() || '')
-                            const currentCity = selectedAddressId === 'new' ? city.toLowerCase() : 
+                            const currentCity = selectedAddressId === 'new' ? city.toLowerCase() :
                               (userProfile?.addresses?.find(a => a.id === selectedAddressId)?.city?.toLowerCase() || '')
-                            
+
                             if (currentCity.includes('kolhapur') || currentDistrict.includes('kolhapur')) {
                               return 'Local (Same City/Kolhapur)'
                             } else if (currentState.includes('maharashtra')) {
@@ -864,11 +861,10 @@ export default function CheckoutPage() {
                         <div
                           key={pay.label}
                           onClick={() => setPaymentMethod(pay.label)}
-                          className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col items-center text-center space-y-1 bg-[#faf8f5] ${
-                            paymentMethod === pay.label
+                          className={`border p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col items-center text-center space-y-1 bg-[#faf8f5] ${paymentMethod === pay.label
                               ? 'border-gold-500 shadow-md ring-1 ring-gold-500/20 bg-cream/10'
                               : 'border-dark/10 hover:border-dark/25'
-                          }`}
+                            }`}
                         >
                           <span className="text-xl">{pay.icon}</span>
                           <span className="text-xs font-bold text-dark">{pay.label}</span>
@@ -1008,7 +1004,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {reviewSubmitted ? (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     className="bg-emerald-50 border border-emerald-500/20 p-4 rounded-xl text-center space-y-2"
@@ -1039,7 +1035,7 @@ export default function CheckoutPage() {
                     {/* Location Field */}
                     <div>
                       <label className="block text-[9px] text-dark/50 font-bold uppercase tracking-wider mb-1">Your Location (City, State)</label>
-                      <input 
+                      <input
                         type="text"
                         value={reviewLocation}
                         onChange={(e) => setReviewLocation(e.target.value)}

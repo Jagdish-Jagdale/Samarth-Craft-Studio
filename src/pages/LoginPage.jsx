@@ -23,7 +23,7 @@ export default function LoginPage() {
   const { userProfile, setUserProfile, orders, loadingAuth, cancelOrder, requestOrderCancellation } = useApp()
   const currentUser = userProfile
 
-  // Navigation Tabs: 'login' | 'signupyy'
+  // Navigation Tabs: 'login' | 'signup'
   const [activeTab, setActiveTab] = useState('login')
 
   // Login Type: 'password' | 'otp'
@@ -1114,8 +1114,8 @@ export default function LoginPage() {
                                 return (
                                   <div key={st} className="flex flex-col items-center relative z-10 text-center w-24">
                                     <div className={`w-4 h-4 rounded-full flex items-center justify-center border transition-all ${isCompleted
-                                        ? 'bg-gold-500 border-gold-600 text-white'
-                                        : 'bg-white border-dark/10 text-dark/30'
+                                      ? 'bg-gold-500 border-gold-600 text-white'
+                                      : 'bg-white border-dark/10 text-dark/30'
                                       }`}>
                                       {isCompleted && <span className="text-[9px]">✓</span>}
                                     </div>

@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { auth, db } from '../firebase'
-import { 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   signOut,
   signInWithPhoneNumber,
   RecaptchaVerifier,
@@ -22,13 +22,13 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const { userProfile, setUserProfile, orders, loadingAuth, cancelOrder, requestOrderCancellation } = useApp()
   const currentUser = userProfile
-  
-  // Navigation Tabs: 'login' | 'signup'
+
+  // Navigation Tabs: 'login' | 'signupyy'
   const [activeTab, setActiveTab] = useState('login')
-  
+
   // Login Type: 'password' | 'otp'
   const [loginType, setLoginType] = useState('password')
-  
+
   // OTP Flow States (Mobicomm API integration)
   const [otpSent, setOtpSent] = useState(false)
   const [otpCode, setOtpCode] = useState(['', '', '', '', '', ''])
@@ -90,10 +90,10 @@ export default function LoginPage() {
         if (result && result.user) {
           const user = result.user
           setNotification('Google Authentication Successful!')
-          
+
           const userDocRef = doc(db, 'users', user.uid)
           const userDocSnap = await getDoc(userDocRef)
-          
+
           let profile;
           if (userDocSnap.exists()) {
             const existingData = userDocSnap.data()
@@ -114,7 +114,7 @@ export default function LoginPage() {
               joined: new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })
             }
           }
-          
+
           await setDoc(userDocRef, profile, { merge: true })
           setNotification('Logged in successfully with Google!')
           setTimeout(() => setNotification(''), 1500)
@@ -134,7 +134,7 @@ export default function LoginPage() {
       return
     }
     setErrorMsg('')
-    
+
     const cleanPhone = phone.trim().replace(/[^\d]/g, '')
     if (cleanPhone.length !== 10) {
       setErrorMsg('Please enter a valid 10-digit mobile number.')
@@ -147,7 +147,7 @@ export default function LoginPage() {
 
     const smsMessage = `Your Verification Code for login is ${generatedOtp}. - Expertskill Technology.`
     const encodedMessage = encodeURIComponent(smsMessage)
-    
+
     // Mobicomm secure API gateway URL matching Java setup
     const url = `https://mobicomm.dove-sms.com/submitsms.jsp?user=Experts&key=ba9dcdcdfcXX&mobile=+91${cleanPhone}&message=${encodedMessage}&accusage=1&senderid=EXTSKL`
 
@@ -190,7 +190,7 @@ export default function LoginPage() {
         const virtualEmail = `otp_${cleanPhone}@samartha.com`
         let user;
         let isNewUser = false;
-        
+
         try {
           const cred = await signInWithEmailAndPassword(auth, virtualEmail, 'otpSecret123')
           user = cred.user
@@ -204,7 +204,7 @@ export default function LoginPage() {
         // Check if user profile already exists in Firestore
         const userDocRef = doc(db, 'users', user.uid)
         const userDocSnap = await getDoc(userDocRef)
-        
+
         let profile;
         if (userDocSnap.exists() && !isNewUser) {
           // User exists - preserve their existing name and email, only update phone if needed
@@ -228,7 +228,7 @@ export default function LoginPage() {
             joined: new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })
           }
         }
-        
+
         await setDoc(userDocRef, profile, { merge: true })
         setNotification('Customer Session Authenticated!')
       } catch (err) {
@@ -363,7 +363,7 @@ export default function LoginPage() {
       }
 
       const existingAddresses = Array.isArray(currentUser?.addresses) ? currentUser.addresses : []
-      
+
       let updatedAddresses
       if (editingAddressId) {
         updatedAddresses = existingAddresses.map(addr => addr.id === editingAddressId ? newAddress : addr)
@@ -416,7 +416,7 @@ export default function LoginPage() {
   const handleDeleteAddress = async (addressId) => {
     if (!window.confirm('Are you sure you want to delete this address?')) return
     setNotification('Removing address...')
-    
+
     try {
       const existingAddresses = Array.isArray(currentUser?.addresses) ? currentUser.addresses : []
       const updatedAddresses = existingAddresses.filter(addr => addr.id !== addressId)
@@ -467,7 +467,7 @@ export default function LoginPage() {
       try {
         setNotification('Registering account with Firebase...')
         setErrorMsg('')
-        
+
         const userCredential = await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
         const user = userCredential.user
 
@@ -498,9 +498,9 @@ export default function LoginPage() {
     try {
       setNotification('Initiating Google Authentication...')
       setErrorMsg('')
-      
+
       const provider = new GoogleAuthProvider()
-      
+
       let result;
       try {
         result = await signInWithPopup(auth, provider)
@@ -513,13 +513,13 @@ export default function LoginPage() {
           throw popupErr
         }
       }
-      
+
       const user = result.user
-      
+
       // Check if user profile already exists in Firestore
       const userDocRef = doc(db, 'users', user.uid)
       const userDocSnap = await getDoc(userDocRef)
-      
+
       let profile;
       if (userDocSnap.exists()) {
         const existingData = userDocSnap.data()
@@ -540,7 +540,7 @@ export default function LoginPage() {
           joined: new Date().toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })
         }
       }
-      
+
       await setDoc(userDocRef, profile, { merge: true })
       setNotification('Logged in successfully with Google!')
       setTimeout(() => setNotification(''), 1500)
@@ -565,13 +565,13 @@ export default function LoginPage() {
     if (!window.confirm('Are you sure you want to request cancellation for this order? A confirmation message will be sent to your WhatsApp. You must reply "Yes" on WhatsApp to complete the cancellation.')) {
       return
     }
-    
+
     setNotification('Sending cancellation request to WhatsApp...')
     try {
       const order = orders.find(o => o.id === orderId)
       const phone = order?.phone || currentUser?.phone || ''
       const customerName = order?.customerName || order?.customer || currentUser?.name || 'Customer'
-      
+
       const success = await requestOrderCancellation(orderId, phone, customerName)
       if (success) {
         setNotification('Request sent! Please check your WhatsApp to confirm.')
@@ -619,7 +619,7 @@ export default function LoginPage() {
     if (numbersOnly.length === 6) {
       const otpArray = numbersOnly.split('')
       setOtpCode(otpArray)
-      
+
       // Focus the last input field
       const lastInput = document.getElementById('otp-5')
       if (lastInput) lastInput.focus()
@@ -629,21 +629,21 @@ export default function LoginPage() {
   // Filter orders related to this user dynamically from Firestore!
   const userOrders = orders.filter(o => {
     if (!currentUser) return false;
-    
+
     // Safe phone comparison with null checks and string conversion
-    const phoneMatch = o.phone && currentUser.phone 
+    const phoneMatch = o.phone && currentUser.phone
       ? String(o.phone).replace(/[^\d]/g, '') === String(currentUser.phone).replace(/[^\d]/g, '')
       : false;
-    
+
     // Safe name comparison with null checks and string conversion
-    const nameMatch = (o.customerName && currentUser.name && String(o.customerName).toLowerCase() === String(currentUser.name).toLowerCase()) || 
-                      (o.customer && currentUser.name && String(o.customer).toLowerCase() === String(currentUser.name).toLowerCase());
-    
+    const nameMatch = (o.customerName && currentUser.name && String(o.customerName).toLowerCase() === String(currentUser.name).toLowerCase()) ||
+      (o.customer && currentUser.name && String(o.customer).toLowerCase() === String(currentUser.name).toLowerCase());
+
     // Safe email comparison with null checks and string conversion
-    const emailMatch = o.customerEmail && currentUser.email 
+    const emailMatch = o.customerEmail && currentUser.email
       ? String(o.customerEmail).toLowerCase() === String(currentUser.email).toLowerCase()
       : false;
-    
+
     return phoneMatch || nameMatch || emailMatch;
   })
 
@@ -655,8 +655,8 @@ export default function LoginPage() {
       return
     }
 
-    const orderItems = Array.isArray(order.items) 
-      ? order.items 
+    const orderItems = Array.isArray(order.items)
+      ? order.items
       : [{ name: order.items || 'Handcrafted Curation Selection', category: 'Handcrafted Heritage', price: order.total, quantity: 1 }]
 
     const itemsRows = orderItems.map(item => {
@@ -866,7 +866,7 @@ export default function LoginPage() {
           {/* Header Profile card */}
           <div className="bg-white border border-dark/5 p-8 rounded-2xl shadow-sm relative overflow-hidden transition-all duration-300">
             <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl -z-10"></div>
-            
+
             {!isEditingProfile ? (
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
@@ -890,7 +890,7 @@ export default function LoginPage() {
                       <span>📞 {currentUser.phone}</span>
                       <span>✦ Member since {currentUser.joined || 'May 2026'}</span>
                     </div>
-                    
+
                     {/* Edit profile trigger */}
                     <button
                       onClick={handleStartEditProfile}
@@ -900,7 +900,7 @@ export default function LoginPage() {
                     </button>
                   </div>
                 </div>
-                
+
                 <button
                   onClick={handleLogout}
                   className="text-xs font-bold tracking-widest border border-dark/25 px-6 py-3 hover:bg-[#faf8f5] transition-all rounded-lg"
@@ -912,7 +912,7 @@ export default function LoginPage() {
               <form onSubmit={handleSaveProfile} className="space-y-6 max-w-xl">
                 <div>
                   <span className="text-[10px] text-gold-600 font-bold uppercase tracking-widest block mb-4">Modify Bespoke Profile</span>
-                  
+
                   {/* Profile Photo Selector */}
                   <div className="mb-6 space-y-3">
                     <label className="block text-[10px] font-bold tracking-widest text-dark/60 uppercase mb-1">Bespoke Profile Photo</label>
@@ -955,7 +955,7 @@ export default function LoginPage() {
                             </button>
                           )}
                         </div>
-                        
+
                         {/* Premium presets */}
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[9px] text-dark/40 font-bold uppercase tracking-wide">Or choose a luxury preset:</span>
@@ -971,9 +971,8 @@ export default function LoginPage() {
                                 key={idx}
                                 type="button"
                                 onClick={() => setEditAvatar(presetUrl)}
-                                className={`w-8 h-8 rounded-full overflow-hidden border-2 transition-all ${
-                                  editAvatar === presetUrl ? 'border-gold-500 scale-110 shadow-xs' : 'border-transparent opacity-70 hover:opacity-100'
-                                }`}
+                                className={`w-8 h-8 rounded-full overflow-hidden border-2 transition-all ${editAvatar === presetUrl ? 'border-gold-500 scale-110 shadow-xs' : 'border-transparent opacity-70 hover:opacity-100'
+                                  }`}
                               >
                                 <img src={presetUrl} className="w-full h-full object-cover" alt={`Preset ${idx + 1}`} />
                               </button>
@@ -1063,7 +1062,7 @@ export default function LoginPage() {
                 <div className="space-y-6">
                   {userOrders.map((o, index) => {
                     const status = o.orderStatus || o.status || 'Processing';
-                    
+
                     // Simple steps logic
                     const steps = ['Processing', 'In Transit', 'Delivered'];
                     const displayStatus = (status === 'Cancellation Pending') ? 'Processing' : status;
@@ -1108,22 +1107,20 @@ export default function LoginPage() {
                             <div className="flex justify-between items-center relative">
                               {/* Horizontal timeline bar */}
                               <div className="absolute left-2 right-2 top-2 h-0.5 bg-dark/5 -z-0"></div>
-                              
+
                               {steps.map((st, i) => {
                                 const isCompleted = i <= currentStepIdx;
                                 const isActive = i === currentStepIdx;
                                 return (
                                   <div key={st} className="flex flex-col items-center relative z-10 text-center w-24">
-                                    <div className={`w-4 h-4 rounded-full flex items-center justify-center border transition-all ${
-                                      isCompleted 
-                                        ? 'bg-gold-500 border-gold-600 text-white' 
+                                    <div className={`w-4 h-4 rounded-full flex items-center justify-center border transition-all ${isCompleted
+                                        ? 'bg-gold-500 border-gold-600 text-white'
                                         : 'bg-white border-dark/10 text-dark/30'
-                                    }`}>
+                                      }`}>
                                       {isCompleted && <span className="text-[9px]">✓</span>}
                                     </div>
-                                    <span className={`text-[9px] mt-2 font-bold tracking-wide uppercase ${
-                                      isActive ? 'text-gold-600' : isCompleted ? 'text-dark/80' : 'text-dark/30'
-                                    }`}>{st}</span>
+                                    <span className={`text-[9px] mt-2 font-bold tracking-wide uppercase ${isActive ? 'text-gold-600' : isCompleted ? 'text-dark/80' : 'text-dark/30'
+                                      }`}>{st}</span>
                                   </div>
                                 );
                               })}
@@ -1142,7 +1139,7 @@ export default function LoginPage() {
                               ❌ CANCEL ORDER
                             </button>
                           )}
-                          
+
                           {status === 'Cancelled' && (
                             <span className="text-[10px] font-bold text-red-600 bg-red-50 px-3 py-2 rounded border border-red-200">
                               ⚠️ ORDER CANCELLED
@@ -1154,7 +1151,7 @@ export default function LoginPage() {
                               ⏳ CANCELLATION PENDING (CHECK WHATSAPP)
                             </span>
                           )}
-                          
+
                           <button
                             onClick={() => downloadInvoice(o)}
                             className="bg-cream/40 border border-dark/10 hover:border-gold-500 hover:bg-white text-dark text-[10px] font-bold tracking-widest px-4 py-2.5 rounded transition-all flex items-center gap-1.5 ml-auto"
@@ -1225,7 +1222,7 @@ export default function LoginPage() {
                 ) : (
                   <form onSubmit={handleSaveAddress} className="space-y-3 pt-2 border-t border-dark/5">
                     <p className="text-[9px] text-gold-600 font-bold uppercase tracking-wider">{editingAddressId ? 'Edit Shipping Destination' : 'New Shipping Destination'}</p>
-                    
+
                     <div>
                       <label className="block text-[9px] font-bold tracking-widest text-dark/60 uppercase mb-0.5">Pincode (Auto-Lookup)</label>
                       <div className="relative">
@@ -1364,8 +1361,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-cream text-dark flex font-sans overflow-hidden pb-16 md:pb-0">
       {/* Back button */}
-      <Link 
-        to="/" 
+      <Link
+        to="/"
         className="absolute top-6 left-6 z-50 flex items-center gap-2 text-xs text-dark/60 hover:text-gold-600 transition-colors uppercase tracking-widest font-semibold"
       >
         ← Return to Gallery
@@ -1374,10 +1371,10 @@ export default function LoginPage() {
       {/* Split layout: Left Visual Panel */}
       <div className="hidden lg:flex lg:w-1/2 relative justify-center items-center p-12 border-r border-dark/5 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/kolhapuri_chappal_bg.png" 
-            className="w-full h-full object-cover opacity-90" 
-            alt="Heritage Background" 
+          <img
+            src="/kolhapuri_chappal_bg.png"
+            className="w-full h-full object-cover opacity-90"
+            alt="Heritage Background"
           />
           {/* Deep dark warm chocolate tint for beautiful elegant contrast inside the left panel */}
           <div className="absolute inset-0 bg-dark/75 mix-blend-multiply"></div>
@@ -1385,10 +1382,10 @@ export default function LoginPage() {
 
         <div className="relative z-10 text-center max-w-lg space-y-6">
           <div className="w-20 h-20 bg-white rounded-full mx-auto flex items-center justify-center border border-gold-500/20 shadow-[0_0_30px_rgba(201,152,42,0.15)] p-2">
-            <img 
-              src="/logo.png" 
-              className="w-full h-full object-contain mix-blend-multiply" 
-              alt="Samartha Brand Emblem" 
+            <img
+              src="/logo.png"
+              className="w-full h-full object-contain mix-blend-multiply"
+              alt="Samartha Brand Emblem"
             />
           </div>
           <h2 className="font-serif text-4xl font-bold text-white italic tracking-wide">
@@ -1405,9 +1402,9 @@ export default function LoginPage() {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 md:p-16 relative bg-cream">
         {/* Glow decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl -z-10"></div>
-        
+
         <div className="w-full max-w-md bg-white border border-dark/5 rounded-2xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(26,18,8,0.06)] relative">
-          
+
           {/* Notifications area */}
           {notification && (
             <div className="absolute top-4 left-4 right-4 bg-gold-500/10 border border-gold-500/20 text-gold-700 text-xs px-4 py-3 rounded-lg text-center font-medium animate-pulse z-20">
@@ -1423,28 +1420,26 @@ export default function LoginPage() {
 
           {/* Heading */}
           <div className="text-center mb-6 flex flex-col items-center">
-            <img 
-              src="/logo.png" 
-              alt="Samartha Craft Studio" 
+            <img
+              src="/logo.png"
+              alt="Samartha Craft Studio"
               className="h-20 sm:h-24 w-auto object-contain mix-blend-multiply"
             />
           </div>
 
           {/* Main Tabs */}
           <div className="flex border-b border-dark/5 mb-8">
-            <button 
+            <button
               onClick={() => { setActiveTab('login'); setErrorMsg(''); setNotification(''); }}
-              className={`flex-1 pb-3 text-sm font-bold tracking-wide uppercase border-b-2 transition-all ${
-                activeTab === 'login' ? 'border-gold-500 text-gold-600' : 'border-transparent text-dark/40 hover:text-dark/60'
-              }`}
+              className={`flex-1 pb-3 text-sm font-bold tracking-wide uppercase border-b-2 transition-all ${activeTab === 'login' ? 'border-gold-500 text-gold-600' : 'border-transparent text-dark/40 hover:text-dark/60'
+                }`}
             >
               Sign In
             </button>
-            <button 
+            <button
               onClick={() => { setActiveTab('signup'); setErrorMsg(''); setNotification(''); }}
-              className={`flex-1 pb-3 text-sm font-bold tracking-wide uppercase border-b-2 transition-all ${
-                activeTab === 'signup' ? 'border-gold-500 text-gold-600' : 'border-transparent text-dark/40 hover:text-dark/60'
-              }`}
+              className={`flex-1 pb-3 text-sm font-bold tracking-wide uppercase border-b-2 transition-all ${activeTab === 'signup' ? 'border-gold-500 text-gold-600' : 'border-transparent text-dark/40 hover:text-dark/60'
+                }`}
             >
               Create Account
             </button>
@@ -1455,19 +1450,17 @@ export default function LoginPage() {
             <div className="space-y-6">
               {/* Login Type selectors */}
               <div className="flex bg-cream rounded-lg p-1 border border-dark/5">
-                <button 
+                <button
                   onClick={() => { setLoginType('password'); setOtpSent(false); }}
-                  className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${
-                    loginType === 'password' ? 'bg-white text-gold-600 border border-dark/5 shadow-sm' : 'text-dark/40 hover:text-dark/70'
-                  }`}
+                  className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${loginType === 'password' ? 'bg-white text-gold-600 border border-dark/5 shadow-sm' : 'text-dark/40 hover:text-dark/70'
+                    }`}
                 >
                   Password
                 </button>
-                <button 
+                <button
                   onClick={() => setLoginType('otp')}
-                  className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${
-                    loginType === 'otp' ? 'bg-white text-gold-600 border border-dark/5 shadow-sm' : 'text-dark/40 hover:text-dark/70'
-                  }`}
+                  className={`flex-1 py-2 text-xs font-bold rounded-md transition-all ${loginType === 'otp' ? 'bg-white text-gold-600 border border-dark/5 shadow-sm' : 'text-dark/40 hover:text-dark/70'
+                    }`}
                 >
                   OTP / Mobile
                 </button>
@@ -1478,7 +1471,7 @@ export default function LoginPage() {
                 <form onSubmit={handlePasswordLogin} className="space-y-5">
                   <div>
                     <label className="block text-[10px] text-dark/60 font-bold uppercase tracking-wider mb-2">Email Address</label>
-                    <input 
+                    <input
                       type="email"
                       required
                       value={email}
@@ -1492,7 +1485,7 @@ export default function LoginPage() {
                       <button type="button" className="text-[10px] text-gold-600 hover:text-gold-500 underline font-medium">Forgot?</button>
                     </div>
                     <div className="relative">
-                      <input 
+                      <input
                         type={showPassword ? "text" : "password"}
                         required
                         value={password}
@@ -1508,7 +1501,7 @@ export default function LoginPage() {
                       </button>
                     </div>
                   </div>
-                  <button 
+                  <button
                     type="submit"
                     className="w-full bg-gold-500 text-white font-bold py-3.5 text-sm hover:bg-gold-600 transition-colors mt-6 rounded-xl shadow-[0_4px_15px_rgba(201,152,42,0.2)]"
                   >
@@ -1526,7 +1519,7 @@ export default function LoginPage() {
                         <label className="block text-[10px] text-dark/60 font-bold uppercase tracking-wider mb-2">Mobile Number</label>
                         <div className="relative">
                           <span className="absolute left-4 top-3 text-sm text-dark/60 font-bold">+91</span>
-                          <input 
+                          <input
                             type="tel"
                             required
                             pattern="[0-9]{10}"
@@ -1536,7 +1529,7 @@ export default function LoginPage() {
                           />
                         </div>
                       </div>
-                      <button 
+                      <button
                         type="submit"
                         className="w-full bg-gold-500 text-white font-bold py-3.5 text-sm hover:bg-gold-600 transition-colors mt-6 rounded-xl shadow-[0_4px_15px_rgba(201,152,42,0.2)]"
                       >
@@ -1552,7 +1545,7 @@ export default function LoginPage() {
 
                       <div className="flex gap-2 justify-center">
                         {otpCode.map((digit, idx) => (
-                          <input 
+                          <input
                             key={idx}
                             id={`otp-${idx}`}
                             type="text"
@@ -1575,7 +1568,7 @@ export default function LoginPage() {
                         )}
                       </div>
 
-                      <button 
+                      <button
                         type="submit"
                         className="w-full bg-gold-500 text-white font-bold py-3.5 text-sm hover:bg-gold-600 transition-colors rounded-xl shadow-[0_4px_15px_rgba(201,152,42,0.2)]"
                       >
@@ -1591,7 +1584,7 @@ export default function LoginPage() {
             <form onSubmit={handleSignUp} className="space-y-4">
               <div>
                 <label className="block text-[10px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Full Name</label>
-                <input 
+                <input
                   type="text"
                   required
                   value={name}
@@ -1602,7 +1595,7 @@ export default function LoginPage() {
 
               <div>
                 <label className="block text-[10px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Email Address</label>
-                <input 
+                <input
                   type="email"
                   required
                   value={signUpEmail}
@@ -1613,7 +1606,7 @@ export default function LoginPage() {
 
               <div>
                 <label className="block text-[10px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Mobile Number</label>
-                <input 
+                <input
                   type="tel"
                   required
                   pattern="[0-9]{10}"
@@ -1626,7 +1619,7 @@ export default function LoginPage() {
               <div>
                 <label className="block text-[10px] text-dark/60 font-bold uppercase tracking-wider mb-1.5">Create Password</label>
                 <div className="relative">
-                  <input 
+                  <input
                     type={showSignUpPassword ? "text" : "password"}
                     required
                     value={signUpPassword}
@@ -1644,7 +1637,7 @@ export default function LoginPage() {
               </div>
 
               <div className="flex items-start gap-2.5 pt-2">
-                <input 
+                <input
                   type="checkbox"
                   required
                   id="terms"
@@ -1655,7 +1648,7 @@ export default function LoginPage() {
                 </label>
               </div>
 
-              <button 
+              <button
                 type="submit"
                 className="w-full bg-gold-500 text-white font-bold py-3 text-sm hover:bg-gold-600 transition-colors mt-4 rounded-xl shadow-[0_4px_15px_rgba(201,152,42,0.2)]"
               >

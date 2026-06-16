@@ -16,7 +16,7 @@ export {
   processMultipleImageUrls
 } from './imageUtils';
 
-// WhatsApp webhook utilities
+// WhatsApp webhook utilitieszz
 export {
   buildWhatsAppWebhookUrl,
   sendWhatsAppMessage,

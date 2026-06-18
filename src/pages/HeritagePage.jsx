@@ -29,7 +29,7 @@ export default function HeritagePage() {
     return Object.entries(categoryMap).map(([label, count]) => ({ label, count }))
   }, [productsList])
 
-  // Generate dynamic subcategories based on selected categoryii
+  // Generate dynamic subcategories based on selected category
   const subCategories = useMemo(() => {
     if (!activeCategory) return []
 

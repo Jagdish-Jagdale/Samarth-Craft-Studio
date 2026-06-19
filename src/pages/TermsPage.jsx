@@ -23,7 +23,7 @@ export default function TermsPage() {
 
           <div className="text-sm text-dark/70 space-y-4 leading-relaxed font-medium">
             <p>
-              Welcome to <strong>SAMARTHA CRAFT STUDIOoo</strong> (Udyam Registration: <code>UDYAM-MH-15-0128444</code>). These Terms and Conditions govern your engagement, customer relationship, and transactions with our studio under the proprietorship of <strong>Shri Nikhil Shivaji Jadhav</strong>.
+              Welcome to <strong>SAMARTHA CRAFT STUDIO</strong> (Udyam Registration: <code>UDYAM-MH-15-0128444</code>). These Terms and Conditions govern your engagement, customer relationship, and transactions with our studio under the proprietorship of <strong>Shri Nikhil Shivaji Jadhav</strong>.
             </p>
 
             <h3 className="font-serif text-lg font-bold text-dark pt-4">1. Product Integrity & Customization</h3>

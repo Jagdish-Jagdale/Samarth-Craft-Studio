@@ -13,7 +13,7 @@ export default function AboutPage() {
     <div className="bg-cream min-h-screen text-dark flex flex-col justify-between pb-16 md:pb-0">
       <Navbar />
 
-      {/* ─── HERO HEADER ─── */}
+      {/* ─── HERO HEADERkk ─── */}
       <section ref={headerRef} className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -94,7 +94,7 @@ export default function AboutPage() {
               <span className="text-[10px] font-bold tracking-[0.3em] text-gold-600 uppercase">
                 THE VISIONARY
               </span>
-              
+
               <h2 className="font-serif text-4xl md:text-5xl font-bold leading-tight text-dark">
                 Preserving Legacy,
                 <br />
@@ -264,7 +264,7 @@ export default function AboutPage() {
               <span className="text-[10px] font-bold tracking-[0.3em] text-gold-600 uppercase">
                 OUR HERITAGE
               </span>
-              
+
               <h2 className="font-serif text-4xl md:text-6xl font-bold leading-tight">
                 Handcrafted in India,
                 <br />

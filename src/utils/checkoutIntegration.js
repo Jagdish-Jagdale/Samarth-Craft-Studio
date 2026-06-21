@@ -11,7 +11,7 @@ import { getProductImageUrl } from './imageUtils';
  * Call this after successful order placement
  * 
  * @param {Object} orderData - Complete order data
- * @returns {Promise<Object>} - Notification resultas
+ * @returns {Promise<Object>} - Notification result
  */
 export async function handleCheckoutNotification(orderData) {
   console.log('\n=== Handling Checkout Notification ===');

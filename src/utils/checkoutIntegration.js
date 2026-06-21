@@ -11,15 +11,15 @@ import { getProductImageUrl } from './imageUtils';
  * Call this after successful order placement
  * 
  * @param {Object} orderData - Complete order data
- * @returns {Promise<Object>} - Notification result
+ * @returns {Promise<Object>} - Notification resultas
  */
 export async function handleCheckoutNotification(orderData) {
   console.log('\n=== Handling Checkout Notification ===');
-  
+
   try {
     // Extract customer phone from order
     const customerPhone = orderData.phone || orderData.customerPhone;
-    
+
     if (!customerPhone) {
       console.warn('No customer phone number provided, skipping WhatsApp notification');
       return {
@@ -27,21 +27,21 @@ export async function handleCheckoutNotification(orderData) {
         error: 'No phone number provided'
       };
     }
-    
+
     // Send order confirmation
     const result = await sendOrderConfirmation({
       order: orderData,
       customerPhone
     });
-    
+
     if (result.success) {
       console.log('✅ Order confirmation sent successfully');
     } else {
       console.error('❌ Failed to send order confirmation:', result.error);
     }
-    
+
     return result;
-    
+
   } catch (error) {
     console.error('Error in checkout notification:', error);
     return {
@@ -63,25 +63,25 @@ export async function handleCheckoutNotification(orderData) {
  */
 export async function sendCustomProductMessage({ phone, message, product = null }) {
   console.log('\n=== Sending Custom Product Message ===');
-  
+
   try {
     let mediaUrl = null;
-    
+
     // Get product image if product provided
     if (product) {
       mediaUrl = getProductImageUrl(product);
       console.log('Product image URL:', mediaUrl);
     }
-    
+
     // Send message
     const result = await sendWhatsAppMessage({
       phone,
       message,
       mediaUrl
     });
-    
+
     return result;
-    
+
   } catch (error) {
     console.error('Error sending custom message:', error);
     return {

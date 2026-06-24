@@ -14,7 +14,7 @@ export default function ResellerLoginPage() {
   const [errorMsg, setErrorMsg] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
 
-  // Onboarding Form
+  // Onboarding Formag
   const [onboardForm, setOnboardForm] = useState({
     boutiqueName: '',
     repName: '',
@@ -26,50 +26,50 @@ export default function ResellerLoginPage() {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    
+
     // Check if data is still loading
     if (loadingFirestore) {
       setErrorMsg('Loading reseller data, please wait...')
       return
     }
-    
+
     // Debug: Log available resellers
     console.log('Available resellers:', resellers)
     console.log('Trying to login with:', { email: loginEmail, password: loginPass })
-    
+
     // More robust matching with null checks and trimmed string matching
     const match = resellers.find(r => {
       // Safely convert stored email & password to trimmed strings
       const cleanEmail = r.email ? String(r.email).trim().toLowerCase() : ''
       const cleanPassword = r.password !== undefined && r.password !== null ? String(r.password).trim() : ''
-      
+
       const targetEmail = loginEmail ? loginEmail.trim().toLowerCase() : ''
       const targetPassword = loginPass ? loginPass.trim() : ''
-      
-      console.log('Checking reseller:', { 
+
+      console.log('Checking reseller:', {
         name: r.name,
-        email: r.email, 
-        password: r.password, 
+        email: r.email,
+        password: r.password,
         status: r.status,
         cleanEmail,
         cleanPassword,
         targetEmail,
         targetPassword
       })
-      
+
       if (!cleanEmail || !cleanPassword) {
         console.log('Skipping reseller due to missing email or password fields')
         return false
       }
-      
+
       const emailMatch = cleanEmail === targetEmail
       const passwordMatch = cleanPassword === targetPassword
-      
+
       console.log('Match results:', { emailMatch, passwordMatch })
-      
+
       return emailMatch && passwordMatch
     })
-    
+
     if (match) {
       console.log('Login successful for:', match)
       console.log('Reseller ID:', match.id)
@@ -92,7 +92,7 @@ export default function ResellerLoginPage() {
 
   const handleOnboardSubmit = async (e) => {
     e.preventDefault()
-    
+
     // Check if email already exists
     if (resellers.some(r => r.email.toLowerCase() === onboardForm.email.toLowerCase())) {
       setErrorMsg('An application or account with this email already exists.')
@@ -116,7 +116,7 @@ export default function ResellerLoginPage() {
     await addReseller(newReseller)
     setSuccessMsg('Your application has been registered successfully! Admin review in progress.')
     setErrorMsg('')
-    
+
     // Reset form
     setOnboardForm({
       boutiqueName: '',
@@ -126,7 +126,7 @@ export default function ResellerLoginPage() {
       gstin: '',
       annualVolume: '100 - 500 pairs'
     })
-    
+
     // Switch tab
     setTimeout(() => {
       setSuccessMsg('')
@@ -151,9 +151,8 @@ export default function ResellerLoginPage() {
               <div>
                 <div className="flex items-center gap-3 mb-1">
                   <h2 className="font-serif text-3xl font-bold">{resellerUser.name}</h2>
-                  <span className={`text-[10px] font-bold tracking-widest px-2.5 py-1 uppercase rounded-full ${
-                    resellerUser.status === 'Active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-amber-50 text-amber-700 border border-amber-100'
-                  }`}>
+                  <span className={`text-[10px] font-bold tracking-widest px-2.5 py-1 uppercase rounded-full ${resellerUser.status === 'Active' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-amber-50 text-amber-700 border border-amber-100'
+                    }`}>
                     {resellerUser.status}
                   </span>
                 </div>
@@ -190,7 +189,7 @@ export default function ResellerLoginPage() {
             ) : (
               /* Approved active reseller workspace */
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12">
-                
+
                 {/* Product Link Sharing */}
                 <div className="space-y-6">
                   <div className="border-b border-dark/5 pb-4">
@@ -222,7 +221,7 @@ export default function ResellerLoginPage() {
                             }}
                           />
                         </div>
-                        <select 
+                        <select
                           className="border border-dark/10 px-3 py-2 text-sm rounded outline-none focus:border-gold-500"
                           onChange={(e) => {
                             const filterCategory = e.target.value
@@ -246,18 +245,18 @@ export default function ResellerLoginPage() {
 
                     {/* Inventory Products */}
                     {products.map(product => (
-                      <div 
-                        key={`inv-${product.id}`} 
+                      <div
+                        key={`inv-${product.id}`}
                         data-product-card
                         data-product-name={product.name}
                         data-product-category={product.category}
                         className="bg-white border border-dark/5 p-5 flex gap-5 rounded shadow-[0_2px_15px_rgba(26,18,8,0.01)]"
                       >
                         <div className="relative">
-                          <img 
-                            src={product.image || product.img || product.images?.[0] || 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80'} 
-                            alt={product.name} 
-                            className="w-24 h-24 object-cover border border-dark/5 rounded" 
+                          <img
+                            src={product.image || product.img || product.images?.[0] || 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=80'}
+                            alt={product.name}
+                            className="w-24 h-24 object-cover border border-dark/5 rounded"
                           />
                           {product.badge && (
                             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold">
@@ -286,7 +285,7 @@ export default function ResellerLoginPage() {
                               Category: {product.category} • Commission: {resellerUser.commissionValue}% • Stock: {product.stock || 'Available'}
                             </p>
                           </div>
-                          
+
                           <div className="flex justify-between items-center">
                             <div className="flex gap-2">
                               <button
@@ -363,15 +362,15 @@ Shop now: ${referralLink}
                                 alert('Please enter a product ID or URL')
                                 return
                               }
-                              
+
                               // Extract product ID from URL or use direct ID
                               let productId = value
                               if (value.includes('product?id=')) {
                                 productId = value.split('product?id=')[1].split('&')[0]
                               }
-                              
+
                               const referralLink = `${window.location.origin}/product?id=${productId}&ref=${resellerUser.id}`
-                              
+
                               // Copy to clipboard
                               navigator.clipboard.writeText(referralLink).then(() => {
                                 alert('Referral link copied to clipboard!')
@@ -394,7 +393,7 @@ Shop now: ${referralLink}
                           </button>
                         </div>
                       </div>
-                      
+
                       <div className="bg-white p-3 rounded text-xs border border-gold-200">
                         <p className="font-medium mb-1 text-gold-800">How it works:</p>
                         <ul className="space-y-1 text-gold-700">
@@ -458,7 +457,7 @@ Shop now: ${referralLink}
                         <p className="text-xs text-blue-700">Commission Rate</p>
                       </div>
                     </div>
-                    
+
                     {/* Recent Commissions */}
                     <div className="border-t pt-4">
                       <h5 className="text-sm font-medium mb-3">Recent Commissions</h5>
@@ -476,7 +475,7 @@ Shop now: ${referralLink}
                           <span className="font-medium text-green-600">+₹3,200</span>
                         </div>
                       </div>
-                      <button 
+                      <button
                         onClick={() => alert('Detailed commission history feature coming soon!')}
                         className="w-full mt-3 text-xs text-blue-600 hover:text-blue-800 underline"
                       >
@@ -514,17 +513,15 @@ Shop now: ${referralLink}
             <div className="flex border-b border-dark/10 mb-8">
               <button
                 onClick={() => setTab('login')}
-                className={`flex-1 text-center py-3 text-xs font-bold tracking-widest transition-colors ${
-                  tab === 'login' ? 'border-b-2 border-gold-500 text-gold-600' : 'text-dark/45 hover:text-dark'
-                }`}
+                className={`flex-1 text-center py-3 text-xs font-bold tracking-widest transition-colors ${tab === 'login' ? 'border-b-2 border-gold-500 text-gold-600' : 'text-dark/45 hover:text-dark'
+                  }`}
               >
                 RESELLER PORTAL LOGIN
               </button>
               <button
                 onClick={() => setTab('register')}
-                className={`flex-1 text-center py-3 text-xs font-bold tracking-widest transition-colors ${
-                  tab === 'register' ? 'border-b-2 border-gold-500 text-gold-600' : 'text-dark/45 hover:text-dark'
-                }`}
+                className={`flex-1 text-center py-3 text-xs font-bold tracking-widest transition-colors ${tab === 'register' ? 'border-b-2 border-gold-500 text-gold-600' : 'text-dark/45 hover:text-dark'
+                  }`}
               >
                 APPLY AS RESELLER
               </button>
@@ -554,7 +551,7 @@ Shop now: ${referralLink}
                 >
                   <form onSubmit={handleLogin} className="space-y-5">
                     <h3 className="font-serif text-lg font-bold border-b border-dark/5 pb-3">Reseller Portal Sign In</h3>
-                    
+
                     <div>
                       <label className="text-[10px] font-bold tracking-widest text-dark/50 block mb-1">PARTNER EMAIL</label>
                       <input
@@ -597,7 +594,7 @@ Shop now: ${referralLink}
                 >
                   <form onSubmit={handleOnboardSubmit} className="space-y-4">
                     <h3 className="font-serif text-lg font-bold border-b border-dark/5 pb-3">Reseller Onboarding Registration</h3>
-                    
+
                     <div>
                       <label className="text-[10px] font-bold tracking-widest text-dark/50 block mb-1">BOUTIQUE/STORE NAME</label>
                       <input

@@ -14,7 +14,7 @@ export default function ResellerLoginPage() {
   const [errorMsg, setErrorMsg] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
 
-  // Onboarding Formag
+  // Onboarding Form
   const [onboardForm, setOnboardForm] = useState({
     boutiqueName: '',
     repName: '',

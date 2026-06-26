@@ -13,7 +13,7 @@ export default function AboutPage() {
     <div className="bg-cream min-h-screen text-dark flex flex-col justify-between pb-16 md:pb-0">
       <Navbar />
 
-      {/* ─── HERO HEADERas ─── */}
+      {/* ─── HERO HEADER ─── */}
       <section ref={headerRef} className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div

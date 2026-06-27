@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
 
           <div className="text-sm text-dark/70 space-y-4 leading-relaxed font-medium">
             <p>
-              Welcome toak <strong>SAMARTHA CRAFT STUDIO</strong> (Udyam Registration: <code>UDYAM-MH-15-0128444</code>). We hold the privacy of our customers and collectors in the highest esteem. This Privacy Policy details how we collect, safeguard, and leverage information provided to us under the direct stewardship of our proprietor, <strong>Shri Nikhil Shivaji Jadhav</strong>.
+              Welcome to <strong>SAMARTHA CRAFT STUDIO</strong> (Udyam Registration: <code>UDYAM-MH-15-0128444</code>). We hold the privacy of our customers and collectors in the highest esteem. This Privacy Policy details how we collect, safeguard, and leverage information provided to us under the direct stewardship of our proprietor, <strong>Shri Nikhil Shivaji Jadhav</strong>.
             </p>
 
             <h3 className="font-serif text-lg font-bold text-dark pt-4">1. Information We Collect</h3>

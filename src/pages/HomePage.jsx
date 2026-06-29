@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import { useInView } from '../hooks/useInView'
 import { useApp } from '../context/AppContext'
 
-// Hero images from Unsplashaz (Indian crafts/jewelry)
+// Hero images from Unsplash (Indian crafts/jewelry)
 const HERO_BG = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1600&q=80'
 const CRAFT_IMG = '/kolhapuri_crafting.png'
 const NECKLACE = 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80'
@@ -864,8 +864,8 @@ export default function HomePage() {
                       }
                     }}
                     className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-colors ${wishlist.some(item => item.id === p.id)
-                        ? 'bg-gold-500 text-white'
-                        : 'bg-white hover:bg-gold-500 hover:text-white'
+                      ? 'bg-gold-500 text-white'
+                      : 'bg-white hover:bg-gold-500 hover:text-white'
                       }`}
                     title={wishlist.some(item => item.id === p.id) ? "Remove from Wishlist" : "Add to Wishlist"}
                   >
@@ -1213,8 +1213,8 @@ export default function HomePage() {
                     key={i}
                     onClick={() => setReviewIndex(i)}
                     className={`h-2 rounded-full transition-all duration-300 ${reviewIndex === i
-                        ? 'w-8 bg-gold-500'
-                        : 'w-2 bg-dark/20 hover:bg-dark/40'
+                      ? 'w-8 bg-gold-500'
+                      : 'w-2 bg-dark/20 hover:bg-dark/40'
                       }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />

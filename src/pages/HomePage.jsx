@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 import { useInView } from '../hooks/useInView'
 import { useApp } from '../context/AppContext'
 
-// Hero images from Unsplash (Indian crafts/jewelry)
+// Hero images from Unsplashaz (Indian crafts/jewelry)
 const HERO_BG = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1600&q=80'
 const CRAFT_IMG = '/kolhapuri_crafting.png'
 const NECKLACE = 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80'
@@ -114,7 +114,7 @@ export default function HomePage() {
     }
     return url;
   }
-  
+
   // Review modal states
   const [showReviewModal, setShowReviewModal] = useState(false)
   const [reviewName, setReviewName] = useState('')
@@ -273,7 +273,7 @@ export default function HomePage() {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
-            
+
             {/* Hero content */}
             <div className="absolute inset-0 flex flex-col items-start justify-center text-left text-white px-6 md:px-12 lg:px-20 max-w-7xl mx-auto w-full z-10 pt-20">
               {/* Label */}
@@ -357,9 +357,8 @@ export default function HomePage() {
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                currentSlide === idx ? 'bg-gold-400 w-8' : 'bg-white/40 hover:bg-white/60'
-              }`}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-gold-400 w-8' : 'bg-white/40 hover:bg-white/60'
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
@@ -406,7 +405,7 @@ export default function HomePage() {
                 Authentic Kolhapuri Paytaan & Premium Jewellery
               </h3>
             </div>
-            
+
             {/* Trust Points Grid */}
             <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:pl-6">
               {/* Point 1 */}
@@ -485,7 +484,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Category Label */}
                   <div className="text-center">
                     <h3 className="font-serif text-2xl font-bold text-dark group-hover:text-gold-600 transition-colors">
@@ -516,7 +515,7 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Category Label */}
                   <div className="text-center">
                     <h3 className="font-serif text-2xl font-bold text-dark group-hover:text-gold-600 transition-colors">
@@ -705,7 +704,7 @@ export default function HomePage() {
                         <h3 className="font-medium text-dark mb-2 group-hover:text-gold-600 transition-colors line-clamp-2 min-h-[3rem]">
                           {p.name}
                         </h3>
-                        
+
                         {/* Category */}
                         <p className="text-xs text-dark/50 mb-3 uppercase tracking-wider">
                           {p.category || 'Handcrafted'}
@@ -831,7 +830,7 @@ export default function HomePage() {
                     className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                   />
                 </Link>
-                
+
                 {/* Badge */}
                 {Number(p.stock || 0) <= 0 ? (
                   <div className="absolute top-3 left-3 bg-stone-500 text-white text-[10px] px-2 py-1 tracking-wider uppercase font-bold rounded">
@@ -864,18 +863,17 @@ export default function HomePage() {
                         addToWishlist(productToAdd)
                       }
                     }}
-                    className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-colors ${
-                      wishlist.some(item => item.id === p.id)
+                    className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-colors ${wishlist.some(item => item.id === p.id)
                         ? 'bg-gold-500 text-white'
                         : 'bg-white hover:bg-gold-500 hover:text-white'
-                    }`}
+                      }`}
                     title={wishlist.some(item => item.id === p.id) ? "Remove from Wishlist" : "Add to Wishlist"}
                   >
                     <svg className="w-5 h-5" fill={wishlist.some(item => item.id === p.id) ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </motion.button>
-                  
+
                   {Number(p.stock || 0) > 0 && (
                     <motion.button
                       whileHover={{ scale: 1.1 }}
@@ -899,7 +897,7 @@ export default function HomePage() {
                       </svg>
                     </motion.button>
                   )}
-                  
+
                   <Link to={`/product?id=${p.id}`}>
                     <motion.button
                       whileHover={{ scale: 1.1 }}
@@ -922,7 +920,7 @@ export default function HomePage() {
                     {p.name}
                   </h3>
                 </Link>
-                
+
                 {/* Price */}
                 <div className="flex items-center justify-center gap-2 mb-2">
                   {p.discount && Number(p.discount) > 0 ? (
@@ -981,7 +979,7 @@ export default function HomePage() {
       {videoTestimonials && videoTestimonials.length > 0 && (
         <section className="py-20 overflow-hidden">
           <div className="text-center max-w-2xl mx-auto mb-14 px-6">
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -989,7 +987,7 @@ export default function HomePage() {
             >
               ✦ Customer Stories
             </motion.p>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -998,7 +996,7 @@ export default function HomePage() {
             >
               Real Reviews, Real People
             </motion.h2>
-            <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: 80 }}
               viewport={{ once: true }}
@@ -1049,7 +1047,7 @@ export default function HomePage() {
 
                 {/* Centered Play Button */}
                 <div className="absolute inset-0 flex items-center justify-center z-10">
-                  <motion.div 
+                  <motion.div
                     className="w-16 h-16 rounded-full flex items-center justify-center transition-all duration-500"
                     style={{
                       background: 'radial-gradient(circle, rgba(201,152,42,0.9) 0%, rgba(201,152,42,0.6) 100%)',
@@ -1093,7 +1091,7 @@ export default function HomePage() {
       <section className="py-24 bg-[#faf8f5] border-t border-b border-dark/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1101,7 +1099,7 @@ export default function HomePage() {
             >
               Voices of Samartha
             </motion.p>
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -1110,7 +1108,7 @@ export default function HomePage() {
             >
               Our Happy Customers
             </motion.h2>
-             <motion.div 
+            <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: 64 }}
               viewport={{ once: true }}
@@ -1147,7 +1145,7 @@ export default function HomePage() {
               </div>
 
               {/* Slider Viewport */}
-              <div 
+              <div
                 className="overflow-hidden w-full px-1 py-4"
                 onMouseEnter={() => setIsReviewsHovered(true)}
                 onMouseLeave={() => setIsReviewsHovered(false)}
@@ -1188,10 +1186,10 @@ export default function HomePage() {
                         </p>
                       </div>
                       <div className="flex items-center gap-4">
-                        <img 
-                          src={rev.avatar || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"} 
-                          className="w-12 h-12 rounded-full object-cover border-2 border-gold-500/20" 
-                          alt={rev.customerName} 
+                        <img
+                          src={rev.avatar || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"}
+                          className="w-12 h-12 rounded-full object-cover border-2 border-gold-500/20"
+                          alt={rev.customerName}
                         />
                         <div>
                           <h4 className="font-serif font-bold text-dark text-sm flex items-center gap-2">
@@ -1214,11 +1212,10 @@ export default function HomePage() {
                   <button
                     key={i}
                     onClick={() => setReviewIndex(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      reviewIndex === i 
-                        ? 'w-8 bg-gold-500' 
+                    className={`h-2 rounded-full transition-all duration-300 ${reviewIndex === i
+                        ? 'w-8 bg-gold-500'
                         : 'w-2 bg-dark/20 hover:bg-dark/40'
-                    }`}
+                      }`}
                     aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
@@ -1250,10 +1247,10 @@ export default function HomePage() {
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
-                    <img 
-                      src={rev.avatar || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"} 
-                      className="w-12 h-12 rounded-full object-cover border-2 border-gold-500/20" 
-                      alt={rev.customerName} 
+                    <img
+                      src={rev.avatar || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=80"}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-gold-500/20"
+                      alt={rev.customerName}
                     />
                     <div>
                       <h4 className="font-serif font-bold text-dark text-sm flex items-center gap-2">

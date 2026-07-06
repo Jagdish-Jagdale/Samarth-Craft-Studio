@@ -24,7 +24,7 @@ const reviews = [
   },
   {
     name: 'Vikram S.',
-    tag: 'VERIFIED COLLECTORab',
+    tag: 'VERIFIED COLLECTOR',
     date: 'Aug 2023',
     quote: '"Exceeded all expectations."',
     text: 'I\'ve bought many luxury brands, but the artisanal soul of Samartha is unmatched. The delivery experience was also incredibly premium.',

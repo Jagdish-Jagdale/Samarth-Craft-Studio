@@ -1,161 +1,192 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect, useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import { useInView } from '../hooks/useInView'
-import { useApp } from '../context/AppContext'
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { useInView } from "../hooks/useInView";
+import { useApp } from "../context/AppContext";
 
 export default function HeritagePage() {
-  const [searchParams] = useSearchParams()
-  const categoryParam = searchParams.get('category')
-  const [activeCategory, setActiveCategory] = useState(null)
-  const [activeSubCategory, setActiveSubCategory] = useState(null)
-  const [checkedMaterials, setCheckedMaterials] = useState([])
-  const [price, setPrice] = useState(200000)
-  const [sortBy, setSortBy] = useState('FEATURED')
-  const [hovered, setHovered] = useState(null)
-  const [headerRef, headerInView] = useInView()
-  const { addToCart, wishlist, addToWishlist, removeFromWishlist, products: productsList } = useApp()
+  const [searchParams] = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeSubCategory, setActiveSubCategory] = useState(null);
+  const [checkedMaterials, setCheckedMaterials] = useState([]);
+  const [price, setPrice] = useState(200000);
+  const [sortBy, setSortBy] = useState("FEATURED");
+  const [hovered, setHovered] = useState(null);
+  const [headerRef, headerInView] = useInView();
+  const {
+    addToCart,
+    wishlist,
+    addToWishlist,
+    removeFromWishlist,
+    products: productsList,
+  } = useApp();
 
-  // Generate dynamic categories from actual productspu
+  // Generate dynamic categories from actual products
   const categories = useMemo(() => {
-    const categoryMap = {}
-    productsList.forEach(p => {
+    const categoryMap = {};
+    productsList.forEach((p) => {
       if (p.category) {
-        categoryMap[p.category] = (categoryMap[p.category] || 0) + 1
+        categoryMap[p.category] = (categoryMap[p.category] || 0) + 1;
       }
-    })
-    return Object.entries(categoryMap).map(([label, count]) => ({ label, count }))
-  }, [productsList])
+    });
+    return Object.entries(categoryMap).map(([label, count]) => ({
+      label,
+      count,
+    }));
+  }, [productsList]);
 
   // Generate dynamic subcategories based on selected category
   const subCategories = useMemo(() => {
-    if (!activeCategory) return []
+    if (!activeCategory) return [];
 
-    const subCategoryMap = {}
+    const subCategoryMap = {};
     productsList
-      .filter(p => {
-        if (activeCategory === 'Kolhapuri Footwear') {
-          return p.category === 'Kolhapuri Footwear' || p.category === 'Kolhapuri Chappal'
+      .filter((p) => {
+        if (activeCategory === "Kolhapuri Footwear") {
+          return (
+            p.category === "Kolhapuri Footwear" ||
+            p.category === "Kolhapuri Chappal"
+          );
         }
-        if (activeCategory === 'Temple Jewellery') {
-          return p.category === 'Temple Jewellery' || p.category === 'Jewellery'
+        if (activeCategory === "Temple Jewellery") {
+          return (
+            p.category === "Temple Jewellery" || p.category === "Jewellery"
+          );
         }
-        return p.category === activeCategory
+        return p.category === activeCategory;
       })
-      .forEach(p => {
-        const subCat = p.subCategory || p.collection || 'Other'
+      .forEach((p) => {
+        const subCat = p.subCategory || p.collection || "Other";
         if (subCat) {
-          subCategoryMap[subCat] = (subCategoryMap[subCat] || 0) + 1
+          subCategoryMap[subCat] = (subCategoryMap[subCat] || 0) + 1;
         }
-      })
+      });
 
-    return Object.entries(subCategoryMap).map(([label, count]) => ({ label, count }))
-  }, [productsList, activeCategory])
+    return Object.entries(subCategoryMap).map(([label, count]) => ({
+      label,
+      count,
+    }));
+  }, [productsList, activeCategory]);
 
   useEffect(() => {
-    const categoryParam = searchParams.get('category')
-    const subCategoryParam = searchParams.get('subcategory')
+    const categoryParam = searchParams.get("category");
+    const subCategoryParam = searchParams.get("subcategory");
 
     if (categoryParam) {
-      setActiveCategory(categoryParam)
+      setActiveCategory(categoryParam);
     } else {
-      setActiveCategory(null)
+      setActiveCategory(null);
     }
 
     if (subCategoryParam) {
-      setActiveSubCategory(subCategoryParam)
+      setActiveSubCategory(subCategoryParam);
     } else {
-      setActiveSubCategory(null)
+      setActiveSubCategory(null);
     }
-  }, [searchParams])
+  }, [searchParams]);
 
   const sortedAndFilteredProducts = useMemo(() => {
     let items = activeCategory
-      ? productsList.filter(p => {
-        if (activeCategory === 'Kolhapuri Footwear') {
-          return p.category === 'Kolhapuri Footwear' || p.category === 'Kolhapuri Chappal'
-        }
-        if (activeCategory === 'Temple Jewellery') {
-          return p.category === 'Temple Jewellery' || p.category === 'Jewellery'
-        }
-        return p.category === activeCategory
-      })
-      : productsList
+      ? productsList.filter((p) => {
+          if (activeCategory === "Kolhapuri Footwear") {
+            return (
+              p.category === "Kolhapuri Footwear" ||
+              p.category === "Kolhapuri Chappal"
+            );
+          }
+          if (activeCategory === "Temple Jewellery") {
+            return (
+              p.category === "Temple Jewellery" || p.category === "Jewellery"
+            );
+          }
+          return p.category === activeCategory;
+        })
+      : productsList;
 
     // Subcategory Filter
     if (activeSubCategory) {
-      items = items.filter(p => {
-        const subCat = p.subCategory || p.collection || 'Other'
-        return subCat === activeSubCategory
-      })
+      items = items.filter((p) => {
+        const subCat = p.subCategory || p.collection || "Other";
+        return subCat === activeSubCategory;
+      });
     }
 
     // Price Filter
-    items = items.filter(p => {
+    items = items.filter((p) => {
       const getProductPrice = (product) => {
-        const base = typeof product.price === 'number' ? product.price : (parseFloat(String(product.price).replace(/[^\d.]/g, '')) || 0);
+        const base =
+          typeof product.price === "number"
+            ? product.price
+            : parseFloat(String(product.price).replace(/[^\d.]/g, "")) || 0;
         if (product.discount && Number(product.discount) > 0) {
           return Math.round(base * (1 - Number(product.discount) / 100));
         }
         return base;
-      }
+      };
       return getProductPrice(p) <= price;
-    })
+    });
 
     // Sorting
     return [...items].sort((a, b) => {
       const getProductPrice = (product) => {
-        const base = typeof product.price === 'number' ? product.price : (parseFloat(String(product.price).replace(/[^\d.]/g, '')) || 0);
+        const base =
+          typeof product.price === "number"
+            ? product.price
+            : parseFloat(String(product.price).replace(/[^\d.]/g, "")) || 0;
         if (product.discount && Number(product.discount) > 0) {
           return Math.round(base * (1 - Number(product.discount) / 100));
         }
         return base;
-      }
+      };
       const priceA = getProductPrice(a);
       const priceB = getProductPrice(b);
 
-      if (sortBy === 'PRICE: LOW TO HIGH') {
+      if (sortBy === "PRICE: LOW TO HIGH") {
         return priceA - priceB;
-      } else if (sortBy === 'PRICE: HIGH TO LOW') {
+      } else if (sortBy === "PRICE: HIGH TO LOW") {
         return priceB - priceA;
-      } else if (sortBy === 'NEWEST FIRST') {
+      } else if (sortBy === "NEWEST FIRST") {
         return b.id - a.id;
       } else {
         // FEATURED
         return b.id - a.id;
       }
-    })
-  }, [productsList, activeCategory, activeSubCategory, price, sortBy])
+    });
+  }, [productsList, activeCategory, activeSubCategory, price, sortBy]);
 
   const toggleMaterial = (m) =>
-    setCheckedMaterials(prev => prev.includes(m) ? prev.filter(x => x !== m) : [...prev, m])
+    setCheckedMaterials((prev) =>
+      prev.includes(m) ? prev.filter((x) => x !== m) : [...prev, m],
+    );
 
   // Function to update URL with filter parameters
   const updateFilters = (category, subCategory) => {
-    const params = new URLSearchParams()
-    if (category) params.set('category', category)
-    if (subCategory) params.set('subcategory', subCategory)
+    const params = new URLSearchParams();
+    if (category) params.set("category", category);
+    if (subCategory) params.set("subcategory", subCategory);
 
-    const newUrl = params.toString() ? `?${params.toString()}` : '/heritage'
-    window.history.pushState({}, '', newUrl)
-  }
+    const newUrl = params.toString() ? `?${params.toString()}` : "/heritage";
+    window.history.pushState({}, "", newUrl);
+  };
 
   // Handle category change
   const handleCategoryChange = (category) => {
-    const newCategory = activeCategory === category ? null : category
-    setActiveCategory(newCategory)
-    setActiveSubCategory(null) // Reset subcategory when category changes
-    updateFilters(newCategory, null)
-  }
+    const newCategory = activeCategory === category ? null : category;
+    setActiveCategory(newCategory);
+    setActiveSubCategory(null); // Reset subcategory when category changes
+    updateFilters(newCategory, null);
+  };
 
   // Handle subcategory change
   const handleSubCategoryChange = (subCategory) => {
-    const newSubCategory = activeSubCategory === subCategory ? null : subCategory
-    setActiveSubCategory(newSubCategory)
-    updateFilters(activeCategory, newSubCategory)
-  }
+    const newSubCategory =
+      activeSubCategory === subCategory ? null : subCategory;
+    setActiveSubCategory(newSubCategory);
+    updateFilters(activeCategory, newSubCategory);
+  };
 
   return (
     <div className="bg-cream min-h-screen pb-16 md:pb-0 font-times">
@@ -168,14 +199,17 @@ export default function HeritagePage() {
           <div className="bg-white rounded-lg p-4 shadow-sm border border-dark/10">
             {/* Category Filter */}
             <div className="mb-6">
-              <p className="text-xs font-medium tracking-widest text-dark/40 mb-3">CATEGORY</p>
+              <p className="text-xs font-medium tracking-widest text-dark/40 mb-3">
+                CATEGORY
+              </p>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => handleCategoryChange(null)}
-                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${!activeCategory
-                    ? 'bg-gold-500 text-white'
-                    : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                    }`}
+                  className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
+                    !activeCategory
+                      ? "bg-gold-500 text-white"
+                      : "bg-gray-100 text-dark/70 hover:bg-gray-200"
+                  }`}
                 >
                   All Categories
                 </button>
@@ -183,10 +217,11 @@ export default function HeritagePage() {
                   <button
                     key={cat.label}
                     onClick={() => handleCategoryChange(cat.label)}
-                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${activeCategory === cat.label
-                      ? 'bg-gold-500 text-white'
-                      : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                      }`}
+                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
+                      activeCategory === cat.label
+                        ? "bg-gold-500 text-white"
+                        : "bg-gray-100 text-dark/70 hover:bg-gray-200"
+                    }`}
                   >
                     {cat.label} ({cat.count})
                   </button>
@@ -197,14 +232,17 @@ export default function HeritagePage() {
             {/* Subcategory Filter - Mobile */}
             {activeCategory && subCategories.length > 0 && (
               <div className="mb-6">
-                <p className="text-xs font-medium tracking-widest text-dark/40 mb-3">SUBCATEGORY</p>
+                <p className="text-xs font-medium tracking-widest text-dark/40 mb-3">
+                  SUBCATEGORY
+                </p>
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleSubCategoryChange(null)}
-                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${!activeSubCategory
-                      ? 'bg-gold-500 text-white'
-                      : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                      }`}
+                    className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
+                      !activeSubCategory
+                        ? "bg-gold-500 text-white"
+                        : "bg-gray-100 text-dark/70 hover:bg-gray-200"
+                    }`}
                   >
                     All {activeCategory}
                   </button>
@@ -212,10 +250,11 @@ export default function HeritagePage() {
                     <button
                       key={subCat.label}
                       onClick={() => handleSubCategoryChange(subCat.label)}
-                      className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${activeSubCategory === subCat.label
-                        ? 'bg-gold-500 text-white'
-                        : 'bg-gray-100 text-dark/70 hover:bg-gray-200'
-                        }`}
+                      className={`px-3 py-2 rounded-full text-xs font-medium transition-colors ${
+                        activeSubCategory === subCat.label
+                          ? "bg-gold-500 text-white"
+                          : "bg-gray-100 text-dark/70 hover:bg-gray-200"
+                      }`}
                     >
                       {subCat.label} ({subCat.count})
                     </button>
@@ -226,14 +265,16 @@ export default function HeritagePage() {
 
             {/* Price Range - Mobile */}
             <div>
-              <p className="text-xs font-medium tracking-widest text-dark/40 mb-3">PRICE RANGE</p>
+              <p className="text-xs font-medium tracking-widest text-dark/40 mb-3">
+                PRICE RANGE
+              </p>
               <input
                 type="range"
                 min={2500}
                 max={200000}
                 step={500}
                 value={price}
-                onChange={e => setPrice(Number(e.target.value))}
+                onChange={(e) => setPrice(Number(e.target.value))}
                 className="w-full accent-gold-500"
               />
               <div className="flex justify-between text-xs text-dark/50 mt-2">
@@ -245,7 +286,6 @@ export default function HeritagePage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12">
-
           {/* ─── Sidebar ─── */}
           <motion.aside
             initial={{ opacity: 0, x: -30 }}
@@ -255,15 +295,20 @@ export default function HeritagePage() {
           >
             {/* Category filter */}
             <div className="mb-8">
-              <p className="text-xs font-medium tracking-widest text-dark/40 mb-4">CATEGORY</p>
+              <p className="text-xs font-medium tracking-widest text-dark/40 mb-4">
+                CATEGORY
+              </p>
               <div className="space-y-2">
                 {categories.map((cat) => (
                   <motion.button
                     key={cat.label}
                     whileHover={{ x: 4 }}
                     onClick={() => handleCategoryChange(cat.label)}
-                    className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${activeCategory === cat.label ? 'text-gold-600 font-medium' : 'text-dark/70 hover:text-dark'
-                      }`}
+                    className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${
+                      activeCategory === cat.label
+                        ? "text-gold-600 font-medium"
+                        : "text-dark/70 hover:text-dark"
+                    }`}
                   >
                     <span>{cat.label}</span>
                     <span className="text-xs text-dark/30">{cat.count}</span>
@@ -276,7 +321,9 @@ export default function HeritagePage() {
             {activeCategory && subCategories.length > 0 && (
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-4">
-                  <p className="text-xs font-medium tracking-widest text-dark/40">SUBCATEGORY</p>
+                  <p className="text-xs font-medium tracking-widest text-dark/40">
+                    SUBCATEGORY
+                  </p>
                   {activeSubCategory && (
                     <button
                       onClick={() => handleSubCategoryChange(null)}
@@ -292,11 +339,16 @@ export default function HeritagePage() {
                       key={subCat.label}
                       whileHover={{ x: 4 }}
                       onClick={() => handleSubCategoryChange(subCat.label)}
-                      className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${activeSubCategory === subCat.label ? 'text-gold-600 font-medium' : 'text-dark/70 hover:text-dark'
-                        }`}
+                      className={`w-full text-left flex items-center justify-between text-sm py-1.5 transition-colors ${
+                        activeSubCategory === subCat.label
+                          ? "text-gold-600 font-medium"
+                          : "text-dark/70 hover:text-dark"
+                      }`}
                     >
                       <span>{subCat.label}</span>
-                      <span className="text-xs text-dark/30">{subCat.count}</span>
+                      <span className="text-xs text-dark/30">
+                        {subCat.count}
+                      </span>
                     </motion.button>
                   ))}
                 </div>
@@ -332,14 +384,16 @@ export default function HeritagePage() {
             </div>
                   {/* Price range */}
             <div>
-              <p className="text-xs font-medium tracking-widest text-dark/40 mb-4">PRICE RANGE</p>
+              <p className="text-xs font-medium tracking-widest text-dark/40 mb-4">
+                PRICE RANGE
+              </p>
               <input
                 type="range"
                 min={2500}
                 max={200000}
                 step={500}
                 value={price}
-                onChange={e => setPrice(Number(e.target.value))}
+                onChange={(e) => setPrice(Number(e.target.value))}
                 className="w-full accent-gold-500"
               />
               <div className="flex justify-between text-xs text-dark/50 mt-2">
@@ -367,7 +421,9 @@ export default function HeritagePage() {
                           ×
                         </button>
                       </span>
-                      {activeSubCategory && <span className="text-dark/30">→</span>}
+                      {activeSubCategory && (
+                        <span className="text-dark/30">→</span>
+                      )}
                     </div>
                   )}
                   {activeSubCategory && (
@@ -392,10 +448,12 @@ export default function HeritagePage() {
                 animate={{ opacity: 1 }}
                 className="text-sm text-dark/50"
               >
-                SHOWING {sortedAndFilteredProducts.length} PRODUCT{sortedAndFilteredProducts.length !== 1 ? 'S' : ''}
+                SHOWING {sortedAndFilteredProducts.length} PRODUCT
+                {sortedAndFilteredProducts.length !== 1 ? "S" : ""}
                 {activeCategory && (
                   <span className="text-gold-600 font-medium">
-                    {' '}in {activeCategory}
+                    {" "}
+                    in {activeCategory}
                     {activeSubCategory && ` → ${activeSubCategory}`}
                   </span>
                 )}
@@ -422,7 +480,9 @@ export default function HeritagePage() {
             >
               <AnimatePresence mode="popLayout">
                 {sortedAndFilteredProducts.map((p, i) => {
-                  const isWishlisted = wishlist.some(item => item.id === p.id)
+                  const isWishlisted = wishlist.some(
+                    (item) => item.id === p.id,
+                  );
 
                   return (
                     <motion.div
@@ -441,23 +501,36 @@ export default function HeritagePage() {
                           {/* Wishlist Heart Button */}
                           <button
                             onClick={(e) => {
-                              e.preventDefault()
-                              e.stopPropagation()
+                              e.preventDefault();
+                              e.stopPropagation();
                               if (isWishlisted) {
-                                removeFromWishlist(p.id)
+                                removeFromWishlist(p.id);
                               } else {
-                                addToWishlist(p)
+                                addToWishlist(p);
                               }
                             }}
                             className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur-xs shadow-sm flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95"
                           >
                             {isWishlisted ? (
-                              <svg className="w-4 h-4 text-red-500 fill-red-500" viewBox="0 0 24 24">
+                              <svg
+                                className="w-4 h-4 text-red-500 fill-red-500"
+                                viewBox="0 0 24 24"
+                              >
                                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
                               </svg>
                             ) : (
-                              <svg className="w-4 h-4 text-dark/50 hover:text-red-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                              <svg
+                                className="w-4 h-4 text-dark/50 hover:text-red-500"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                />
                               </svg>
                             )}
                           </button>
@@ -494,10 +567,10 @@ export default function HeritagePage() {
                               >
                                 <motion.button
                                   onClick={(e) => {
-                                    e.preventDefault()
-                                    e.stopPropagation()
+                                    e.preventDefault();
+                                    e.stopPropagation();
                                     if (Number(p.stock || 0) > 0) {
-                                      addToCart(p, 8)
+                                      addToCart(p, 8);
                                     }
                                   }}
                                   disabled={Number(p.stock || 0) <= 0}
@@ -505,19 +578,26 @@ export default function HeritagePage() {
                                   animate={{ y: 0, opacity: 1 }}
                                   exit={{ y: 20, opacity: 0 }}
                                   transition={{ duration: 0.25 }}
-                                  className={`text-xs tracking-widest px-6 py-2.5 transition-colors shadow-sm font-bold ${Number(p.stock || 0) > 0
-                                    ? 'bg-dark text-white hover:bg-gold-600'
-                                    : 'bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200'
-                                    }`}
+                                  className={`text-xs tracking-widest px-6 py-2.5 transition-colors shadow-sm font-bold ${
+                                    Number(p.stock || 0) > 0
+                                      ? "bg-dark text-white hover:bg-gold-600"
+                                      : "bg-stone-300 text-stone-500 cursor-not-allowed border-stone-200"
+                                  }`}
                                 >
-                                  {Number(p.stock || 0) > 0 ? 'ADD TO CART' : 'SOLD OUT'}
+                                  {Number(p.stock || 0) > 0
+                                    ? "ADD TO CART"
+                                    : "SOLD OUT"}
                                 </motion.button>
                               </motion.div>
                             )}
                           </AnimatePresence>
                         </div>
-                        <h3 className="font-serif text-base font-semibold mb-1 group-hover:text-gold-600 transition-colors duration-300">{p.name}</h3>
-                        <p className="text-xs text-dark/50 mb-2">{p.sub || p.subCategory || p.collection || ''}</p>
+                        <h3 className="font-serif text-base font-semibold mb-1 group-hover:text-gold-600 transition-colors duration-300">
+                          {p.name}
+                        </h3>
+                        <p className="text-xs text-dark/50 mb-2">
+                          {p.sub || p.subCategory || p.collection || ""}
+                        </p>
                         <div className="flex items-center gap-2">
                           {p.discount && Number(p.discount) > 0 ? (
                             <>
@@ -525,18 +605,23 @@ export default function HeritagePage() {
                                 ₹{p.price.toLocaleString()}
                               </span>
                               <span className="text-gold-700 font-medium text-sm">
-                                ₹{Math.round(p.price * (1 - Number(p.discount) / 100)).toLocaleString()}
+                                ₹
+                                {Math.round(
+                                  p.price * (1 - Number(p.discount) / 100),
+                                ).toLocaleString()}
                               </span>
                             </>
                           ) : (
                             <span className="text-gold-700 font-medium text-sm">
-                              {typeof p.price === 'number' ? `₹${p.price.toLocaleString()}` : p.price}
+                              {typeof p.price === "number"
+                                ? `₹${p.price.toLocaleString()}`
+                                : p.price}
                             </span>
                           )}
                         </div>
                       </Link>
                     </motion.div>
-                  )
+                  );
                 })}
               </AnimatePresence>
             </motion.div>
@@ -548,15 +633,16 @@ export default function HeritagePage() {
               viewport={{ once: true }}
               className="flex items-center justify-center gap-2 mt-16"
             >
-              {['←', '01', '02', '03', '...', '98', '→'].map((item, i) => (
+              {["←", "01", "02", "03", "...", "98", "→"].map((item, i) => (
                 <motion.button
                   key={i}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`w-9 h-9 text-xs flex items-center justify-center border transition-all ${item === '01'
-                    ? 'bg-dark text-white border-dark'
-                    : 'border-dark/15 text-dark/60 hover:border-dark hover:text-dark'
-                    }`}
+                  className={`w-9 h-9 text-xs flex items-center justify-center border transition-all ${
+                    item === "01"
+                      ? "bg-dark text-white border-dark"
+                      : "border-dark/15 text-dark/60 hover:border-dark hover:text-dark"
+                  }`}
                 >
                   {item}
                 </motion.button>
@@ -568,5 +654,5 @@ export default function HeritagePage() {
 
       <Footer />
     </div>
-  )
+  );
 }

@@ -18,7 +18,7 @@ export default function HeritagePage() {
   const [headerRef, headerInView] = useInView()
   const { addToCart, wishlist, addToWishlist, removeFromWishlist, products: productsList } = useApp()
 
-  // Generate dynamic categories from actual products
+  // Generate dynamic categories from actual productspu
   const categories = useMemo(() => {
     const categoryMap = {}
     productsList.forEach(p => {

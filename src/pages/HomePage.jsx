@@ -24,7 +24,7 @@ const SANDAL =
   "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80";
 
 const products = [
-  { name: "Aura Ruby Necklacepy", price: "₹1,42,000", img: NECKLACE, tag: "" },
+  { name: "Aura Ruby Necklace", price: "₹1,42,000", img: NECKLACE, tag: "" },
   {
     name: "Celestial Suede Slides",
     price: "₹13,500",

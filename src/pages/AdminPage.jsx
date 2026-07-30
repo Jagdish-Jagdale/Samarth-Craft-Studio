@@ -6462,7 +6462,7 @@ ${payout.orders
                         {/* Image Upload for this color variant */}
                         <div>
                           <label className="block text-[9px] text-dark/50 font-bold tracking-wider uppercase mb-2">
-                            Images forpr{" "}
+                            Images for{" "}
                             {variant.colorName || `Color ${index + 1}`}
                           </label>
                           <div className="flex items-center justify-center w-full">

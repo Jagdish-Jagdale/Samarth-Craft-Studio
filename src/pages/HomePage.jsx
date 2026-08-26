@@ -26,7 +26,7 @@ const SANDAL =
 const products = [
   { name: "Aura Ruby Necklace", price: "₹1,42,000", img: NECKLACE, tag: "" },
   {
-    name: "Celestial Suede Slides",
+    name: "Celestial Suede Slidespj",
     price: "₹13,500",
     img: FOOTWEAR,
     tag: "NEW",

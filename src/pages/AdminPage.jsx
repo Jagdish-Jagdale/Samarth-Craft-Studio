@@ -6470,7 +6470,7 @@ ${payout.orders
                               <div className="flex flex-col items-center justify-center pt-2 pb-2">
                                 <span className="text-sm mb-1">📸</span>
                                 <p className="text-xs text-dark font-medium">
-                                  Upload images for this colorpf
+                                  Upload images for this color
                                 </p>
                               </div>
                               <input

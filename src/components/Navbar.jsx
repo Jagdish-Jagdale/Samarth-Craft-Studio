@@ -30,7 +30,7 @@ export default function Navbar({ dark = false }) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  // Close menus/drawers on page navigatepd
+  // Close menus/drawers on page navigate
   useEffect(() => {
     setMobileMenuOpen(false);
     setCartOpen(false);

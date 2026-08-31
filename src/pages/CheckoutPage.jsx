@@ -23,7 +23,7 @@ export default function CheckoutPage() {
     return saved ? JSON.parse(saved).phone : ''
   })
 
-  // Address selection state
+  // Address selection statepm
   const [selectedAddressId, setSelectedAddressId] = useState(() => {
     if (userProfile?.addresses && Array.isArray(userProfile.addresses) && userProfile.addresses.length > 0) {
       return userProfile.addresses[0].id

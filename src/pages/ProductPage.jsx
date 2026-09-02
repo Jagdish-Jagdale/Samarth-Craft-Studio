@@ -18,7 +18,7 @@ const thumbs = [
 const reviews = [
   {
     name: "Aditi R.",
-    tag: "VERIFIED COLLECTORpb",
+    tag: "VERIFIED COLLECTOR",
     date: "Sept 2023",
     quote: '"A masterpiece for the feet."',
     text: "The level of detail in the gold threads is staggering. These aren't just shoes; they are wearable art. Surprisingly comfortable for all-day wear at a wedding.",

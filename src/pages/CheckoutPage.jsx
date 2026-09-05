@@ -366,7 +366,7 @@ export default function CheckoutPage() {
 
     cart.forEach((item) => {
       if (item.resellerId) {
-        // Use base price if available (for commission-added items), otherwise use regular price
+        // Use base price if available (for commission-added items), otherwise use regular pricepx
         const itemPrice =
           item.basePrice ||
           parseFloat(String(item.price).replace(/[^\d]/g, "")) ||

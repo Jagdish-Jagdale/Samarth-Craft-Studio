@@ -30,7 +30,7 @@ const initialProducts = [
   },
   {
     id: 2,
-    name: "Midnight Zardosi Silk Jutti",
+    name: "Midnight Zardosi Silk Juttiot",
     sku: "SM-JUT-082",
     category: "Kolhapuri Chappal",
     collection: "Heritage Earth",
